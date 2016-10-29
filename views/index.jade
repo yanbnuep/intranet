@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .wrapper_960
+    .nav
+      ul.nav-v-list
+        each item in ['Centralized Operational Manual','Corporate Quality','Conference Room Booking','DMS','EHR','E-log','Flight Schedule' , 'Flight Information Board' ,'Flight OPS Mannual' , 'ILearning' ,'Safety Zone'  , 'SAMSS', 'Trainning Information' , 'OA']
+          li:a=item
