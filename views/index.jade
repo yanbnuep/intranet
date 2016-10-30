@@ -1,8 +1,25 @@
 extends layout
-
 block content
-  .wrapper_960
+  .left-content
     .nav
       ul.nav-v-list
         each item in ['Centralized Operational Manual','Corporate Quality','Conference Room Booking','DMS','EHR','E-log','Flight Schedule' , 'Flight Information Board' ,'Flight OPS Mannual' , 'ILearning' ,'Safety Zone'  , 'SAMSS', 'Trainning Information' , 'OA']
-          li:a=item
+          li.list-item: a=item
+  .content
+    .nav
+      ul.nav-h-list
+        each item in ['Home','Telephone','Services','Departments','Download']
+          li.list-item: a=item
+        form
+          input
+  style.
+    .left-content {
+      width: 220px;
+      min-height: 465px;
+      top:0;
+      left:0;
+      float: left;
+    }
+    .content {
+      margin-left: 220px;
+    }
