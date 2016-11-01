@@ -1,5 +1,7 @@
 extends layout
+
 block content
+  script(src='/javascripts/jquery-3.1.1.min.js')
   .left-content
     .nav
       ul.nav-v-list
@@ -11,7 +13,22 @@ block content
         each item in ['Home','Telephone','Services','Departments','Download']
           li.list-item: a=item
         form
-          input#teleipt
+          input#teleipt(autocomplete='off')
+  #test
+  button#request request
+  script.
+    $(document).ready(function(){
+      $("#request").on('click',function(e){e.preventDefault();request();});
+    });
+    function request() {
+      $.ajax({
+        method: 'get',
+        url: '/db',
+      }).done(function (msg) {
+        $('#test').html(msg);
+      });
+    }
+
   style.
     .left-content {
       width: 220px;
