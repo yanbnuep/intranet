@@ -23,7 +23,10 @@ block content
     function request() {
       $.ajax({
         method: 'get',
-        url: '/db',
+        url: '/db/phone',
+        data: {
+          value: $('#teleipt').val()
+        }
       }).done(function (msg) {
         $('#test').html(msg);
       });

@@ -5,6 +5,7 @@ var sql = require('mssql');
 
 /* GET users listing. */
 
+
 var config = {
     user: 'ian',
     password: 'airmacau2016',
@@ -12,22 +13,34 @@ var config = {
     database: 'CSD'
 }
 
-
-
 router.get('/', function(req, res, next) {
-    var connection = new sql.Connection(config);
-    connection.connect(function(err){
-        var request = new sql.Request(connection);
-        request.query('select top 10 * from [CSD].[dbo].[TEL_VW]',function(err,recordset){
-            if(err){res.send(err);console.log('err:'+err)}
-            else{
-                console.log("recordset:"+recordset[0].EMPLID);
-                res.send(recordset[1].EMPLID);
-            }
-            connection.close();
-        });
 
-    });
 });
+
+router.get('/phone',function(req,res,next){
+    console.log('start search phone');
+    var pnum = req.query['value'];
+    var conn = new sql.Connection(config,function(err){
+        if(err) console.log('err extablish conn'+err);
+        else{
+           var request = new sql.Request(conn);
+            var rstxt = 'SELECT TOP 10 [NAME],[BUSNPHONE] FROM [CSD].[dbo].[TEL_VW] WHERE [BUSNPHONE] LIKE \'%'+pnum+'%\'';
+            request.query(rstxt,function (err,recordset) {
+                if(err) console.log('err in search'+err);
+                else {
+                    conn.close();
+                    var rss = parseRecord(recordset);
+                    console.log(rss);
+                    res.send(rss);
+                }
+            });
+        }
+    })
+})
+
+function parseRecord(data){
+    var names = []
+
+}
 
 module.exports = router;
