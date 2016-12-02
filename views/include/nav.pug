@@ -1,3 +1,18 @@
 //
    Created by itdwyy on 12/2/2016.
 .nav
+    .wrapper-960
+        .nav-logo
+            a(style={background:''})
+        .nav-form
+            form
+                input.search.scaler
+        ul.nav-list-v
+            -
+                var nav_list_items = ['Home','Telephone','Departments','Download','About'];
+            each item in nav_list_items
+                li.nav-list-item
+                    a(href='#')= item
+
+
+
