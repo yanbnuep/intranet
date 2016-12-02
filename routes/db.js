@@ -8,7 +8,7 @@ var sql = require('mssql');
 
 var config = {
     user: 'ian',
-    password: 'airmacau2016',
+    password: 'ian6691',
     server: '192.168.101.114',
     database: 'CSD'
 }

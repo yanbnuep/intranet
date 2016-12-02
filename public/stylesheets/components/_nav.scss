@@ -9,7 +9,8 @@
   }
   .nav-h-list {
      .list-item {
-       display: inline;
+       display: block;
+       float: left;
      }
   }
 }
