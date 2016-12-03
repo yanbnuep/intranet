@@ -9,10 +9,22 @@
                 input.search.scaler
         ul.nav-list-v
             -
-                var nav_list_items = ['Home','Telephone','Departments','Download','About'];
-            each item in nav_list_items
-                li.nav-list-item
-                    a(href='#')= item
+                var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)']
+            li.nav-item
+                a(href='#') Home
+            li.nav-item
+                a(href='#') Telephone
+            li.nav-item
+                a(href='#') Department
+                    ul.drp-list-v
+                        each item in departments
+                            li.drp-list-item
+                                a(href='#')= item
+            li.nav-item
+                a(href='#') Download
+            li.nav-item
+                a(href='#') Help
+
 
 
 
