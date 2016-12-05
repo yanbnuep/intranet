@@ -1,3 +1,87 @@
 .nav {
+  position: relative;
+  display: block;
+  clear: both;
+  height: $nav-height;
+  overflow: hidden;
+  @include clearfix;
+}
 
+.nav-logo {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  width: $nav-logo-img-width;
+  height: $nav-logo-img-height;
+  margin: $nav-logo-img-margin;
+}
+
+.nav-form {
+
+}
+
+.nav-list-h,ul.nav-list-h {
+  position: relative;
+  margin: 0 10px;
+  padding: 0;
+  display: inline-block;
+  .nav-item {
+    display: block;
+    float: left;
+    &,& a{
+      padding: $nav-list-item-padding;
+      text-decoration: none;
+      color: $nav-item-color;
+      line-height: $nav-list-line-height;
+      white-space: nowrap;
+      cursor: pointer;
+      font-size: $nav-item-font-size;
+      font-weight: bold;
+    }
+    //hover add cur
+    &.cur {
+      &,a {color: $nav-item-color-hover}
+    }
+  }
+  .drp-list-v {
+    display: none;
+  }
+}
+
+.nav-form {
+  position: relative;
+  display: inline-block;
+  margin: $nav-form-margin;
+  padding: 0;
+  width: $nav-form-width;
+  height: $nav-form-height;
+  vertical-align: top;
+  input.search {
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 100%;
+    height: $nav-form-ipt-height;
+    margin-top: -$nav-form-ipt-height/2;
+    padding: $nav-form-ipt-padding;
+    font-size: $nav-form-ipt-font-size;
+    border: none;
+    line-height: $nav-form-ipt-height;
+    background-color: $search-ipt-background-color;
+    &:focus {
+      outline: none;
+      background-color: $search-ipt-background-color;
+    }
+    &:hover {
+      background-color: $search-ipt-background-hover;
+    }
+  }
+}
+
+.icon-group-h {
+  display: inline-block;
+  vertical-align: top;
+  .materl-icons,i{
+    line-height: $nav-height;
+  }
 }

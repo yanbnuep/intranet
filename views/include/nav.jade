@@ -1,16 +1,12 @@
 //
    Created by itdwyy on 12/2/2016.
-.nav
+.nav.z-depth-1
     .wrapper-960
-        .nav-logo
-            a(style={background:''})
-        .nav-form
-            form
-                input.search.scaler
-        ul.nav-list-v
+        a.nav-logo.cp-logo
+        ul.nav-list-h
             -
                 var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)']
-            li.nav-item
+            li.nav-item.cur
                 a(href='#') Home
             li.nav-item
                 a(href='#') Telephone
@@ -25,6 +21,9 @@
             li.nav-item
                 a(href='#') Help
 
-
-
+        form.nav-form
+            input.search.scaler
+            i.material-icons.search-icon &#xE8B6;
+        .icon-group-h.right
+            i.material-icons.blue-icon &#xE0BE;
 

@@ -1,3 +1,19 @@
-.nav-logo-img {
-  background: no-repeat url('');
+.cp-logo {
+  background: transparent url("/img/cplogo.svg") no-repeat scroll 0 0/100%;
 }
+.icon-group-h {
+  position: relative;
+  display: inline-block;
+}
+
+.search-icon {
+  position: absolute;
+  top: $search-icon-top;
+  left: $search-icon-left;
+  color: $search-form-color ;
+}
+
+.blue-icon {
+  color: $blue-icon-bg-color;
+}
+
