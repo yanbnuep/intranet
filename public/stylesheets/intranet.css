@@ -1898,6 +1898,7 @@ html {
     display: block;
     float: left; }
     .nav-list-h .nav-item, .nav-list-h .nav-item a, ul.nav-list-h .nav-item, ul.nav-list-h .nav-item a {
+      display: block;
       padding: 0 2.5px;
       text-decoration: none;
       color: #757575;

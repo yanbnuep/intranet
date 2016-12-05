@@ -16,9 +16,6 @@
   margin: $nav-logo-img-margin;
 }
 
-.nav-form {
-
-}
 
 .nav-list-h,ul.nav-list-h {
   position: relative;
@@ -29,6 +26,7 @@
     display: block;
     float: left;
     &,& a{
+      display: block;
       padding: $nav-list-item-padding;
       text-decoration: none;
       color: $nav-item-color;
