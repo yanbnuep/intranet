@@ -3,7 +3,7 @@
   display: block;
   clear: both;
   height: $nav-height;
-  overflow: hidden;
+  border-bottom: $nav-bottom-border;
   @include clearfix;
 }
 
@@ -16,8 +16,7 @@
   margin: $nav-logo-img-margin;
 }
 
-
-.nav-list-h,ul.nav-list-h {
+.nav-list-h {
   position: relative;
   margin: 0 10px;
   padding: 0;
@@ -25,10 +24,10 @@
   .nav-item {
     display: block;
     float: left;
-    &,& a{
+    a {
       display: block;
-      padding: $nav-list-item-padding;
       text-decoration: none;
+      padding: $nav-list-item-padding;
       color: $nav-item-color;
       line-height: $nav-list-line-height;
       white-space: nowrap;
@@ -38,12 +37,26 @@
     }
     //hover add cur
     &.cur {
-      &,a {color: $nav-item-color-hover}
+      &, a {
+        color: $nav-item-color-hover
+      }
     }
+    &.has-dropdown:hover ul.drp-list-v{
+      display: block;
+    }
+
   }
   .drp-list-v {
+    position: absolute;
     display: none;
+    margin: 0;
+    padding: 0;
+    background-color: $drop-down-list-bg-color;
+    border: $drop-down-list-border;
+    list-style: none;
   }
+
+
 }
 
 .nav-form {
@@ -79,7 +92,7 @@
 .icon-group-h {
   display: inline-block;
   vertical-align: top;
-  .materl-icons,i{
+  .materl-icons, i {
     line-height: $nav-height;
   }
 }

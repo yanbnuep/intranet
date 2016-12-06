@@ -1,13 +1,14 @@
 //1.Navigation
 $nav-height: 56px;
+$nav-bottom-border: 1px solid color('grey','lighten-2');
 //nav-logo
 $nav-logo-img-height: 36px;
-$nav-logo-img-width: $nav-logo-img-height*3.81;
+$nav-logo-img-width: floor($nav-logo-img-height*3.81);
 $nav-logo-img-margin: floor(($nav-height - $nav-logo-img-height)/2) 0;
 //nav-list
 $nav-list-height: $nav-height;
 $nav-line-height: $nav-list-height;
-$nav-list-item-padding: 0 2.5px;
+$nav-list-item-padding: 0 5px;
 $nav-list-line-height: $nav-list-height;
 $nav-item-font-size: 14px;
 $nav-item-color: color('grey','darken-1');
@@ -17,7 +18,7 @@ $nav-form-height: $nav-height;
 $nav-form-width: 200px;
 $nav-form-ipt-height: 30px;
 $nav-form-ipt-padding: 3px 8px 3px 40px;
-$nav-form-margin: 0 0 0 200px;
+$nav-form-margin: 0 0 0 100px;
 $nav-form-ipt-font-size: 13px;
 $search-icon-font-size: 20px;
 $search-icon-top: ($nav-form-height - $nav-form-ipt-height + $search-icon-font-size/2)/2;
@@ -28,3 +29,6 @@ $search-ipt-background-hover: #ebebeb;
 
 //icon
 $blue-icon-bg-color: color('blue','darken-1');
+//drop-down-list
+$drop-down-list-bg-color: #fff;
+$drop-down-list-border: 1px solid color('grey','lighten-2');

@@ -1875,7 +1875,7 @@ html {
   display: block;
   clear: both;
   height: 56px;
-  overflow: hidden; }
+  border-bottom: 1px solid #e0e0e0; }
   .nav::after {
     display: block;
     content: "";
@@ -1885,37 +1885,45 @@ html {
   position: relative;
   left: 0;
   display: inline-block;
-  width: 137.16px;
+  width: 137px;
   height: 36px;
   margin: 10px 0; }
 
-.nav-list-h, ul.nav-list-h {
+.nav-list-h {
   position: relative;
   margin: 0 10px;
   padding: 0;
   display: inline-block; }
-  .nav-list-h .nav-item, ul.nav-list-h .nav-item {
+  .nav-list-h .nav-item {
     display: block;
     float: left; }
-    .nav-list-h .nav-item, .nav-list-h .nav-item a, ul.nav-list-h .nav-item, ul.nav-list-h .nav-item a {
+    .nav-list-h .nav-item a {
       display: block;
-      padding: 0 2.5px;
       text-decoration: none;
+      padding: 0 5px;
       color: #757575;
       line-height: 56px;
       white-space: nowrap;
       cursor: pointer;
       font-size: 14px;
       font-weight: bold; }
-    .nav-list-h .nav-item.cur, .nav-list-h .nav-item.cur a, ul.nav-list-h .nav-item.cur, ul.nav-list-h .nav-item.cur a {
+    .nav-list-h .nav-item.cur, .nav-list-h .nav-item.cur a {
       color: #424242; }
-  .nav-list-h .drp-list-v, ul.nav-list-h .drp-list-v {
-    display: none; }
+    .nav-list-h .nav-item.has-dropdown:hover ul.drp-list-v {
+      display: block; }
+  .nav-list-h .drp-list-v {
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    list-style: none; }
 
 .nav-form {
   position: relative;
   display: inline-block;
-  margin: 0 0 0 200px;
+  margin: 0 0 0 100px;
   padding: 0;
   width: 200px;
   height: 56px;

@@ -5,26 +5,33 @@
         a.nav-logo.cp-logo
         ul.nav-list-h
             -
-                var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)']
+                var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];
+                var services = ['IT Request Form','E-Service','Crew Zone'];
             li.nav-item.cur
                 a(href='#') Home
             li.nav-item
                 a(href='#') Telephone
-            li.nav-item
-                a(href='#').has-dropdown Department
-                    ul.drp-list-v
+            li.nav-item.has-dropdown
+                a(href='#') Department
+                    ul.drp-list-v.z-depth-1
                         each item in departments
                             li.drp-list-item
                                 a(href='#')= item
+            li.nav-item.has-dropdown
+                a(href='#') Services
+                ul.drp-list-v.z-depth-1
+                    each item in services
+                        li.drp-list-item
+                            a(href='#')= item
             li.nav-item
                 a(href='#') Download
             li.nav-item
                 a(href='#') Help
 
         form.nav-form
-            input.search.scaler
+            input#telSearch.search
             i.material-icons.search-icon &#xE8B6;
         a(href='#').icon-group-h.right
             i.material-icons.blue-icon &#xE0BE;
 
-script(src='/javascript/jquery-1.12.4.min.js')
+
