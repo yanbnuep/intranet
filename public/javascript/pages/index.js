@@ -9,10 +9,24 @@ $(document).ready(function () {
 });
 
 function autoSearch(msg){
-    //start with 2 chars
+    //start with 3 chars
+    var str = '',
+        num = '';
     if(msg.length > 1) {
-        console.log(am.rgxGet('number',msg));
-    }else {
-        return null;
+        str = am.rgxGet('enChar',msg);
+        num = am.rgxGet('number',msg);
+        $.ajax({
+            url: '/phone',
+
+        });
     }
 }
+
+function teleSearch(name,number) {
+
+}
+
+function autoComplete() {
+
+}
+

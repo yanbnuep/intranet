@@ -6,15 +6,19 @@
 
     };
     //Regex
-    function rgxGet(req, str) {
-
-        var reqReg = {
-            number: /\d+/g,
-            upperCase: /\W+/g,
-            lowerCase: /\w+/g
-        };
-        if(reqReg[req]){
-            return String(str).match(reqReg[req]);
+    function rgxGet(req, str, separator) {
+        var sep = (separator != undefined)? separator : '';
+        switch (req) {
+            case 'number':
+                return String(str).replace(/\D/g,sep);
+            case 'upperCase':
+                return String(str).replace(/\W|\d|[a-z]/g,sep);
+            case 'lowerCase':
+                return String(str).replace(/\W|\d|[A-Z]/g,sep);
+            case 'enChar':
+                return String(str).replace(/\W|\d/g,sep);
+            default:
+                return null;
         }
     }
 
