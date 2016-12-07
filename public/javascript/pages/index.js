@@ -16,7 +16,12 @@ function autoSearch(msg){
         str = am.rgxGet('enChar',msg);
         num = am.rgxGet('number',msg);
         $.ajax({
-            url: '/phone',
+            url: '/db/autoSearch',
+            method: 'get',
+            data: {name:str,number:num},
+            success: function(data){
+                
+            }
 
         });
     }
