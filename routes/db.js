@@ -13,57 +13,53 @@ var config = {
         database: 'CSD'
     },
     teleAutoSearchConfig = {
-        teleReqInfo: '[PREFER],[BUSNPHONE],[DIV]',
-        tableName: '[CSD].[dbo].[TEL_VW]'
+        teleReqInfo: ' [PREFER],[BUSNPHONE],[DIV]',
+        tableName: ' [CSD].[dbo].[TEL_VW]'
     };
-
 router.get('/', function (req, res, next) {
 
 });
 
-router.get('/phone', function (req, res, next) {
-
-})
+router.get('/autoSearch', function (req, res, next) {
+    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 5),
+        dataSend =  function (result) {
+            res.send(result);
+        };
+    sqlRunner(dataSQL,dataSend);
+});
 
 function telephoneSearch(searchName, number, topNum) {
-    var request = new sql.Request(conn),
-        //sql pre define
+    var //sql pre define
         name = searchName.length > 0 ? searchName : '*',
         tele = number.length > 0 ? number : '*',
         top = topNum,
         teleReqInfo = teleAutoSearchConfig.teleReqInfo,
         tableName = teleAutoSearchConfig.tableName,
-        sqlUsr = 'SELECT TOP ' + top +' '+teleReqInfo +
-            'FROM'+ tableName +'WHERE  CHARINDEX(' + name + '\',UPPER(PREFER))=1' +
-            'OR CHARINDEX(' + name + '\',UPPER(NAME))>=1 ORDER BY CHARINDEX(' +
-            'CHARINDEX(' + name + '\',UPPER(PREFER))*100+CHARINDEX('+name+'\',UPPER(NAME)) DESC',
-        sqlNum = 'SELECT TOP '+top+' '+teleReqInfo+ 'FROME'+tableName+
-            'WHERE CHARINDEX('+tele+'\',REPLACE(BUSNPHONE,\' \',\'\')>=1';
-
-        console.log(sqlReq);
-    var conn = new sql.Connection(config, function (err) {
-        if (err) {
-            console.log('error search telephone ' + err)
+        sqlByName = 'SELECT TOP '+ top + teleReqInfo+'FROM '+tableName +
+            '\n WHERE CHARINDEX(\''+name+'\',REPLACE( UPPER(PREFER),\' \',\'\'))=1 '+
+            '\n OR CHARINDEX(\''+name+'\',REPLACE( UPPER(NAME),\' \',\'\'))>=1'+
+            '\n ORDER BY CHARINDEX(\''+name+'\',REPLACE( UPPER(PREFER),\' \',\'\')) + CHARINDEX(\''+name+'\',REPLACE( UPPER(NAME),\' \',\'\')) ASC',
+        sqlByNum = 'SELECT TOP '+ top + teleReqInfo+' FROM '+tableName +' WHERE CHARINDEX(\'' + tele + '\',REPLACE(BUSNPHONE,\' \',\'\'))>=1';
+        console.log(sqlByName);
+        if(name != '*' && tele === '*'){
+            return sqlByName;
+        }else if(name === '*' && tele != '*'){
+            return sqlByNum;
         }
-        else {
-           if(name === '*' && tele != '*'){
-
-           }else if(tele != '*' && name === '*') {
-               request.query(sqlUsr,function (err,resultJSON) {
-                   if(err){console.log('err searching: '+err)}
-                   else {
-                       conn.close();
-                       return parseRecord(resultJSON);
-                   }
-               })
-           }
-        }
-    });
 }
 
-function parseRecord(data) {
-    var names = []
+function parseRecord(jsonData) {
+    return JSON.stringify(jsonData);
+}
 
+function sqlRunner(sqlStr,callback){
+    sql.connect(config,function(err){
+        new sql.Request().query(sqlStr,function(err,recordset){
+            if(err){console.log("sql runner erro:"+err)}
+            var result = parseRecord(recordset);
+            callback(result);
+        });
+    })
 }
 
 module.exports = router;

@@ -21,7 +21,9 @@
                 return null;
         }
     }
+    function autoSearch(){
 
+    }
     am.prototype = {
         //Regex
         rgxGet: rgxGet

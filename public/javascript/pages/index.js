@@ -4,30 +4,36 @@
 $(document).ready(function () {
 
     $('#telSearch').keyup(function () {
-        autoSearch(this.value);
+        autoSearch(this.value,this);
     });
 });
 
-function autoSearch(msg){
+function autoSearch(msg,checkElemnt) {
     //start with 3 chars
     var str = '',
+        elementValue = checkElemnt.value,
         num = '';
-    if(msg.length > 1) {
-        str = am.rgxGet('enChar',msg);
-        num = am.rgxGet('number',msg);
+    if (msg.length > 1) {
+        str = am.rgxGet('enChar', msg).toUpperCase();
+        num = am.rgxGet('number', msg);
         $.ajax({
             url: '/db/autoSearch',
             method: 'get',
-            data: {name:str,number:num},
-            success: function(data){
-                
+            data: {
+                name: str,
+                number: num
+            },
+            success: function (data) {
+                //if it is the last ajax request,
+                if(checkElemnt.value === elementValue){
+                    console.log(data);
+                }
             }
-
         });
     }
 }
 
-function teleSearch(name,number) {
+function teleSearch(name, number) {
 
 }
 

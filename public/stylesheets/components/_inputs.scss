@@ -1,0 +1,19 @@
+
+.autoSearchList {
+  position: absolute;
+  display: block;
+  width: 100%;
+  &.nav-searchList {
+    top: $nav-searchList-top;
+  }
+  &.pull-left {
+    right: 0;
+  }
+
+  .resultItem {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-align: left;
+  }
+}

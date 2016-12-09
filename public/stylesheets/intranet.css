@@ -1952,4 +1952,18 @@ html {
   .icon-group-h .materl-icons, .icon-group-h i {
     line-height: 56px; }
 
+.autoSearchList {
+  position: absolute;
+  display: block;
+  width: 100%; }
+  .autoSearchList.nav-searchList {
+    top: 56px; }
+  .autoSearchList.pull-left {
+    right: 0; }
+  .autoSearchList .resultItem {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-align: left; }
+
 /*# sourceMappingURL=intranet.css.map */
