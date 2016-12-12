@@ -18,7 +18,7 @@ $nav-form-height: $nav-height;
 $nav-form-width: 200px;
 $nav-form-ipt-height: 30px;
 $nav-form-ipt-padding: 3px 8px 3px 40px;
-$nav-form-margin: 0 0 0 100px;
+$nav-form-margin: 0 0 0 150px;
 $nav-form-ipt-font-size: 13px;
 $search-icon-font-size: 20px;
 $search-icon-top: ($nav-form-height - $nav-form-ipt-height + $search-icon-font-size/2)/2;
@@ -35,3 +35,6 @@ $drop-down-list-border: 1px solid color('grey','lighten-2');
 
 //input
 $nav-searchList-top: $nav-height;
+//auto complete
+$autocompletItem-padding: 0 5px;
+$autocompletInside-padding: 0 5px;

@@ -1823,6 +1823,9 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
+body {
+  overflow: hidden; }
+
 .wrapper-960 {
   position: relative;
   margin: 0 auto;
@@ -1923,7 +1926,7 @@ html {
 .nav-form {
   position: relative;
   display: inline-block;
-  margin: 0 0 0 100px;
+  margin: 0 0 0 150px;
   padding: 0;
   width: 200px;
   height: 56px;
@@ -1955,7 +1958,8 @@ html {
 .autoSearchList {
   position: absolute;
   display: block;
-  width: 100%; }
+  width: 100%;
+  background-color: inherit; }
   .autoSearchList.nav-searchList {
     top: 56px; }
   .autoSearchList.pull-left {
@@ -1963,7 +1967,19 @@ html {
   .autoSearchList .resultItem {
     position: relative;
     display: block;
+    padding: 0 5px;
     text-decoration: none;
     text-align: left; }
+    .autoSearchList .resultItem .string, .autoSearchList .resultItem .num {
+      display: inline-block;
+      width: 33%;
+      padding: 0 5px;
+      word-wrap: break-word; }
+    .autoSearchList .resultItem .bold {
+      font-weight: bold; }
+    .autoSearchList .resultItem:hover {
+      color: #fff;
+      background-color: #0D47A1;
+      cursor: pointer; }
 
 /*# sourceMappingURL=intranet.css.map */

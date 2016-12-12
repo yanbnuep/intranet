@@ -2,16 +2,19 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-
-    $('#telSearch').keyup(function () {
-        autoSearch(this.value,this);
+    //search action
+    $('#telSearch').on('keyup', am.debounce(function(){
+        autoSearch(this.value);
+    },500)).focusin(function () {
+        $(this).parent('form.nav-form').animate({margin:0,width: 350},300);
+    }).focusout(function () {
+        $(this).parent('form.nav-form').animate({marginLeft : 150,width: 200}, 300);
     });
 });
 
-function autoSearch(msg,checkElemnt) {
+function autoSearch(msg) {
     //start with 3 chars
     var str = '',
-        elementValue = checkElemnt.value,
         num = '';
     if (msg.length > 1) {
         str = am.rgxGet('enChar', msg).toUpperCase();
@@ -23,21 +26,29 @@ function autoSearch(msg,checkElemnt) {
                 name: str,
                 number: num
             },
-            success: function (data) {
-                //if it is the last ajax request,
-                if(checkElemnt.value === elementValue){
-                    console.log(data);
-                }
+            success: function (jsonResult) {
+                var htmlString = parseTeleJson(jsonResult);
+                $('#telResult').html(htmlString);
             }
         });
+    }else if(msg.length === 0){
+        $('#telResult').html('');
     }
 }
 
-function teleSearch(name, number) {
+function parseTeleJson(jsonData) {
+    var resultArray = JSON.parse(jsonData),
+        htmlString = '';
 
-}
-
-function autoComplete() {
-
+    resultArray.forEach(function (ele) {
+            var string = '<div class="resultItem">'+
+                    '<span class="string bold">'+ele['PREFER']+'</span>'+
+                    '<span class="num">'+ele['BUSNPHONE']+'</span>'+
+                    '<span class="string sm">'+ele['DIV']+'</span>'+
+                    '</div>';
+            htmlString += string.replace('null',' ');
+        }
+    );
+    return htmlString;
 }
 

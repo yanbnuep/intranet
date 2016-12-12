@@ -2,8 +2,8 @@
  * Created by itdwyy on 11/22/2016.
  */
 (function () {
-    var am = function () {
-
+    var am = function AM() {
+        this.debounce = debounce;
     };
     //Regex
     function rgxGet(req, str, separator) {
@@ -20,15 +20,23 @@
             default:
                 return null;
         }
-    }
-    function autoSearch(){
-
+    }//debounce
+    function debounce(func, delay) {
+        var timer;
+        return function(){
+            var context = this,
+                args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                func.apply(context, args);
+            },delay)
+        }
     }
     am.prototype = {
         //Regex
         rgxGet: rgxGet
 
     };
-    //Expose AMS
+    //Expose AM
     window.am = new am();
 })();

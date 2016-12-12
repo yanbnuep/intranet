@@ -3,6 +3,7 @@
   position: absolute;
   display: block;
   width: 100%;
+  background-color: inherit;
   &.nav-searchList {
     top: $nav-searchList-top;
   }
@@ -13,7 +14,20 @@
   .resultItem {
     position: relative;
     display: block;
+    padding: $autocompletItem-padding;
     text-decoration: none;
     text-align: left;
+    .string,.num {
+      display: inline-block;
+      width: 33%;
+      padding: $autocompletInside-padding;
+      word-wrap: break-word;
+    }
+    .bold {font-weight: bold}
+    &:hover {
+      color: #fff;
+      background-color: #0D47A1;
+      cursor: pointer;
+    }
   }
 }
