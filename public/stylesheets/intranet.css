@@ -1829,10 +1829,12 @@ body {
 .wrapper-960 {
   position: relative;
   margin: 0 auto;
-  width: 960px; }
-  .wrapper-960::after {
-    display: block;
+  width: 960px;
+  *zoom: 1; }
+  .wrapper-960:before, .wrapper-960:after {
     content: "";
+    display: table; }
+  .wrapper-960:after {
     clear: both; }
 
 .left {
@@ -1878,10 +1880,12 @@ body {
   display: block;
   clear: both;
   height: 56px;
-  border-bottom: 1px solid #e0e0e0; }
-  .nav::after {
-    display: block;
+  border-bottom: 1px solid #e0e0e0;
+  *zoom: 1; }
+  .nav:before, .nav:after {
     content: "";
+    display: table; }
+  .nav:after {
     clear: both; }
 
 .nav-logo {
@@ -1967,11 +1971,22 @@ body {
   .autoSearchList .resultItem {
     position: relative;
     display: block;
-    padding: 0 5px;
+    padding: 5px 5px;
     text-decoration: none;
-    text-align: left; }
+    text-align: left;
+    vertical-align: top;
+    *zoom: 1; }
+    .autoSearchList .resultItem:before, .autoSearchList .resultItem:after {
+      content: "";
+      display: table; }
+    .autoSearchList .resultItem:after {
+      clear: both; }
     .autoSearchList .resultItem .string, .autoSearchList .resultItem .num {
-      display: inline-block;
+      position: relative;
+      top: 0;
+      display: block;
+      float: left;
+      height: 100%;
       width: 33%;
       padding: 0 5px;
       word-wrap: break-word; }

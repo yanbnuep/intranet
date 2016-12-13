@@ -17,8 +17,14 @@
     padding: $autocompletItem-padding;
     text-decoration: none;
     text-align: left;
+    vertical-align: top;
+    @include clearfix;
     .string,.num {
-      display: inline-block;
+      position: relative;
+      top: 0;
+      display: block;
+      float: left;
+      height: 100%;
       width: 33%;
       padding: $autocompletInside-padding;
       word-wrap: break-word;

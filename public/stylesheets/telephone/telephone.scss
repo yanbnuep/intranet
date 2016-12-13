@@ -1,0 +1,15 @@
+@import "../components/mixins";
+//values
+
+//sidebar
+$sidebar-width: 320px;
+$sidebar-padding: 40px 0 30px 60px;
+
+.sidebar {
+  position: relative;
+  display: block;
+  float: left;
+  width: $sidebar-width;
+  padding: $sidebar-padding;
+  @include clearfix;
+}
