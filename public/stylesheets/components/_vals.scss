@@ -1,6 +1,15 @@
+//0 color:
+$company-theme-color: #292059;
+$company-theme-red: #ef1828;
+$company-theme-black: 291d0f;
+$company-theme-dark-red: #882d49;
+$company-theme-lighter-black: #091423;
+
+$company-theme-color-darken-20: darken($company-theme-color,20%);
+
 //1.Navigation
-$nav-height: 56px;
-$nav-bottom-border: 1px solid color('grey','lighten-2');
+$nav-height: 60px;
+$nav-bottom-border: none;
 //nav-logo
 $nav-logo-img-height: 36px;
 $nav-logo-img-width: floor($nav-logo-img-height*3.81);
@@ -13,28 +22,43 @@ $nav-list-line-height: $nav-list-height;
 $nav-item-font-size: 14px;
 $nav-item-color: color('grey','darken-1');
 $nav-item-color-hover: color('grey','darken-3');
+$nav-second-height: floor($nav-height/1.618);
+$nav-second-item-line-height: $nav-second-height;
+$nav-second-bg-color: $company-theme-color;
+$nav-second-color: color('grey','lighten-5');
 //nav-form
 $nav-form-height: $nav-height;
 $nav-form-width: 200px;
 $nav-form-ipt-height: 30px;
 $nav-form-ipt-padding: 3px 8px 3px 40px;
-$nav-form-margin: 0 0 0 150px;
+$nav-form-margin: 0 50px 0 0;
 $nav-form-ipt-font-size: 13px;
 $search-icon-font-size: 20px;
 $search-icon-top: ($nav-form-height - $nav-form-ipt-height + $search-icon-font-size/2)/2;
 $search-icon-left: 5px;
 $search-form-color: color('grey','darken-1');
-$search-ipt-background-color: #f7f7f7;
-$search-ipt-background-hover: #ebebeb;
+$search-ipt-background-color: color('grey','lighten-3');
+$search-ipt-background-hover: color('grey','lighten-2');
+$search-ipt-border-radius: floor($nav-form-ipt-height/2);
 
 //icon
 $blue-icon-bg-color: color('blue','darken-1');
 //drop-down-list
 $drop-down-list-bg-color: #fff;
 $drop-down-list-border: 1px solid color('grey','lighten-2');
+$drop-down-list-color: $company-theme-color;
 
 //input
 $nav-searchList-top: $nav-height;
 //auto complete
 $autocompletItem-padding: 5px 5px;
 $autocompletInside-padding: 0 5px;
+
+
+//pages
+$news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618);
+$slide-container-width: 550px;
+$slide-container-height: 385px;
+//for ie6
+$right-news-panel-width: 960 - $slide-container-width - 0.01;
+$right-news-panel-height: $slide-container-height;

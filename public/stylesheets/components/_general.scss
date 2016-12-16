@@ -26,6 +26,16 @@ body {
 .center {
   margin: 0 auto;
 }
+.clear {
+  clear: both;
+}
+.clearfix {
+  @include clearfix;
+  min-height: 1px;
+}
+.none-padding {
+  padding: 0;
+}
 // Z-levels
 .z-depth-0 {
   box-shadow: none !important;

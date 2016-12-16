@@ -6,10 +6,10 @@ $(document).ready(function () {
     $('#telSearch').on('keyup', am.debounce(function(){
         autoSearch(this.value);
     },500)).focusin(function () {
-        $(this).parent('form.nav-form').stop().animate({margin:0,width: 350},300);
+        $(this).parent('form.nav-form').stop().animate({width: 700},200);
         $('#telResult').fadeIn(300);
     }).focusout(function () {
-        $(this).parent('form.nav-form').stop().animate({marginLeft : 150,width: 200}, 300);
+        $(this).parent('form.nav-form').stop().animate({width: 200}, 200);
         $('#telResult').fadeOut(300);
     });
 });
@@ -29,8 +29,7 @@ function autoSearch(msg) {
                 number: num
             },
             success: function (jsonResult) {
-                var htmlString = parseTeleJson(jsonResult);
-                document.getElementById('telResult').innerHTML= htmlString;
+                document.getElementById('telResult').innerHTML= parseTeleJson(jsonResult);
             }
         });
     }else if(msg.length === 0){

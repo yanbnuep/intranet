@@ -20,7 +20,18 @@
   position: relative;
   margin: 0 10px;
   padding: 0;
-  display: inline-block;
+  display: block;
+  &.second-nav {
+    position: relative;
+    top: 0;
+    margin: 0;
+    height: $nav-second-height;
+    background-color: $nav-second-bg-color;
+    & .nav-item a {
+      color: $nav-second-color;
+      line-height: $nav-second-item-line-height;
+    }
+  }
   .nav-item {
     display: block;
     float: left;
@@ -54,9 +65,13 @@
     background-color: $drop-down-list-bg-color;
     border: $drop-down-list-border;
     list-style: none;
+
+    .drp-list-item {
+      &,li,a {
+        color: $drop-down-list-color
+      }
+    }
   }
-
-
 }
 
 .nav-form {
@@ -77,6 +92,7 @@
     padding: $nav-form-ipt-padding;
     font-size: $nav-form-ipt-font-size;
     border: none;
+    border-radius: $search-ipt-border-radius;
     line-height: $nav-form-ipt-height;
     background-color: $search-ipt-background-color;
     &:focus {

@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/autoSearch', function (req, res, next) {
-    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 5),
+    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 25),
         dataSend =  function (result) {
             res.send(result);
         };

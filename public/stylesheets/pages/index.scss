@@ -1,0 +1,14 @@
+//pages
+.news-area {
+  margin-top: $news-area-margin-top;
+}
+.slide-container {
+  @include float-block;
+  width: $slide-container-width;
+  height: $slide-container-height;
+}
+.right-new-panel {
+  @include float-block;
+  width: $right-news-panel-width;
+  height: $right-news-panel-height;
+}

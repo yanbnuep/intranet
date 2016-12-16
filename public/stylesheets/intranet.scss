@@ -2,9 +2,16 @@
 @import "components/mixins";
 @import "components/vals";
 @import "components/normal";
+@import "components/staticGrid";
 @import "components/icons";
 @import "components/buttons";
 @import "components/general";
 @import "components/nav";
 @import "components/inputs";
 @import "components/forms";
+
+//items
+@import "components/slideimgs";
+
+//pages
+@import "pages/index";

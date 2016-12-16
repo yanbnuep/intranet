@@ -1,38 +1,39 @@
 //
    Created by itdwyy on 12/2/2016.
-.nav.z-depth-1
+.nav
     .wrapper-960
         a.nav-logo.cp-logo
-        ul.nav-list-h
-            -
-                var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];
-                var services = ['IT Request Form','E-Service','Crew Zone'];
-            li.nav-item
-                a(href='/') Home
-            li.nav-item
-                a(href='/tele') Telephone
-            li.nav-item.has-dropdown
-                a(href='#') Department
-                    ul.drp-list-v.z-depth-1
-                        each item in departments
-                            li.drp-list-item
-                                a(href='#')= item
-            li.nav-item.has-dropdown
-                a(href='#') Services
-                ul.drp-list-v.z-depth-1
-                    each item in services
-                        li.drp-list-item
-                            a(href='#')= item
-            li.nav-item
-                a(href='#') Download
-            li.nav-item
-                a(href='#') Help
-
-        form.nav-form
+        a(href='#').icon-group-h.right
+            i.material-icons.blue-icon &#xE0BE;
+        form.nav-form.right
             input#telSearch.search
             #telResult.autoSearchList.nav-searchList.z-depth-2
             i.material-icons.search-icon &#xE8B6;
-        a(href='#').icon-group-h.right
-            i.material-icons.blue-icon &#xE0BE;
+.nav-list-h.second-nav.clear.clearfix
+    ul.wrapper-960.none-padding
+        -
+            var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];
+            var services = ['IT Request Form','E-Service','Crew Zone'];
+        li.nav-item
+            a(href='/') Home
+        li.nav-item
+            a(href='/tele') Telephone
+        li.nav-item.has-dropdown
+            a(href='#') Department
+                ul.drp-list-v.z-depth-1
+                    each item in departments
+                        li.drp-list-item
+                            a(href='#')= item
+        li.nav-item.has-dropdown
+            a(href='#') Services
+            ul.drp-list-v.z-depth-1
+                each item in services
+                    li.drp-list-item
+                        a(href='#')= item
+        li.nav-item
+            a(href='#') Download
+        li.nav-item
+            a(href='#') Help
+
 
 

@@ -1,0 +1,22 @@
+@mixin gridMaker($container-width,$col-num){
+  @for $i from 1 through $col-num {
+    .col-#{$i} {
+      position: relative;
+      display: block;
+      width: ($container-width/$col-num)*$i+px;
+      float: left;
+      min-height: 1px;
+      @include clearfix;
+    }
+  }
+}
+
+@mixin float-block {
+  position: relative;
+  display: block;
+  float: left;
+  min-height: 1px;
+  @include clearfix;
+}
+
+@include gridMaker(960,12);
