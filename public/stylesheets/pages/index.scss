@@ -12,3 +12,48 @@
   width: $right-news-panel-width;
   height: $right-news-panel-height;
 }
+
+.right-new-panel {
+  position: relative;
+  display: block;
+  padding: $news-area-padding;
+  .slide-tab-bar {
+    @include float-block;
+    height: $slide-tab-bar-height;
+    .slide-item {
+      padding: $slide-tab-padding;
+      @include float-block;
+      @include clearfix;
+      &,span {
+        line-height: $slide-tab-bar-height;
+      }
+
+    }
+  }
+
+
+  .card-h {
+
+    .txt {
+      width: $txt-area-width;
+      height: $txt-area-height;
+      .title {
+        font-size: $title-font-size;
+        line-height: $title-line-height;
+      }
+      .sub {
+        font-size: $sub-font-size;
+      }
+    }
+    .img {
+      width: $new-image-width;
+      height: $new-image-height;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+

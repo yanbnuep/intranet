@@ -59,6 +59,26 @@ $autocompletInside-padding: 0 5px;
 $news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618);
 $slide-container-width: 550px;
 $slide-container-height: 385px;
+
 //for ie6
 $right-news-panel-width: 960 - $slide-container-width - 0.01;
 $right-news-panel-height: $slide-container-height;
+
+
+//news-area
+$news-area-padding: 0 0 0 30px;
+//news txt width
+$news-txt-width: 260px;
+//new images width
+$new-image-width: 149.99px;
+$new-image-height: 98px;
+//slide-tab
+$slide-tab-bar-height: 18px;
+$slide-tab-padding: 0 20px;
+//card news
+
+$txt-area-width: 230px;
+$txt-area-height: floor(($slide-container-height - $slide-tab-bar-height)/3);
+$title-font-size: 14px;
+$title-line-height: 18px;
+$sub-font-size: 12px;

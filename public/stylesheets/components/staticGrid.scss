@@ -11,12 +11,6 @@
   }
 }
 
-@mixin float-block {
-  position: relative;
-  display: block;
-  float: left;
-  min-height: 1px;
-  @include clearfix;
-}
+
 
 @include gridMaker(960,12);

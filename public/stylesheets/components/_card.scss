@@ -1,0 +1,19 @@
+.card-h {
+  @include relativeblock;
+  text-decoration: none;
+  @include clear;
+  .txt {
+    @include float-block;
+    float: right;
+    .title {
+      @include clear;
+    }
+    .sub {
+      @include clear;
+    }
+  }
+  .img {
+    @include float-block;
+    float: left;
+  }
+}

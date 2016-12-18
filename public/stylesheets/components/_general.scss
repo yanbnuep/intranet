@@ -33,6 +33,9 @@ body {
   @include clearfix;
   min-height: 1px;
 }
+.center-text {
+  text-align: center;
+}
 .none-padding {
   padding: 0;
 }
