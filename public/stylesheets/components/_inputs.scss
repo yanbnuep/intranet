@@ -3,7 +3,7 @@
   position: absolute;
   display: block;
   width: 100%;
-  background-color: inherit;
+  background-color: $autocomplet-bck-color;
   &.nav-searchList {
     top: $nav-searchList-top;
   }

@@ -1,6 +1,7 @@
 //pages
 .news-area {
   margin-top: $news-area-margin-top;
+  padding-bottom: $news-area-padding-bottom;
 }
 .slide-container {
   @include float-block;
@@ -16,7 +17,7 @@
 .right-new-panel {
   position: relative;
   display: block;
-  padding: $news-area-padding;
+  padding-left: $news-area-padding-left;
   .slide-tab-bar {
     @include float-block;
     height: $slide-tab-bar-height;
@@ -25,6 +26,7 @@
       @include float-block;
       @include clearfix;
       &,span {
+        font-weight: bold;
         line-height: $slide-tab-bar-height;
       }
 
@@ -33,12 +35,14 @@
 
 
   .card-h {
-
+    padding: $card-padding;
     .txt {
       width: $txt-area-width;
       height: $txt-area-height;
+      padding: $new-title-padding;
       .title {
         font-size: $title-font-size;
+        font-weight: bold;
         line-height: $title-line-height;
       }
       .sub {
@@ -57,3 +61,15 @@
   }
 }
 
+#orslideshow {
+  padding: $or-container-padding;
+}
+.slide-show-container-h{
+  display: block;
+  .slide-item {
+    position: relative;
+    width: $or-slide-item-width;
+    margin-left: $or-slide-item-margin-left;
+    min-height: 1px;
+  }
+}

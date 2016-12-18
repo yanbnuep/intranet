@@ -71,3 +71,16 @@ body {
   transition: box-shadow .25s;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.zindexthetop {
+  z-index: $z-index-the-top;
+}
+.zindexsecond {
+  z-index: $z-index-second;
+}
+.zindexnormal {
+  z-index: $z-index-normal;
+}
+.second-backgrond-color {
+  background-color: $second-bck-color;
+}

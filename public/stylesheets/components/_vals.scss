@@ -4,8 +4,14 @@ $company-theme-red: #ef1828;
 $company-theme-black: 291d0f;
 $company-theme-dark-red: #882d49;
 $company-theme-lighter-black: #091423;
+$second-bck-color: color('grey','lighten-4');
 
 $company-theme-color-darken-20: darken($company-theme-color,20%);
+
+//z-index
+$z-index-the-top: 1000;
+$z-index-second: 500;
+$z-index-normal: 100;
 
 //1.Navigation
 $nav-height: 60px;
@@ -53,6 +59,7 @@ $nav-searchList-top: $nav-height;
 //auto complete
 $autocompletItem-padding: 5px 5px;
 $autocompletInside-padding: 0 5px;
+$autocomplet-bck-color: color('grey','lighten-5');
 
 
 //pages
@@ -66,19 +73,26 @@ $right-news-panel-height: $slide-container-height;
 
 
 //news-area
-$news-area-padding: 0 0 0 30px;
+$news-area-padding-left: 30px;
+$news-area-padding-bottom: 30px;
 //news txt width
 $news-txt-width: 260px;
 //new images width
 $new-image-width: 149.99px;
 $new-image-height: 98px;
 //slide-tab
-$slide-tab-bar-height: 18px;
+$slide-tab-bar-height: 16px;
 $slide-tab-padding: 0 20px;
 //card news
-
+$card-padding: 15px 0;
 $txt-area-width: 230px;
-$txt-area-height: floor(($slide-container-height - $slide-tab-bar-height)/3);
-$title-font-size: 14px;
-$title-line-height: 18px;
-$sub-font-size: 12px;
+$txt-area-height: $new-image-height;
+$title-font-size: 16px;
+$new-title-padding: 0 0 0 15px;
+$title-line-height: $slide-tab-bar-height;
+$sub-font-size: 14px;
+
+//or-slide-show
+$or-container-padding: 30px 0 30px 0;
+$or-slide-item-width: 180px;
+$or-slide-item-margin-left: floor((960-$or-slide-item-width*5)/5);
