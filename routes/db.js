@@ -1,10 +1,10 @@
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
 
 var sql = require('mssql');
 
 /* GET users listing. */
-
 
 var config = {
         user: 'ian',
@@ -27,6 +27,16 @@ router.get('/autoSearch', function (req, res, next) {
         };
     sqlRunner(dataSQL,dataSend);
 });
+
+
+//json test
+router.post('/mainStory',function (req,res) {
+    fs.readFile('./javascript/dbJSON/mainstory.json',function (err,data) {
+        if(err) throw err;
+        return  JSON.parse(data);
+    });
+});
+
 
 function telephoneSearch(searchName, number, topNum) {
     var //sql pre define

@@ -12,6 +12,10 @@ $(document).ready(function () {
         $(this).parent('form.nav-form').stop().animate({width: 200}, 200);
         $('#telResult').fadeOut(300);
     });
+
+    //main story
+    mainStory(addMainStory);
+
 });
 
 function autoSearch(msg) {
@@ -53,3 +57,18 @@ function parseTeleJson(jsonData) {
     return htmlString;
 }
 
+function mainStory(callback){
+    $.ajax({
+        url: '/db/mainStory',
+        method: "POST",
+        error: function (err) {
+            console.log('Main story ajax error:'+err);
+        }
+    }).done(function (data) {
+        callback(data);
+    });
+}
+
+function addMainStory(json){
+
+}
