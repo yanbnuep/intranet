@@ -1,7 +1,6 @@
 var express = require('express');
 var fs = require('fs');
 var router = express.Router();
-
 var sql = require('mssql');
 
 /* GET users listing. */
@@ -31,10 +30,12 @@ router.get('/autoSearch', function (req, res, next) {
 
 //json test
 router.post('/mainStory',function (req,res) {
-    fs.readFile('./javascript/dbJSON/mainstory.json',function (err,data) {
-        if(err) throw err;
-        return  JSON.parse(data);
-    });
+
+    // fs.readFile('../'+_dirname+'/public/javascript/dbJSON/mainstory.json',function (err,data) {
+    //     if(err) throw err;
+    //     return  JSON.parse(data);
+    // });
+    res.send(_filename);
 });
 
 

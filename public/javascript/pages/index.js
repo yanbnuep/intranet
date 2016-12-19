@@ -70,5 +70,5 @@ function mainStory(callback){
 }
 
 function addMainStory(json){
-
+    console.log(json);
 }
