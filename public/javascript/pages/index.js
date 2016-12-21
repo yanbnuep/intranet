@@ -58,17 +58,15 @@ function parseTeleJson(jsonData) {
 }
 
 function mainStory(callback){
-    $.ajax({
-        url: '/db/mainStory',
-        method: "POST",
-        error: function (err) {
-            console.log('Main story ajax error:'+err);
-        }
-    }).done(function (data) {
-        callback(data);
-    });
+    $.getJSON('javascript/dbJSON/mainstory.json',function(data){
+        addMainStory(data);
+    })
 }
 
 function addMainStory(json){
-    console.log(json);
+    var mainStory = json.mainStoryShow,
+        slideImages = [];
+    for(var i = 0;i < mainStory.length;i++){
+
+    }
 }

@@ -28,15 +28,6 @@ router.get('/autoSearch', function (req, res, next) {
 });
 
 
-//json test
-router.post('/mainStory',function (req,res) {
-
-    // fs.readFile('../'+_dirname+'/public/javascript/dbJSON/mainstory.json',function (err,data) {
-    //     if(err) throw err;
-    //     return  JSON.parse(data);
-    // });
-    res.send(_filename);
-});
 
 
 function telephoneSearch(searchName, number, topNum) {
