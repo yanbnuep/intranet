@@ -3,10 +3,10 @@
  */
 $(document).ready(function () {
     //search action
-    $('#telSearch').on('keyup', am.debounce(function(){
+    $('#telSearch').on('keyup', am.debounce(function () {
         autoSearch(this.value);
-    },500)).focusin(function () {
-        $(this).parent('form.nav-form').stop().animate({width: 700},200);
+    }, 500)).focusin(function () {
+        $(this).parent('form.nav-form').stop().animate({width: 700}, 200);
         $('#telResult').fadeIn(300);
     }).focusout(function () {
         $(this).parent('form.nav-form').stop().animate({width: 200}, 200);
@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
 
     //main story
-    mainStory(addMainStory);
+    addMainStory.apply($('#mainNews'));
 
 });
 
@@ -33,10 +33,10 @@ function autoSearch(msg) {
                 number: num
             },
             success: function (jsonResult) {
-                document.getElementById('telResult').innerHTML= parseTeleJson(jsonResult);
+                document.getElementById('telResult').innerHTML = parseTeleJson(jsonResult);
             }
         });
-    }else if(msg.length === 0){
+    } else if (msg.length === 0) {
         $('#telResult').html('');
     }
 }
@@ -45,28 +45,49 @@ function parseTeleJson(jsonData) {
     var resultArray = JSON.parse(jsonData),
         htmlString = '';
 
-    $.each(resultArray,function (index,ele) {
-            var string = '<div class="resultItem">'+
-                    '<span class="string bold">'+ele['PREFER']+'</span>'+
-                    '<span class="num">'+ele['BUSNPHONE']+'</span>'+
-                    '<span class="string sm">'+ele['DIV']+'</span>'+
-                    '</div>';
-            htmlString += string.replace('null',' ');
+    $.each(resultArray, function (index, ele) {
+            var string = '<div class="resultItem">' +
+                '<span class="string bold">' + ele['PREFER'] + '</span>' +
+                '<span class="num">' + ele['BUSNPHONE'] + '</span>' +
+                '<span class="string sm">' + ele['DIV'] + '</span>' +
+                '</div>';
+            htmlString += string.replace('null', ' ');
         }
     );
     return htmlString;
 }
 
-function mainStory(callback){
-    $.getJSON('javascript/dbJSON/mainstory.json',function(data){
-        addMainStory(data);
+function addMainStory() {
+    $.getJSON('javascript/dbJSON/ajax.json', function (data) {
+        var html = getMainStory(data);
+        try {
+            console.log(html);
+            $(this).append(html);
+        }
+        catch (e) {
+            console.log('error append element to mainstory:' + e);
+        }
     })
 }
 
-function addMainStory(json){
-    var mainStory = json.mainStoryShow,
-        slideImages = [];
-    for(var i = 0;i < mainStory.length;i++){
+function getMainStory(json) {
 
+    var jsonStr = {
+            attrName: 'mainStory',
+            image: "imgUrl",
+            title: "title",
+            subTitle: "subTitle",
+            href: "href",
+            order: "index"
+        },
+        html = $(),
+        newsHtml = [];
+        mainStory = json[jsonStr.attrName];
+
+    for (var i = 0; i < mainStory.length; i++) {
+        html.append("<a class='slide-images' href='"+ mainStory[i][jsonStr.href] +"'>");
+        newsHtml.push(html);
     }
+
+    return newsHtml.join('');
 }
