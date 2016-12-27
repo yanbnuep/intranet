@@ -1,0 +1,30 @@
+.slide-btn-group {
+  position: absolute;
+  top: 50%;
+}
+.slide-btn{
+  position: absolute;
+  border-radius: 50%;
+  background-color: $slide-btn-bck-color;
+  @include opacity(.5);
+  cursor: pointer;
+  &:hover {
+    @include opacity(.9)
+  }
+
+  &.big{
+    width: $slide-btn-width-big;
+    height: $slide-btn-height-big;
+
+  }
+  &.sm {
+    width: $slide-btn-width-sm;
+    height: $slide-btn-height-sm;
+  }
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+  }
+}

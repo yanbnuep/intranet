@@ -33,3 +33,20 @@
   background: -moz-linear-gradient($direction, $start, $end); /* For Firefox 3.6 to 15 */
   background: linear-gradient($direction, $start, $end); /* Standard syntax (must be last) */
 }
+
+@mixin opacity ($num){
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $num * 100 + ")";
+
+  /* IE 5-7 */
+  filter: alpha(opacity= $num * 100);
+
+  /* Netscape */
+  -moz-opacity: $num;
+
+  /* Safari 1.x */
+  -khtml-opacity: $num;
+
+  /* Good browsers */
+  opacity: $num;
+
+}

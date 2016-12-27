@@ -64,12 +64,14 @@ $autocomplet-bck-color: color('grey','lighten-5');
 
 //pages
 $news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618);
-$slide-container-width: 550px;
-$slide-container-height: 385px;
-
+$slide-image-width: 550px;
+$slide-image-height: 385px;
+//custom  number of slide images
+$slide-num : 8;
+$slide-container-width: $slide-image-width * $slide-num;
 //for ie6
-$right-news-panel-width: 960 - $slide-container-width - 0.01;
-$right-news-panel-height: $slide-container-height;
+$right-news-panel-width: 960 - $slide-image-width - 0.01;
+$right-news-panel-height: $slide-image-height;
 
 
 //news-area
@@ -96,3 +98,12 @@ $sub-font-size: 14px;
 $or-container-padding: 30px 0 30px 0;
 $or-slide-item-width: 180px;
 $or-slide-item-margin-left: floor((960-$or-slide-item-width*5)/5);
+
+
+//button slide-btn
+
+$slide-btn-width-big: 48px;
+$slide-btn-height-big: 48px;
+$slide-btn-width-sm: 24px;
+$slide-btn-height-sm: 24px;
+$slide-btn-bck-color: color('grey','lighten-5');
