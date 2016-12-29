@@ -59,7 +59,7 @@
         line-height: $title-line-height;
       }
       .sub {
-        font-size: $sub-font-size;
+        font-size: $slick-sub-font-size;
       }
     }
     .img {
@@ -85,6 +85,16 @@
     margin-left: $or-slide-item-margin-left;
     min-height: 1px;
   }
+}
+#slick-container {
+  &:hover #slick-left,&:hover #slick-right{
+    @include opacity(.8);
+  }
+}
+#slick-left,#slick-right {
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 #slick-left {
   background-image:url(../img/btn/ic_keyboard_arrow_left_black_24dp_2x.png);

@@ -6,10 +6,10 @@
   position: absolute;
   border-radius: 50%;
   background-color: $slide-btn-bck-color;
-  @include opacity(.5);
+  @include opacity(.1);
   cursor: pointer;
   &:hover {
-    @include opacity(.9)
+    @include opacity(.8)
   }
 
   &.big{

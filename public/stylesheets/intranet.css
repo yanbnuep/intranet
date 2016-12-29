@@ -1977,26 +1977,26 @@ template {
   position: absolute;
   border-radius: 50%;
   background-color: #fafafa;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
   /* IE 5-7 */
-  filter: alpha(opacity=50);
+  filter: alpha(opacity=10);
   /* Netscape */
-  -moz-opacity: 0.5;
+  -moz-opacity: 0.1;
   /* Safari 1.x */
-  -khtml-opacity: 0.5;
+  -khtml-opacity: 0.1;
   /* Good browsers */
-  opacity: 0.5;
+  opacity: 0.1;
   cursor: pointer; }
   .slide-btn:hover {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     /* IE 5-7 */
-    filter: alpha(opacity=90);
+    filter: alpha(opacity=80);
     /* Netscape */
-    -moz-opacity: 0.9;
+    -moz-opacity: 0.8;
     /* Safari 1.x */
-    -khtml-opacity: 0.9;
+    -khtml-opacity: 0.8;
     /* Good browsers */
-    opacity: 0.9; }
+    opacity: 0.8; }
   .slide-btn.big {
     margin-top: -24px;
     width: 48px;
@@ -2336,6 +2336,7 @@ body {
     .slide-container .slide-images .title {
       position: absolute;
       display: block;
+      height: 60px;
       margin: 0;
       width: 100%;
       font-size: 28px;
@@ -2351,6 +2352,13 @@ body {
       -khtml-opacity: 0.8;
       /* Good browsers */
       opacity: 0.8; }
+    .slide-container .slide-images .sub {
+      position: absolute;
+      display: block;
+      left: 0;
+      bottom: 0;
+      padding: 15px 0;
+      font-size: 16px; }
 
 .slide-show-container-h {
   position: relative;
@@ -2470,7 +2478,7 @@ body {
         font-weight: bold;
         line-height: 16px; }
       .right-new-panel .card-h .txt .sub {
-        font-size: 14px; }
+        font-size: 16px; }
     .right-new-panel .card-h .img {
       width: 149.99px;
       height: 98px; }
@@ -2489,6 +2497,22 @@ body {
     width: 180px;
     margin-left: 12px;
     min-height: 1px; }
+
+#slick-container:hover #slick-left, #slick-container:hover #slick-right {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+  /* Netscape */
+  -moz-opacity: 0.8;
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+  /* Good browsers */
+  opacity: 0.8; }
+
+#slick-left, #slick-right {
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out; }
 
 #slick-left {
   background-image: url(../img/btn/ic_keyboard_arrow_left_black_24dp_2x.png); }

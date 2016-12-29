@@ -91,7 +91,8 @@ function getMainStory(json) {
             image = '<div class="img" style="background-image: url(' +
                 story[jsonStr.image] + ')">\</div>',
             title = '<p class="title"> ' +
-                story[jsonStr.title] +'<div class="subTitle">'+story[jsonStr.subTitle]+'</div>'+ '</p>';
+                story[jsonStr.title] +'<span class="sub">'+story[jsonStr.subTitle]+'</span>'+ '</p>';
+        console.log(title);
         htmlStr = '<a href="' + story[jsonStr.href] + '" class="slide-images">' + image + title + '</a>';
         newsHtml.push(htmlStr);
     }

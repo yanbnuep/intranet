@@ -28,6 +28,7 @@
     .title {
       position: absolute;
       display: block;
+      height: $slick-title-height;
       margin: 0;
       width: 100%;
       font-size: $slick-title-font-size;
@@ -35,6 +36,14 @@
       color: $slick-title-color;
       background-color: $slick-title-background-color;
       @include opacity($slick-title-background-opacity);
+    }
+    .sub {
+      position: absolute;
+      display: block;
+      left: 0;
+      bottom: 0;
+      padding: $slick-sub-padding;
+      font-size: $slick-sub-font-size;
     }
   }
 }
