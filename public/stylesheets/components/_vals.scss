@@ -69,6 +69,11 @@ $slide-image-height: 385px;
 //custom  number of slide images
 $slide-num : 8;
 $slide-container-width: $slide-image-width * $slide-num;
+//title
+$slick-title-color: color('grey','lighten-5');
+$slick-title-background-color: color('grey','darken-3');
+$slick-title-background-opacity: .8;
+$slick-title-font-size: 28px;
 //for ie6
 $right-news-panel-width: 960 - $slide-image-width - 0.01;
 $right-news-panel-height: $slide-image-height;

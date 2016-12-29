@@ -24,6 +24,18 @@
       height: 100%;
       background-repeat: no-repeat;
     }
+
+    .title {
+      position: absolute;
+      display: block;
+      margin: 0;
+      width: 100%;
+      font-size: $slick-title-font-size;
+      bottom: 0;
+      color: $slick-title-color;
+      background-color: $slick-title-background-color;
+      @include opacity($slick-title-background-opacity);
+    }
   }
 }
 

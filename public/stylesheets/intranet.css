@@ -1998,15 +1998,19 @@ template {
     /* Good browsers */
     opacity: 0.9; }
   .slide-btn.big {
+    margin-top: -24px;
     width: 48px;
     height: 48px; }
   .slide-btn.sm {
+    margin-top: -12px;
     width: 24px;
     height: 24px; }
   .slide-btn.left {
     left: 0; }
   .slide-btn.right {
     right: 0; }
+  .slide-btn.center-v {
+    top: 50%; }
 
 html {
   -webkit-box-sizing: border-box;
@@ -2329,6 +2333,24 @@ body {
       display: block;
       height: 100%;
       background-repeat: no-repeat; }
+    .slide-container .slide-images .title {
+      position: absolute;
+      display: block;
+      margin: 0;
+      width: 100%;
+      font-size: 28px;
+      bottom: 0;
+      color: #fafafa;
+      background-color: #424242;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+      /* IE 5-7 */
+      filter: alpha(opacity=80);
+      /* Netscape */
+      -moz-opacity: 0.8;
+      /* Safari 1.x */
+      -khtml-opacity: 0.8;
+      /* Good browsers */
+      opacity: 0.8; }
 
 .slide-show-container-h {
   position: relative;
@@ -2467,5 +2489,11 @@ body {
     width: 180px;
     margin-left: 12px;
     min-height: 1px; }
+
+#slick-left {
+  background-image: url(../img/btn/ic_keyboard_arrow_left_black_24dp_2x.png); }
+
+#slick-right {
+  background-image: url(../img/btn/ic_keyboard_arrow_right_black_24dp_2x.png); }
 
 /*# sourceMappingURL=intranet.css.map */

@@ -13,11 +13,13 @@
   }
 
   &.big{
+    margin-top: -(floor($slide-btn-height-big/2));
     width: $slide-btn-width-big;
     height: $slide-btn-height-big;
 
   }
   &.sm {
+    margin-top: -(floor($slide-btn-height-sm/2));
     width: $slide-btn-width-sm;
     height: $slide-btn-height-sm;
   }
@@ -26,5 +28,8 @@
   }
   &.right {
     right: 0;
+  }
+  &.center-v {
+    top: 50%;
   }
 }

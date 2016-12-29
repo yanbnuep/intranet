@@ -59,11 +59,13 @@ function parseTeleJson(jsonData) {
 
 function addMainStory(selector) {
     $.getJSON('javascript/dbJSON/ajax.json', function (data) {
-        var html = getMainStory(data);
+        var html = getMainStory(data),
+            eleLength = 0;
         try {
             selector.append(html);
-
-            $('.slide-images').slick();
+            if (selector.is('#mainNews')) {
+                am.addSlick($("#mainNews .slide-images"));
+            }
         }
         catch (e) {
             console.log('error append element to mainstory:' + e);
@@ -82,15 +84,15 @@ function getMainStory(json) {
         },
         htmlStr = '',
         newsHtml = [];
-        mainStory = json[jsonStr.attrName];
+    mainStory = json[jsonStr.attrName];
 
     for (var i = 0; i < mainStory.length; i++) {
         var story = mainStory[i],
             image = '<div class="img" style="background-image: url(' +
                 story[jsonStr.image] + ')">\</div>',
-            title = '<div class="title" ' +
-            story[jsonStr.title] + '>\</div>';
-            htmlStr = '<a href="'+story[jsonStr.href]+'" class="slide-images">'+image+title+'</a>';
+            title = '<p class="title"> ' +
+                story[jsonStr.title] +'<div class="subTitle">'+story[jsonStr.subTitle]+'</div>'+ '</p>';
+        htmlStr = '<a href="' + story[jsonStr.href] + '" class="slide-images">' + image + title + '</a>';
         newsHtml.push(htmlStr);
     }
 
