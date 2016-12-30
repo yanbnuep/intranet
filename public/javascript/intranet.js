@@ -69,7 +69,8 @@
                 dotsClass: 'slide-dot',
                 leftbtn: '#slick-left',
                 rightbtn: '#slick-right',
-                duration: 250
+                duration: 250,
+                internal: true
             },
             setting = {},
             slideElements = {},
@@ -156,6 +157,12 @@
                     }
                 });
             }
+        }
+        //add internal timer to slick
+        if(setting.internal){
+            setInterval(function () {
+                slick('rtl',1);
+            },7000);
         }
 
     }

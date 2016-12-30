@@ -73,10 +73,11 @@ $slide-container-width: $slide-image-width * $slide-num;
 $slick-title-color: color('grey','lighten-5');
 $slick-title-background-color: color('grey','darken-3');
 $slick-title-background-opacity: .8;
-$slick-title-font-size: 28px;
-$slick-title-height: 60px;
+$slick-title-font-size: 20px;
+$slick-title-height: 80px;
+$slick-title-padding: 15px 5px;
 //sub
-$slick-sub-font-size: 13px;
+$slick-sub-font-size: 14px;
 //for ie6
 $right-news-panel-width: 960 - $slide-image-width - 0.01;
 $right-news-panel-height: $slide-image-height;
@@ -100,8 +101,8 @@ $txt-area-height: $new-image-height;
 $title-font-size: 16px;
 $new-title-padding: 0 0 0 15px;
 $title-line-height: $slide-tab-bar-height;
-$slick-sub-font-size: 16px;
-$slick-sub-padding: 15px 0;
+
+$slick-sub-padding: 15px 5px;
 //or-slide-show
 $or-container-padding: 30px 0 30px 0;
 $or-slide-item-width: 180px;

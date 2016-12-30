@@ -6,10 +6,10 @@ $(document).ready(function () {
     $('#telSearch').on('keyup', am.debounce(function () {
         autoSearch(this.value);
     }, 500)).focusin(function () {
-        $(this).parent('form.nav-form').stop().animate({width: 700}, 200);
+        $(this).parent('form.nav-form').stop().animate({width: 700}, 150);
         $('#telResult').fadeIn(300);
     }).focusout(function () {
-        $(this).parent('form.nav-form').stop().animate({width: 200}, 200);
+        $(this).parent('form.nav-form').stop().animate({width: 200}, 150);
         $('#telResult').fadeOut(300);
     });
 
@@ -92,7 +92,6 @@ function getMainStory(json) {
                 story[jsonStr.image] + ')">\</div>',
             title = '<p class="title"> ' +
                 story[jsonStr.title] +'<span class="sub">'+story[jsonStr.subTitle]+'</span>'+ '</p>';
-        console.log(title);
         htmlStr = '<a href="' + story[jsonStr.href] + '" class="slide-images">' + image + title + '</a>';
         newsHtml.push(htmlStr);
     }

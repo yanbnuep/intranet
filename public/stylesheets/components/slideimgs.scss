@@ -28,6 +28,7 @@
     .title {
       position: absolute;
       display: block;
+      padding: $slick-title-padding;
       height: $slick-title-height;
       margin: 0;
       width: 100%;
