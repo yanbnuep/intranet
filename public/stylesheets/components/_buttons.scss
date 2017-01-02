@@ -2,7 +2,8 @@
   position: absolute;
   top: 50%;
 }
-.slide-btn{
+
+.slide-btn {
   position: absolute;
   border-radius: 50%;
   background-color: $slide-btn-bck-color;
@@ -12,7 +13,7 @@
     @include opacity(.8)
   }
 
-  &.big{
+  &.big {
     margin-top: -(floor($slide-btn-height-big/2));
     width: $slide-btn-width-big;
     height: $slide-btn-height-big;
@@ -31,5 +32,30 @@
   }
   &.center-v {
     top: 50%;
+  }
+}
+
+.slick-dots {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: $slick-dots-padding;
+  @include clearfix;
+  .dot {
+    position: relative;
+    display: block;
+    float: left;
+    margin: $dot-margin;
+    width: $dot-btn-width;
+    height: $dot-btn-height;
+    padding: $dot-btn-padding;
+    cursor: pointer;
+    border-radius: $dot-btn-border-radius;
+    background-color: $dot-btn-background-color;
+    text-indent: -99999px;
+    @include opacity(.9);
+    &.cur {
+      background-color: $dot-btn-cur-background-color;
+    }
   }
 }

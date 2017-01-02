@@ -27,6 +27,8 @@
                 return String(str).replace(/\W|\d|[A-Z]/g, sep);
             case 'enChar':
                 return String(str).replace(/\W|\d/g, sep);
+            case 'nonEn':
+                return String(str).replace(/[a-z A-Z]/g,sep);
             default:
                 return null;
         }
@@ -58,6 +60,7 @@
         return $(outerHtml).append(innerHtml);
     }
 
+
     function addSlick(slideEle, settings) {
 
         var defaultSettings = {
@@ -69,8 +72,10 @@
                 dotsClass: 'slide-dot',
                 leftbtn: '#slick-left',
                 rightbtn: '#slick-right',
-                duration: 250,
-                internal: true
+                duration: 300,
+                internal: true,
+                slickNum: 1,
+                slickContainer: '#slick-container'
             },
             setting = {},
             slideElements = {},
@@ -83,12 +88,13 @@
         } else {
             setting = defaultSettings;
         }
-
+        var slickContainer = $(setting.slickContainer);
         //if slide infinity add clone slide element
         slideElements = slideEle instanceof $ ? slideEle : $(slideEle);
         container = $(slideElements.parent());
         eleWidth = slideEle.width();
         eleLenght = slideElements.length;
+
         if (eleLenght < 2) return null;
         /*1.add first and last element's copy to dom
          2.change the width of parent element and slide left to the first element
@@ -100,11 +106,9 @@
                 eleWidth = $(ele[0]).width();
             $(ele[0]).before(lastEle);
             $(ele[eleLenght - 1]).after(firstEle);
-
-            container.css('width', function (ele) {
-                return $(this).width() + eleWidth * 2;
+            container.css('width', function () {
+                return eleWidth * (ele.length+setting.slickNum*2)
             });
-
             container.css('left', -eleWidth);
 
         })(slideEle);
@@ -120,11 +124,30 @@
             e.preventDefault ? e.preventDefault() : (e.returnValue = false);
             slick('rtl', 1);
         });
+
+        //add slide dots and click event
+        (function (ele) {
+            var eleNum = ele.length,
+                slick_dots = $('<div class="slick-dots"></div>');
+            if(eleNum === 0) return null;
+            for(var i = 0 ; i < eleNum ; i++){
+                (function (w) {
+                    var slick_btn = $('<div class="dot"></div>').click(function () {
+                        slickTo(w);
+                    });
+                    slick_dots.append(slick_btn);
+                })(i);
+            }
+            slickContainer.append(slick_dots);
+            $($('.slick-dots .dot')[0]).addClass("cur");
+        })(slideEle);
+
+        //get the left attribute of parent div
+        function getLeft() {
+            return rgxGet('nonEn',container.css('left'));
+        }
+
         function slick(direction, num) {
-            //get container's position
-            var getLeft = function () {
-                return rgxGet('number', container.css('left'))
-            };
             var left = 0;
             //stop all animate;
             container.finish();
@@ -134,14 +157,13 @@
                     opacity: 1,
                     left: "-=" + eleWidth * num
                 }, setting.duration, function () {
-                    left = -getLeft();
-                    console.log(left - eleWidth * num);
-                    if (left - eleWidth * num <= -container.width()) {
-                        console.log(container.width());
+                    left = getLeft();
+                    if (left <= -container.width()+eleWidth*setting.slickNum) {
                         container.css('left', function () {
                             return -(eleWidth * num);
                         })
                     }
+                    chageCur();
                 });
 
             } else if (direction === 'ltr') {
@@ -149,20 +171,45 @@
                     opacity: 1,
                     left: "+=" + eleWidth * num
                 }, setting.duration, function () {
-                    left = -getLeft();
-                    if ((left + eleWidth * num) >= 0) {
+                    left = getLeft();
+                    if (left >= 0) {
                         container.css('left', function () {
-                            return (eleWidth * num + 1) - container.width();
+                            return -(container.width()-eleWidth*setting.slickNum*2);
                         })
                     }
+                    chageCur();
                 });
+            }
+        }
+        function slickTo(idx) {
+            var curLeft = getLeft(),
+                //default slick add id
+                shouldLeft = -(eleWidth*(idx+setting.slickNum));
+            container.finish();
+            container.animate({left:"+="+ (shouldLeft - curLeft)},setting.duration,function () {
+                chageCur(idx);
+            });
+        }
+
+        //function add class 'cur' to dot
+        function chageCur(idx) {
+            var left = 0,
+                nxIdx = 0;
+            $('.slick-dots .dot.cur').removeClass('cur');
+            if(idx !== undefined){
+                $($('.slick-dots .dot')[idx]).addClass('cur');
+                return null;
+            }else{
+                left = Math.abs(getLeft());
+                nxIdx = left/eleWidth - setting.slickNum;
+                $($('.slick-dots .dot')[nxIdx]).addClass('cur');
             }
         }
         //add internal timer to slick
         if(setting.internal){
             setInterval(function () {
                 slick('rtl',1);
-            },7000);
+            },8000);
         }
 
     }
