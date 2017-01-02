@@ -2058,7 +2058,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  overflow: hidden; }
+  overflow: scroll; }
 
 .wrapper-960 {
   position: relative;
