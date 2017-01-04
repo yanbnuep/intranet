@@ -17,7 +17,14 @@ body
                     li
                         a.sidebar-link CEO Office
                     li
-                        a.sidebar-link General Affairs
+                        a.sidebar-link(href='/') General Affairs
+                        ul.menu-sub
+                            li
+                                a.section-link(data-scroll href="#Admin") Admin
+                            li
+                                a.section-link(data-scroll href="#HR") HR
+                            li
+                                a.section-link(data-scroll href="#Information-Technology") Information Technology
                     li
                         a.sidebar-link Commercial
                     li
@@ -28,8 +35,27 @@ body
                         a.sidebar-link Engineering & Maintenance
                     li
                         a.sidebar-link Customer Services
+        .main-content
+            #Admin.card.list
+                a( href="#").title Admin
+                    ul.list-container
+                        li
+                            .contact-box
+                                .name Lee Sok I.Carrie(Ms)
+
+            #Information-Technology.card.list
+                a( href="#").title Admin
+                    ul.list-container
+                        li
+                            .contact-box
+                                .name Lee Sok I.Carrie(Ms)
 
 
 
 script(src='/javascript/includes/jquery-1.12.4.min.js')
+script(src='/javascript/includes/smooth-scroll.min.js')
 script(src='/javascript/pages/telephoneSearch.js')
+
+
+script.
+    smoothScroll.init();

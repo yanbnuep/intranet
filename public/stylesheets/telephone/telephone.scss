@@ -6,10 +6,20 @@ $sidebar-width: 320px;
 $sidebar-padding: 40px 0 30px 60px;
 
 .sidebar {
-  position: relative;
+  position: fixed;
   display: block;
   float: left;
   width: $sidebar-width;
   padding: $sidebar-padding;
   @include clearfix;
+}
+.main-content {
+  position: relative;
+  display: block;
+  float: left;
+  margin-left: $sidebar-width;
+}
+
+#Admin,#Information-Technology {
+  margin-top: 1000px;
 }
