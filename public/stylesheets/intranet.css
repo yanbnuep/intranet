@@ -2325,6 +2325,13 @@ body {
     .card-h .img:after {
       clear: both; }
 
+.menu-root {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .menu-root a {
+    text-decoration: none; }
+
 .slide-container {
   display: block;
   position: relative;
