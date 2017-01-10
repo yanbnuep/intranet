@@ -71,6 +71,7 @@ function getConstruction(callback) {
 router.get('/department',function(req,res,next){
     try{
         byDepartment(req.query['department'],function (data) {
+            console.log(data);
             res.send(data);
         })
     }catch (e){
@@ -80,8 +81,7 @@ router.get('/department',function(req,res,next){
 
 
 function byDepartment(department,callback) {
-    var result = [],
-        div = {};
+    var result = {};
     console.log('SELECT * FROM [INTRANET].[dbo].[TEL_VW] where DEPT = \''+department+'\' and LOCATION = \'MFM\' order by DIV ');
     sql.connect(config, function (err){
         if(err){
@@ -94,10 +94,23 @@ function byDepartment(department,callback) {
                     console.log('error search by department: '+error);
                     return null;
                 }
+
+                for(var i = 0 ; i < data.length; i++ ){
+                    (function (peron) {
+                        var div = peron['DIV'];
+                        if(result[div] === undefined){
+                            result[div] = [];
+                        }
+                        if(div !== null && div !== undefined){
+                            result[div].push(peron);
+                        }
+                    })(data[i])
+                }
+
                 if (typeof callback === 'function') {
-                    callback(data);
+                    callback(result);
                 } else {
-                    return data;
+                    return result;
                 }
             });
         }catch (e){

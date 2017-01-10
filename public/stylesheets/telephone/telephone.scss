@@ -6,15 +6,16 @@ $sidebar-width: 320px;
 $sidebar-padding: 40px 0 30px 60px;
 
 .sidebar {
-  position: fixed;
+  position: relative;
   display: block;
   float: left;
+  height: 100%;
   width: $sidebar-width;
   padding: $sidebar-padding;
   @include clearfix;
 }
 .main-content {
-  position: relative;
+  position: fixed;
   display: block;
   float: left;
   margin-left: $sidebar-width;
@@ -24,3 +25,9 @@ $sidebar-padding: 40px 0 30px 60px;
   margin-top: 500px;
 }
 
+#contacts-content {
+  @include float-block;
+  @include clearfix;
+  min-height: 1px;
+  width: 629px;
+}

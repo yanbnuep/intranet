@@ -2325,9 +2325,16 @@ body {
     .card-h .img:after {
       clear: both; }
 
+.contact-group {
+  position: relative;
+  display: block;
+  margin: 15px 0 0 10px; }
+
 .menu-root {
   margin: 0;
   padding: 0;
+  display: block;
+  height: 100%;
   list-style: none; }
   .menu-root a {
     text-decoration: none; }

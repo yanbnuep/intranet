@@ -17,3 +17,8 @@
     float: left;
   }
 }
+
+.contact-group {
+ @include relativeblock;
+  margin: $contact-group-margin;
+}
