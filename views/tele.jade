@@ -4,20 +4,22 @@
 doctype html
 html(lang="en")
     include include/header
-    link(rel='stylesheet',href = 'stylesheets/telephone/telephone.css')
 body
     include include/nav
-    .wrapper-960
+    .tele-content.wrapper-960
         .sidebar
             .nav-list-v.teleList.left
-                .header Headquarter
-                ul#headQuarter.menu-root
-        #contacts-content
+                .menu-root
+                    .header Headquarter
+                    ul#headQuarter
+                .header
 
+        #contacts-content
+    //include include/footer
 script(src='/javascript/includes/jquery-1.12.4.min.js')
 script(src='/javascript/includes/smooth-scroll.min.js')
 script(src='/javascript/pages/telephoneSearch.js')
 
 
 script.
-    smoothScroll.init();
+    smoothScroll.init({offset: 100});

@@ -1,0 +1,15 @@
+.contact-group {
+  @include relativeblock;
+  margin: $contact-group-margin;
+  padding: $contact-group-padding;
+
+  .title {
+    color: $contact-group-title-color;
+    background-color: $contact-group-title-bk-color;
+  }
+
+  .person {
+    @include relativeblock;
+    margin: $person-margin;
+  }
+}

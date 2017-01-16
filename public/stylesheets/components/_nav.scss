@@ -1,10 +1,14 @@
 .nav {
-  position: relative;
+  position: fixed;
   display: block;
   clear: both;
+  width: 100%;
+  top: 0;
   height: $nav-height;
   border-bottom: $nav-bottom-border;
+  background-color: white;
   @include clearfix;
+  @include opacity(1);
 }
 
 .nav-logo {
@@ -21,9 +25,10 @@
   margin: 0 10px;
   padding: 0;
   display: block;
+  width: 100%;
   &.second-nav {
-    position: relative;
-    top: 0;
+    position: fixed;
+    top: $nav-height;
     margin: 0;
     height: $nav-second-height;
     background-color: $nav-second-bg-color;

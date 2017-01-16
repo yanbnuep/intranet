@@ -17,6 +17,7 @@ function getConstructor(callback) {
 
 function addDepartment(constructor) {
     var departmenthtml = $(),
+        menuSub = $();
         divhtml = $();
     for (var department in constructor) {
         departmenthtml = $('<li><a href="/" class="sidebar-link">' + department + '</a></li>');
@@ -24,6 +25,12 @@ function addDepartment(constructor) {
             (function (department) {
                 departmenthtml.children('a').click(function (event) {
                     event.preventDefault() ? event.preventDefault() : (event.returnValue = false);
+                    //add cur remove others class cur
+                    menuSub = $($(this).next('ul.menu-sub'));
+                    if(!menuSub.hasClass('cur')){
+                        $('ul.menu-sub.cur').removeClass('cur');
+                        menuSub.addClass('cur');
+                    }
                     //get html by department
                     $('#contacts-content').html('');
                     searchByDepartment(department);
@@ -40,7 +47,7 @@ function addDepartment(constructor) {
             departmenthtml.append(subMenu);
         }
 
-        $('#headQuarter.menu-root').append(departmenthtml);
+        $('#headQuarter').append(departmenthtml);
     }
 
 }
@@ -58,25 +65,20 @@ function searchByDepartment(department) {
 
 function renderPhoneResult(data) {
     var person = {},
-        card = {},
+        card = $(),
         contactCards = [];
     for(var div in data){
         if(data.hasOwnProperty(div) && div !== null){
             card = $('<div id="'+div+'" class="contact-group">'+'<div class="title">'+div+'</div>'+'</div>');
             for(var i = 0; i< data[div].length ; i++){
                 (function (contact) {
+                    person.name =  contact['NAME'];
                     person.companyPhone = contact['BUSNPHONE'];
                     person.email = contact['EMAIL'];
                     person.jobtitle =  contact['JOBTITLE'];
-                    person.name =  contact['NAME'];
                     (function (person) {
                         contactCards = makeContactCard(person);
-                        for(var j = 0; j < contactCards.length; j++){
-                            (function (contactInfo) {
-                                card.append(contactInfo);
-                                console.log(card.html());
-                            })(contactCards[j])
-                        }
+                        card.append(contactCards);
                     })(person)
                 })(data[div][i]);
             }
@@ -88,13 +90,13 @@ function renderPhoneResult(data) {
 }
 
 function makeContactCard(contactList) {
-    var card = [],
+    var person = $('<div class="person"></div>'),
         personInfo = $();
 
     for(var info in contactList){
         if(contactList.hasOwnProperty(info))
         personInfo = $('<div class="peronInfo">'+info+": "+contactList[info]+'</div>');
-        card.push(personInfo)
+        person.append(personInfo);
     }
-    return card;
+    return person;
 }

@@ -2140,12 +2140,24 @@ body {
   background-color: #f5f5f5; }
 
 .nav {
-  position: relative;
+  position: fixed;
   display: block;
   clear: both;
+  width: 100%;
+  top: 0;
   height: 60px;
   border-bottom: none;
-  *zoom: 1; }
+  background-color: white;
+  *zoom: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  /* IE 5-7 */
+  filter: alpha(opacity=100);
+  /* Netscape */
+  -moz-opacity: 1;
+  /* Safari 1.x */
+  -khtml-opacity: 1;
+  /* Good browsers */
+  opacity: 1; }
   .nav:before, .nav:after {
     content: "";
     display: table; }
@@ -2164,10 +2176,11 @@ body {
   position: relative;
   margin: 0 10px;
   padding: 0;
-  display: block; }
+  display: block;
+  width: 100%; }
   .nav-list-h.second-nav {
-    position: relative;
-    top: 0;
+    position: fixed;
+    top: 60px;
     margin: 0;
     height: 37px;
     background-color: #292059; }
@@ -2339,6 +2352,32 @@ body {
   .menu-root a {
     text-decoration: none; }
 
+.menu-sub {
+  display: none;
+  list-style: none; }
+  .menu-sub.cur {
+    display: block; }
+
+.contact-group {
+  position: relative;
+  display: block;
+  margin: 15px 0 0 10px;
+  padding: 0 15px; }
+  .contact-group .title {
+    color: #f5f5f5;
+    background-color: #292059; }
+  .contact-group .person {
+    position: relative;
+    display: block;
+    margin: 10px 0; }
+
+.default-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: #fafafa;
+  background-color: #292059; }
+
 .slide-container {
   display: block;
   position: relative;
@@ -2437,7 +2476,7 @@ body {
       height: 100%; }
 
 .news-area {
-  margin-top: 22px;
+  margin-top: 119px;
   padding-bottom: 30px; }
 
 .slide-container {
@@ -2569,5 +2608,59 @@ body {
 
 #slick-right {
   background-image: url(../img/btn/ic_keyboard_arrow_right_black_24dp_2x.png); }
+
+.sidebar {
+  position: fixed;
+  display: block;
+  float: left;
+  height: 100%;
+  top: 97px;
+  width: 300px;
+  padding: 20px 0 300px 0;
+  *zoom: 1;
+  overflow-y: scroll; }
+  .sidebar:before, .sidebar:after {
+    content: "";
+    display: table; }
+  .sidebar:after {
+    clear: both; }
+
+.main-content {
+  position: fixed;
+  display: block;
+  float: left;
+  margin-left: 300px; }
+
+#headQuarter {
+  margin: 10px 0 0 0;
+  padding: 0;
+  list-style: none; }
+
+#Admin, #Information-Technology {
+  margin-top: 500px; }
+
+#contacts-content {
+  position: relative;
+  display: block;
+  float: left;
+  min-height: 1px;
+  *zoom: 1;
+  *zoom: 1;
+  min-height: 1px;
+  margin-left: 300px;
+  width: 629px; }
+  #contacts-content:before, #contacts-content:after {
+    content: "";
+    display: table; }
+  #contacts-content:after {
+    clear: both; }
+  #contacts-content:before, #contacts-content:after {
+    content: "";
+    display: table; }
+  #contacts-content:after {
+    clear: both; }
+
+#contacts-content {
+  top: 97px; }
 
 /*# sourceMappingURL=intranet.css.map */

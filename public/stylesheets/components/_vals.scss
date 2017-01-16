@@ -63,7 +63,7 @@ $autocomplet-bck-color: color('grey','lighten-5');
 
 
 //pages
-$news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618);
+$news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618) + $nav-height +$nav-second-height;
 $slide-image-width: 550px;
 $slide-image-height: 385px;
 //custom  number of slide images
@@ -125,5 +125,13 @@ $slide-btn-width-sm: 24px;
 $slide-btn-height-sm: 24px;
 $slide-btn-bck-color: color('grey','lighten-5');
 
-//contact cards
+
+//telephone
 $contact-group-margin: 15px 0 0 10px;
+$contact-group-padding: 0 15px;
+$contact-group-title-color: color('grey','lighten-4');
+$contact-group-title-bk-color: $company-theme-color;
+$person-margin: 10px 0;
+//footer
+$default-footer-color: $nav-second-color;
+$default-footer-bk-color: $company-theme-color;

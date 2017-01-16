@@ -6,20 +6,20 @@ var sql = require('mssql');
 
 var config = {
         user: 'ian',
-        password: 'ian6691',
-        server: '192.168.101.114',
-        database: 'CSD'
+        password: 'airmacau',
+        server: '192.168.110.70',
+        database: 'INTRANET'
     },
     teleAutoSearchConfig = {
         teleReqInfo: ' [PREFER],[BUSNPHONE],[DIV]',
-        tableName: ' [CSD].[dbo].[TEL_VW]'
+        tableName: ' [INTRANET].[dbo].[TEL_VW]'
     };
 router.get('/', function (req, res, next) {
 
 });
 
 router.get('/autoSearch', function (req, res, next) {
-    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 25),
+    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 20),
         dataSend =  function (result) {
             res.send(result);
         };

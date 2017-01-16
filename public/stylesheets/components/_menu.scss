@@ -9,6 +9,13 @@
   }
 }
 
-.menu-sub {
 
+
+.menu-sub {
+  display: none;
+  list-style: none;
+
+  &.cur {
+    display: block;
+  }
 }

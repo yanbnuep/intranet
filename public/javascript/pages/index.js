@@ -33,6 +33,7 @@ function autoSearch(msg) {
                 number: num
             },
             success: function (jsonResult) {
+                console.log(jsonResult);
                 document.getElementById('telResult').innerHTML = parseTeleJson(jsonResult);
             }
         });
