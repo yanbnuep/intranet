@@ -1,11 +1,17 @@
 .menu-root {
   margin: 0;
-  padding: 0;
+  padding: $menu-root-padding;
   display: block;
   height: 100%;
   list-style: none;
   a {
     text-decoration: none;
+  }
+  .header {
+    padding: $menu-root-header-padding;
+    color: $menu-root-header-color;
+    font-size: $menu-root-header-font-size;
+    font-weight: bolder;
   }
 }
 
@@ -14,7 +20,8 @@
 .menu-sub {
   display: none;
   list-style: none;
-
+  padding: 0 0 0 25px;
+  font-size: 15px;
   &.cur {
     display: block;
   }

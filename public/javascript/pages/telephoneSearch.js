@@ -3,7 +3,16 @@
  */
 $(document).ready(function () {
     getConstructor(addDepartment);
+    smoothScrollInit();
 });
+
+function smoothScrollInit() {
+    var options = {offset:100,easing: 'easeOutCubic',callback:function (anchor, toggle) {
+        console.log(anchor);
+        am.oneClass($(toggle),'cur');
+    }};
+    smoothScroll.init(options);
+}
 
 function getConstructor(callback) {
     $.ajax({
@@ -26,6 +35,7 @@ function addDepartment(constructor) {
                 departmenthtml.children('a').click(function (event) {
                     event.preventDefault() ? event.preventDefault() : (event.returnValue = false);
                     //add cur remove others class cur
+                    am.oneClass($(this),'cur');
                     menuSub = $($(this).next('ul.menu-sub'));
                     if(!menuSub.hasClass('cur')){
                         $('ul.menu-sub.cur').removeClass('cur');

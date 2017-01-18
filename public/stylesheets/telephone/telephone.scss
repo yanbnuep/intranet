@@ -3,8 +3,8 @@
 
 //sidebar
 $sidebar-width: 300px;
-$sidebar-padding: 20px 0 300px 0;
-
+$sidebar-link-padding: 0;
+$sidebar-link-color: color('grey','darken-3');
 .sidebar {
   position: fixed;
   display: block;
@@ -12,9 +12,36 @@ $sidebar-padding: 20px 0 300px 0;
   height: 100%;
   top: $nav-height +$nav-second-height;
   width: $sidebar-width;
-  padding: $sidebar-padding;
   @include clearfix;
   overflow-y: scroll;
+  .sidebar-link {
+    position: relative;
+    padding: $sidebar-link-padding;
+    width: 100%;
+    &,& a {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 35px;
+      color: $sidebar-link-color;
+      border-bottom: $sidebar-link-border;
+    }
+    &:hover {
+      border-bottom: $sidebar-link-border-hover;
+    }
+    &.cur {
+      color: $sidebar-link-cur-color;
+    }
+  }
+  .section-link {
+    display: block;
+    padding: 5px 3px;
+    color: $sidebar-link-color;
+    white-space: nowrap;
+    &.cur {
+      color: $sidebar-link-cur-color;
+      font-weight: bold;
+    }
+  }
 }
 .main-content {
   position: fixed;

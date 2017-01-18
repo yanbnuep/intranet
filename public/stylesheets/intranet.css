@@ -2248,6 +2248,9 @@ body {
   .icon-group-h .materl-icons, .icon-group-h i {
     line-height: 60px; }
 
+.nav-list-v {
+  width: 100%; }
+
 .autoSearchList {
   position: absolute;
   display: block;
@@ -2345,16 +2348,23 @@ body {
 
 .menu-root {
   margin: 0;
-  padding: 0;
+  padding: 20px 20px 0 0;
   display: block;
   height: 100%;
   list-style: none; }
   .menu-root a {
     text-decoration: none; }
+  .menu-root .header {
+    padding: 7.5px 0;
+    color: #292059;
+    font-size: 18px;
+    font-weight: bolder; }
 
 .menu-sub {
   display: none;
-  list-style: none; }
+  list-style: none;
+  padding: 0 0 0 25px;
+  font-size: 15px; }
   .menu-sub.cur {
     display: block; }
 
@@ -2364,8 +2374,10 @@ body {
   margin: 15px 0 0 10px;
   padding: 0 15px; }
   .contact-group .title {
-    color: #f5f5f5;
-    background-color: #292059; }
+    color: #292059;
+    background-color: none;
+    font-size: 18px;
+    font-weight: bold; }
   .contact-group .person {
     position: relative;
     display: block;
@@ -2616,7 +2628,6 @@ body {
   height: 100%;
   top: 97px;
   width: 300px;
-  padding: 20px 0 300px 0;
   *zoom: 1;
   overflow-y: scroll; }
   .sidebar:before, .sidebar:after {
@@ -2624,6 +2635,28 @@ body {
     display: table; }
   .sidebar:after {
     clear: both; }
+  .sidebar .sidebar-link {
+    position: relative;
+    padding: 0;
+    width: 100%; }
+    .sidebar .sidebar-link, .sidebar .sidebar-link a {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 35px;
+      color: #424242;
+      border-bottom: 2px solid transparent; }
+    .sidebar .sidebar-link:hover {
+      border-bottom: 2px solid #292059; }
+    .sidebar .sidebar-link.cur {
+      color: #3a2d7f; }
+  .sidebar .section-link {
+    display: block;
+    padding: 5px 3px;
+    color: #424242;
+    white-space: nowrap; }
+    .sidebar .section-link.cur {
+      color: #3a2d7f;
+      font-weight: bold; }
 
 .main-content {
   position: fixed;
