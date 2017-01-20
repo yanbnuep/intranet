@@ -217,7 +217,6 @@
     // only one class in group
     function oneClass(selector,addClassName) {
         var targetString = "."+selector.context.className+"."+addClassName;
-        console.log(targetString);
         var targets = document.querySelectorAll(targetString);
         $.each(targets,function (name,val) {
             $(val).removeClass(addClassName);

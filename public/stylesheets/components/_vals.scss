@@ -46,18 +46,19 @@ $search-form-color: color('grey','darken-1');
 $search-ipt-background-color: color('grey','lighten-3');
 $search-ipt-background-hover: color('grey','lighten-2');
 $search-ipt-border-radius: floor($nav-form-ipt-height/2);
+$resultItem-border-bottom: 1px solid color('grey','lighten-2');
 
 //icon
 $blue-icon-bg-color: color('blue','darken-1');
 //drop-down-list
-$drop-down-list-bg-color: #fff;
+$drop-down-list-bg-color:color('grey','lighten-4');;
 $drop-down-list-border: 1px solid color('grey','lighten-2');
 $drop-down-list-color: $company-theme-color;
 
 //input
 $nav-searchList-top: $nav-height;
 //auto complete
-$autocompletItem-padding: 5px 5px;
+$autocompletItem-padding: 7.5px 5px;
 $autocompletInside-padding: 0 5px;
 $autocomplet-bck-color: color('grey','lighten-5');
 

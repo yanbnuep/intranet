@@ -2,6 +2,7 @@
 .autoSearchList {
   position: absolute;
   display: block;
+  margin-top: -15px;
   width: 100%;
   background-color: $autocomplet-bck-color;
   &.nav-searchList {
@@ -18,17 +19,23 @@
     text-decoration: none;
     text-align: left;
     vertical-align: top;
+    border-bottom: $resultItem-border-bottom;
     @include clearfix;
+    .string {
+      white-space: nowrap;
+    }
     .string,.num {
       position: relative;
       top: 0;
       display: block;
       float: left;
       height: 100%;
-      width: 33%;
+      min-height: 1px;
+      width: 150px;
       padding: $autocompletInside-padding;
       word-wrap: break-word;
     }
+
     .bold {font-weight: bold}
     &:hover {
       color: #fff;

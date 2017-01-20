@@ -68,14 +68,33 @@
     display: none;
     margin: 0;
     padding: 0;
+    margin-top: -5px;
     background-color: $drop-down-list-bg-color;
-    border: $drop-down-list-border;
+    //border: $drop-down-list-border;
+    border-radius: 5px;
     list-style: none;
+    &:before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid $drop-down-list-bg-color;
+    }
 
     .drp-list-item {
       &,li,a {
+        padding: 0 15px;
         color: $drop-down-list-color
       }
+      &:hover {
+        background-color: $company-theme-color;
+        a{
+          color: color('grey','lighten-5');
+        }
+      }
+
     }
   }
 }

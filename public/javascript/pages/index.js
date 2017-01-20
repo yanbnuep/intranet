@@ -6,7 +6,7 @@ $(document).ready(function () {
     $('#telSearch').on('keyup', am.debounce(function () {
         autoSearch(this.value);
     }, 500)).focusin(function () {
-        $(this).parent('form.nav-form').stop().animate({width: 700}, 150);
+        $(this).parent('form.nav-form').stop().animate({width: 500}, 150);
         $('#telResult').fadeIn(300);
     }).focusout(function () {
         $(this).parent('form.nav-form').stop().animate({width: 200}, 150);
@@ -33,7 +33,6 @@ function autoSearch(msg) {
                 number: num
             },
             success: function (jsonResult) {
-                console.log(jsonResult);
                 document.getElementById('telResult').innerHTML = parseTeleJson(jsonResult);
             }
         });
@@ -44,11 +43,12 @@ function autoSearch(msg) {
 
 function parseTeleJson(jsonData) {
     var resultArray = JSON.parse(jsonData),
+        usrName = '',
         htmlString = '';
-
-    $.each(resultArray, function (index, ele) {
+        $.each(resultArray, function (index, ele) {
+            usrName = (ele['PREFER'].length>1 ? ele['PREFER']:ele['NAME']);
             var string = '<div class="resultItem">' +
-                '<span class="string bold">' + ele['PREFER'] + '</span>' +
+                '<span class="string bold">' + usrName + '</span>' +
                 '<span class="num">' + ele['BUSNPHONE'] + '</span>' +
                 '<span class="string sm">' + ele['DIV'] + '</span>' +
                 '</div>';

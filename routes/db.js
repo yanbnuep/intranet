@@ -11,7 +11,7 @@ var config = {
         database: 'INTRANET'
     },
     teleAutoSearchConfig = {
-        teleReqInfo: ' [PREFER],[BUSNPHONE],[DIV]',
+        teleReqInfo: ' [PREFER],[BUSNPHONE],[DIV],[NAME]',
         tableName: ' [INTRANET].[dbo].[TEL_VW]'
     };
 router.get('/', function (req, res, next) {
