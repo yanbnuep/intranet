@@ -28,7 +28,7 @@
             case 'enChar':
                 return String(str).replace(/\W|\d/g, sep);
             case 'nonEn':
-                return String(str).replace(/[a-z A-Z]/g,sep);
+                return String(str).replace(/[a-z A-Z]/g, sep);
             default:
                 return null;
         }
@@ -107,7 +107,7 @@
             $(ele[0]).before(lastEle);
             $(ele[eleLenght - 1]).after(firstEle);
             container.css('width', function () {
-                return eleWidth * (ele.length+setting.slickNum*2)
+                return eleWidth * (ele.length + setting.slickNum * 2)
             });
             container.css('left', -eleWidth);
 
@@ -129,8 +129,8 @@
         (function (ele) {
             var eleNum = ele.length,
                 slick_dots = $('<div class="slick-dots"></div>');
-            if(eleNum === 0) return null;
-            for(var i = 0 ; i < eleNum ; i++){
+            if (eleNum === 0) return null;
+            for (var i = 0; i < eleNum; i++) {
                 (function (w) {
                     var slick_btn = $('<div class="dot"></div>').click(function () {
                         slickTo(w);
@@ -144,7 +144,7 @@
 
         //get the left attribute of parent div
         function getLeft() {
-            return rgxGet('nonEn',container.css('left'));
+            return rgxGet('nonEn', container.css('left'));
         }
 
         function slick(direction, num) {
@@ -158,7 +158,7 @@
                     left: "-=" + eleWidth * num
                 }, setting.duration, function () {
                     left = getLeft();
-                    if (left <= -container.width()+eleWidth*setting.slickNum) {
+                    if (left <= -container.width() + eleWidth * setting.slickNum) {
                         container.css('left', function () {
                             return -(eleWidth * num);
                         })
@@ -174,19 +174,20 @@
                     left = getLeft();
                     if (left >= 0) {
                         container.css('left', function () {
-                            return -(container.width()-eleWidth*setting.slickNum*2);
+                            return -(container.width() - eleWidth * setting.slickNum * 2);
                         })
                     }
                     chageCur();
                 });
             }
         }
+
         function slickTo(idx) {
             var curLeft = getLeft(),
                 //default slick add id
-                shouldLeft = -(eleWidth*(idx+setting.slickNum));
+                shouldLeft = -(eleWidth * (idx + setting.slickNum));
             container.finish();
-            container.animate({left:"+="+ (shouldLeft - curLeft)},setting.duration,function () {
+            container.animate({left: "+=" + (shouldLeft - curLeft)}, setting.duration, function () {
                 chageCur(idx);
             });
         }
@@ -196,35 +197,52 @@
             var left = 0,
                 nxIdx = 0;
             $('.slick-dots .dot.cur').removeClass('cur');
-            if(idx !== undefined){
+            if (idx !== undefined) {
                 $($('.slick-dots .dot')[idx]).addClass('cur');
                 return null;
-            }else{
+            } else {
                 left = Math.abs(getLeft());
-                nxIdx = left/eleWidth - setting.slickNum;
+                nxIdx = left / eleWidth - setting.slickNum;
                 $($('.slick-dots .dot')[nxIdx]).addClass('cur');
             }
         }
+
         //add internal timer to slick
-        if(setting.internal){
+        if (setting.internal) {
             setInterval(function () {
-                slick('rtl',1);
-            },8000);
+                slick('rtl', 1);
+            }, 8000);
         }
 
     }
 
     // only one class in group
-    function oneClass(selector,addClassName) {
-        var targetString = "."+selector.context.className+"."+addClassName;
+    function oneClass(selector, addClassName) {
+        var targetString = "." + selector.context.className + "." + addClassName;
         var targets = document.querySelectorAll(targetString);
-        $.each(targets,function (name,val) {
+        $.each(targets, function (name, val) {
             $(val).removeClass(addClassName);
         });
 
         selector.addClass(addClassName);
     }
 
+    //Tabs
+    (function ($) {
+
+        var methods = {
+            init: function (options) {
+                var defaults = {
+                    onShow: null
+                };
+                options = $.extend(defaults, options);
+                return this.each(function () {
+                    
+                });
+            }
+        }
+
+    }(jQuery));
     am.prototype = {
         //Regex
         rgxGet: rgxGet,

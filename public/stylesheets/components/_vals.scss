@@ -48,6 +48,11 @@ $search-ipt-background-hover: color('grey','lighten-2');
 $search-ipt-border-radius: floor($nav-form-ipt-height/2);
 $resultItem-border-bottom: 1px solid color('grey','lighten-2');
 
+//Tabs
+$tabs-height: 36px;
+$tabs-bk-color: white;
+$tab-a-padding: 0 24px;
+
 //icon
 $blue-icon-bg-color: color('blue','darken-1');
 //drop-down-list
@@ -105,7 +110,7 @@ $dot-btn-border-radius: 15px;
 $dot-btn-background-color: color('grey','lighten-5');
 $dot-btn-cur-background-color: color('blue','darken-4');
 //card news
-$card-padding: 15px 0;
+$card-padding: 11px 0;
 $txt-area-width: 230px;
 $txt-area-height: $new-image-height;
 $title-font-size: 16px;

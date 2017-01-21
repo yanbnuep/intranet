@@ -7,7 +7,7 @@ $(document).ready(function () {
 });
 
 function smoothScrollInit() {
-    var options = {offset:100,easing: 'easeOutCubic',callback:function (anchor, toggle) {
+    var options = {offset:100,easing: 'easeOutCubic',speed: 350,callback:function (anchor, toggle) {
         console.log(anchor);
         am.oneClass($(toggle),'cur');
     }};

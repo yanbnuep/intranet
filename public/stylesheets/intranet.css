@@ -2387,6 +2387,51 @@ body {
   .menu-sub.cur {
     display: block; }
 
+.tabs {
+  position: relative;
+  height: 36px;
+  width: 100%;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  list-style: none;
+  *zoom: 1; }
+  .tabs:before, .tabs:after {
+    content: "";
+    display: table; }
+  .tabs:after {
+    clear: both; }
+  .tabs .tab {
+    position: relative;
+    display: block;
+    float: left;
+    min-height: 1px;
+    *zoom: 1;
+    text-align: center;
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none; }
+    .tabs .tab:before, .tabs .tab:after {
+      content: "";
+      display: table; }
+    .tabs .tab:after {
+      clear: both; }
+    .tabs .tab a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: color .28s ease;
+      background-color: transparent;
+      color: #292059; }
+
 .contact-group {
   position: relative;
   display: block;
@@ -2588,7 +2633,7 @@ body {
         font-weight: bold;
         line-height: 16px; }
   .right-new-panel .card-h {
-    padding: 15px 0; }
+    padding: 11px 0; }
     .right-new-panel .card-h .txt {
       width: 230px;
       height: 98px;
