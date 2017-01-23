@@ -27,6 +27,7 @@ $nav-list-item-padding: 0 5px;
 $nav-list-line-height: $nav-list-height;
 $nav-item-font-size: 14px;
 $nav-item-color: color('grey','darken-1');
+$nav-item-hover-color: darken(#fafafa,15%);
 $nav-item-color-hover: color('grey','darken-3');
 $nav-second-height: floor($nav-height/1.618);
 $nav-second-item-line-height: $nav-second-height;
@@ -57,7 +58,7 @@ $tab-a-padding: 0 24px;
 $blue-icon-bg-color: color('blue','darken-1');
 //drop-down-list
 $drop-down-list-bg-color:color('grey','lighten-4');;
-$drop-down-list-border: 1px solid color('grey','lighten-2');
+$drop-down-list-border: 1px solid #ccc;
 $drop-down-list-color: $company-theme-color;
 
 //input
