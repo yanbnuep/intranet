@@ -2442,10 +2442,18 @@ body {
     background-color: none;
     font-size: 18px;
     font-weight: bold; }
-  .contact-group .person {
-    position: relative;
-    display: block;
-    margin: 10px 0; }
+
+table.contact-table thead th {
+  text-align: left; }
+table.contact-table tbody tr.person:nth-child(odd) {
+  background-color: #f2f2f2; }
+table.contact-table tbody tr.person td span.name {
+  font-size: 15px;
+  font-weight: bold;
+  display: block; }
+table.contact-table tbody tr.person td span.jobTitle {
+  font-size: 12px;
+  font-weight: normal; }
 
 .default-footer {
   position: fixed;

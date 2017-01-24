@@ -9,9 +9,30 @@
     font-size: $contact-group-title-font-size;
     font-weight: bold;
   }
+}
 
-  .person {
-    @include relativeblock;
-    margin: $person-margin;
+table.contact-table {
+  thead {
+    th {
+      text-align: left;
+    }
+  }
+  tbody {
+    tr.person {
+      &:nth-child(odd){
+        background-color: #f2f2f2;
+      }
+      td {
+        span.name {
+          font-size: 15px;
+          font-weight: bold;
+          display: block;
+        }
+        span.jobTitle {
+          font-size: 12px;
+          font-weight: normal;
+        }
+      }
+    }
   }
 }

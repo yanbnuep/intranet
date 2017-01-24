@@ -9,9 +9,11 @@ $(document).ready(function () {
 
 
 function smoothScrollInit() {
-    var options = {offset:100,easing: 'easeOutCubic',speed: 350,callback:function (anchor, toggle) {
-        am.oneClass($(toggle),'cur');
-    }};
+    var options = {
+        offset: 100, easing: 'easeOutCubic', speed: 350, callback: function (anchor, toggle) {
+            am.oneClass($(toggle), 'cur');
+        }
+    };
     smoothScroll.init(options);
 }
 
@@ -28,22 +30,20 @@ function getConstructor(callback) {
 function addDepartment(constructor) {
     var departmenthtml = $(),
         menuSub = $();
-        divhtml = $();
+    divhtml = $();
     for (var department in constructor) {
         departmenthtml = $('<li><a href="/" class="sidebar-link">' + department + '</a></li>');
-
         if (constructor.hasOwnProperty(department)) {
             (function (department) {
                 departmenthtml.children('a').click(function (event) {
                     event.preventDefault() ? event.preventDefault() : (event.returnValue = false);
                     //add cur remove others class cur
-                    am.oneClass($(this),'cur');
-                    var lastCurLink = $('.section-link.cur')[0];
-                    $(lastCurLink).removeClass('cur');
-                     var firstlink = $($(this).next('.menu-sub').find(".section-link")[0]);
-                    firstlink.addClass('cur');
+                    activeLinkReset();
+                    am.oneClass($(this), 'cur');
+                    var firstlink = $($(this).next('.menu-sub').find(".section-link")[0]);
+                    am.oneClass(firstlink, 'cur');
                     menuSub = $($(this).next('ul.menu-sub'));
-                    if(!menuSub.hasClass('cur')){
+                    if (!menuSub.hasClass('cur')) {
                         $('ul.menu-sub.cur').removeClass('cur');
                         menuSub.addClass('cur');
                     }
@@ -57,7 +57,7 @@ function addDepartment(constructor) {
             var subMenu = $('<ul class="menu-sub"></ul>');
             for (var i = 0; i < constructor[department].length; i++) {
                 var div = constructor[department][i];
-                divhtml = $('<li><a class="section-link" data-scroll href="#' + am.rgxGet("enChar",div).replace(" ","-") + '"> ' + div + '</a></li>');
+                divhtml = $('<li><a class="section-link" data-scroll href="#' + am.rgxGet("enChar", div).replace(" ", "-") + '"> ' + div + '</a></li>');
                 subMenu.append(divhtml);
             }
             departmenthtml.append(subMenu);
@@ -76,11 +76,10 @@ function addDepartment(constructor) {
 }
 
 
-
 function searchByDepartment(department) {
     $.ajax({
-        url:'/tele/department',
-        data: {department:department},
+        url: '/tele/department',
+        data: {department: department},
         method: 'get',
         success: function (data) {
             renderPhoneResult(data);
@@ -91,36 +90,41 @@ function searchByDepartment(department) {
 function renderPhoneResult(data) {
     var person = {},
         card = $(),
+        tablehead,
         contactCards = [];
-    for(var div in data){
-        if(data.hasOwnProperty(div) && div !== null){
-            card = $('<div id="'+am.rgxGet("enChar",div).replace(" ","-")+'" class="contact-group">'+'<div class="title">'+div+'</div>'+'</div>');
-            for(var i = 0; i< data[div].length ; i++){
+    for (var div in data) {
+        if (data.hasOwnProperty(div) && div !== null) {
+            card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
+            tablehead = $('<table class="contact-table"><thead><tr><th>Name</th><th>Telephone</th><th>Email</th><tr></thead></table>');
+
+            var tb = $('<tbody></tbody>');
+            for (var i = 0; i < data[div].length; i++) {
                 (function (contact) {
-                    person.name =  contact['NAME'];
+                    person.name = contact['NAME'];
                     person.companyPhone = contact['BUSNPHONE'];
                     person.email = contact['EMAIL'];
-                    person.jobtitle =  contact['JOBTITLE'];
+                    person.jobtitle = contact['JOBTITLE'];
                     (function (person) {
                         contactCards = makeContactCard(person);
-                        card.append(contactCards);
+                        tb.append(contactCards);
                     })(person)
                 })(data[div][i]);
             }
+            tablehead.append(tb);
+            card.append(tablehead);
         }
         $('#contacts-content').append(card);
     }
 }
 
 function makeContactCard(contactList) {
-    var person = $('<div class="person"></div>'),
-        personInfo = $();
-
-    for(var info in contactList){
-        if(contactList.hasOwnProperty(info))
-        personInfo = $('<div class="peronInfo">'+info+": "+contactList[info]+'</div>');
-        person.append(personInfo);
-    }
+    var person = $('<tr class="person"></tr>'),
+        name = $('<td ><span class="name">'+contactList.name+'</span>'+'<span class="jobTitle">'+contactList.jobtitle+'</span>'+'</td>'),
+        tele = $('<td ><span class="tele">'+contactList.companyPhone+'</span></td>'),
+        email = $('<td ><span class="email">'+contactList.email+'</span></td>');
+    person.append(name);
+    person.append(tele);
+    person.append(email);
     return person;
 }
 
@@ -134,49 +138,58 @@ function windowScrollListener() {
             didScroll = true;
         });
         setInterval(function () {
-            if(didScroll){
+            if (didScroll) {
                 //detect if window is scroll up or down
                 curScrollTop = $(this).scrollTop();
                 scrollDown = curScrollTop > lastScrollTop;
                 lastScrollTop = curScrollTop;
                 scrollSetActive(scrollDown);
-                didScroll  = false;
+                didScroll = false;
             }
-        },1000);
+        }, 100);
     })()
 }
 
 function scrollSetActive(scrollDown) {
-    var curActiveLink = $(".section-link.cur"),
-        curActiveContentId= curActiveLink.attr('href'),
-        curContent = $(curActiveContentId);
-    //prevent select document
-    if(curContent.is('div')){
-        var curDistance = curContent.offset().top - $(window).scrollTop();
-        var curMenu = $('.menu-sub.cur .section-link'),
-            curLength = curMenu.length,
-            curIndex = curMenu.index(curActiveLink);
-        if(curIndex){
-            var lastContent = $(curMenu[curIndex - 1]);
-        }
-        if(curIndex < curLength-1){
-            var nextContent = $(curMenu[curIndex + 1]);
-        }
-        if(scrollDown){
-            if(nextContent){
-               var nextDistance = nextContent.offset().top - $(window).scrollTop();
-               console.log(nextContent.scrollHeight());
-               if(nextDistance < 110){
-                   am.oneClass(nextContent,'cur');
-               }
-            }
-        }else {
-            if(lastContent){
-                var lastDistance = lastContent.offset().top - $(window).scrollTop();
-                if(lastDistance < 110){
-                    am.oneClass(lastContent,'cur');
-                }
-            }
-        }
+    var curIndex, curGroup, nextLink, nextElment, distance, change;
+    curGroup = $('.menu-sub.cur .section-link');
+    curIndex = curGroup.index($('.section-link.cur'));
+    //init change to false
+    change = false;
+    if (scrollDown && curGroup.length > curIndex + 1) {
+        nextLink = $(curGroup[curIndex + 1]);
+        nextElment = $(nextLink.attr('href'));
+        distance = $(window).scrollTop() - nextElment.offset().top + 220;
     }
+    else if (!scrollDown && curIndex != 0) {
+        nextLink = $(curGroup[curIndex - 1]);
+        nextElment = $(nextLink.attr('href'));
+        distance = $(window).scrollTop() - nextElment.offset().top - 220;
+    } else if ($(window).scrollTop() + $(window).height() == $(document).height() && $(window).scrollTop() > 112) {
+        // already scroll to the bottom
+        nextLink = $(curGroup).last();
+        nextElment = $(nextLink.attr('href'));
+        change = true;
+    } else if ($(window).scrollTop() === 0) {
+        //112 is the top of navbar
+        //and window already top
+        nextLink = $(curGroup).first();
+        nextElment = $(nextLink.attr('href'));
+        change = true;
+    }
+    if ((distance > 0 && scrollDown) || (distance < 0 && !scrollDown)) {
+        change = true;
+    }
+
+    if (change) {
+        am.oneClass(nextElment, 'cur');
+        am.oneClass(nextLink, 'cur');
+    }
+}
+
+function activeLinkReset() {
+    var activeLinks = $('.section-link.cur');
+    $.each(activeLinks, function (s, o) {
+        $(o).removeClass('cur');
+    });
 }
