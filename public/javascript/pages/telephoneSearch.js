@@ -27,10 +27,13 @@ function getConstructor(callback) {
     });
 }
 
+
+
 function addDepartment(constructor) {
     var departmenthtml = $(),
         menuSub = $();
     divhtml = $();
+    console.log(constructor);
     for (var department in constructor) {
         departmenthtml = $('<li><a href="/" class="sidebar-link">' + department + '</a></li>');
         if (constructor.hasOwnProperty(department)) {
@@ -100,7 +103,7 @@ function renderPhoneResult(data) {
             var tb = $('<tbody></tbody>');
             for (var i = 0; i < data[div].length; i++) {
                 (function (contact) {
-                    person.name = contact['NAME'];
+                    person.name = contact['NAME']+" . "+contact['PREFER'];
                     person.companyPhone = contact['BUSNPHONE'];
                     person.email = contact['EMAIL'];
                     person.jobtitle = contact['JOBTITLE'];
@@ -119,9 +122,9 @@ function renderPhoneResult(data) {
 
 function makeContactCard(contactList) {
     var person = $('<tr class="person"></tr>'),
-        name = $('<td ><span class="name">'+contactList.name+'</span>'+'<span class="jobTitle">'+contactList.jobtitle+'</span>'+'</td>'),
-        tele = $('<td ><span class="tele">'+contactList.companyPhone+'</span></td>'),
-        email = $('<td ><span class="email">'+contactList.email+'</span></td>');
+        name = $('<td class="td-name"><span class="name">'+contactList.name+'</span>'+'<span class="jobTitle">'+contactList.jobtitle+'</span>'+'</td>'),
+        tele = $('<td class="td-tele"><span class="tele">'+contactList.companyPhone+'</span></td>'),
+        email = $('<td class="td-email"><span class="email">'+'<a href="'+'mailto:'+contactList.email+'\">'+contactList.email+'</span></td>');
     person.append(name);
     person.append(tele);
     person.append(email);

@@ -2055,10 +2055,12 @@ html {
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+  font-family: Arial, Arial, Helvetica, sans-serif; }
 
 body {
-  overflow: scroll; }
+  overflow: scroll;
+  font-family: Arial, Arial, Helvetica, sans-serif; }
 
 .wrapper-960 {
   position: relative;
@@ -2363,7 +2365,7 @@ body {
 .contact-group {
   position: relative;
   display: block;
-  margin: 15px 0 0 10px; }
+  margin: 65px 0 0 10px; }
 
 .menu-root {
   margin: 0;
@@ -2435,25 +2437,46 @@ body {
 .contact-group {
   position: relative;
   display: block;
-  margin: 15px 0 0 10px;
+  margin: 65px 0 0 10px;
   padding: 0 15px; }
   .contact-group .title {
+    padding-left: 5px;
     color: #292059;
     background-color: none;
     font-size: 18px;
-    font-weight: bold; }
+    font-weight: bold;
+    border-left: 5px solid #292059; }
 
-table.contact-table thead th {
-  text-align: left; }
-table.contact-table tbody tr.person:nth-child(odd) {
-  background-color: #f2f2f2; }
-table.contact-table tbody tr.person td span.name {
-  font-size: 15px;
-  font-weight: bold;
-  display: block; }
-table.contact-table tbody tr.person td span.jobTitle {
-  font-size: 12px;
-  font-weight: normal; }
+table.contact-table {
+  margin-top: 30px;
+  width: 100%; }
+  table.contact-table thead th {
+    text-align: left; }
+  table.contact-table tbody tr.person {
+    width: 100%; }
+    table.contact-table tbody tr.person:nth-child(odd) {
+      background-color: #f2f2f2; }
+    table.contact-table tbody tr.person td {
+      display: table-cell;
+      padding: 7.5px 0 7.5px 15px; }
+      table.contact-table tbody tr.person td span.name {
+        font-weight: bold;
+        display: block; }
+      table.contact-table tbody tr.person td span.jobTitle {
+        font-size: 12px;
+        font-weight: normal; }
+      table.contact-table tbody tr.person td span.tele, table.contact-table tbody tr.person td span.name, table.contact-table tbody tr.person td span.email {
+        font-size: 13px; }
+      table.contact-table tbody tr.person td .email a {
+        font-size: 14px;
+        text-decoration: none;
+        color: #212121; }
+    table.contact-table tbody tr.person td.td-name {
+      width: 30%; }
+    table.contact-table tbody tr.person td.td-tele {
+      width: 30%; }
+    table.contact-table tbody tr.person td.td-email {
+      width: 39%; }
 
 .default-footer {
   position: fixed;
@@ -2766,6 +2789,7 @@ table.contact-table tbody tr.person td span.jobTitle {
     clear: both; }
 
 #contacts-content {
-  top: 97px; }
+  top: 97px;
+  margin-bottom: 150px; }
 
 /*# sourceMappingURL=intranet.css.map */

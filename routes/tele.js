@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/construct', function (req, res, nex) {
-    console.log('start get constructor');
     try {
         getConstruction(function (data) {
             res.send(data);
@@ -33,28 +32,67 @@ router.get('/construct', function (req, res, nex) {
 function getConstruction(callback) {
     var constructor = {},
         department = '',
+        location = '',
         div = '';
+    var locationTranslator = {
+        BKK: 'Bangkok(曼谷)',
+        CGO : 'ZhengZhou(郑州)',
+        CKG: 'ChongQing(重庆)',
+        CTU: 'ChengDu(成都)',
+        FUK: 'Fukuoka(福冈)',
+        HFE: 'HeFei(合肥)',
+        HGH: 'HangZhou(杭州)',
+        KHH: 'Kaohsiung(高雄)',
+        KWE: 'GuiYang(贵阳)',
+        MFM: 'Macau(澳门)',
+        NGB: 'NingBo(宁波)',
+        NKG: 'NanJing(南京)',
+        NNG: 'NanNing(南宁)',
+        NX : 'Macau(澳门)',
+        OSA: 'KAYAK(大阪)',
+        PEK: 'BeiJing(北京)',
+        SEL: 'Seoul,South Korea(南韩)',
+        SHA: 'ShangHai(上海)',
+        SHE: 'Shengyang(沈阳)',
+        SZX: 'ShenZhen(深圳)',
+        TPE: 'TaiWan Taoyuan(台北)',
+        TSN: 'TianJin(天津)',
+        TXG: 'TaiWan TaiChung(台春)',
+        TYN: 'TaiYuan(太原)',
+        TYO: 'Tokyo Haneda(东京)',
+        XMN: 'XiaMen(厦门)',
+        ZHU: 'ZhuHai(珠海)'
+    };
+    var headquarter = {},
+        outStation = {};
     sql.connect(config, function (err) {
         try {
-            new sql.Request().query('SELECT DISTINCT DEPT,DIV FROM [INTRANET].[dbo].[TEL_VW] WHERE LOCATION = \'MFM\' order by DEPT', function (err, record) {
+            new sql.Request().query('SELECT DISTINCT DEPT,DIV,LOCATION,DIVCODE FROM [INTRANET].[dbo].[TEL_ORDER_VW] where DEPT != \'NULL\' order by DIVCODE ', function (err, record) {
                 if (err) {
                     console.log('error search department: ' + err);
                     return err;
                 }
-                try{
+                try {
                     for (var i = 0; i < record.length; i++) {
                         department = record[i]['DEPT'];
                         div = record[i]['DIV'];
-                        //init department
-                        if (department !== null && constructor[department]=== undefined && div !== undefined) {
-                            constructor[department] = [];
-                            constructor[department].push(div);
-                        }else if( constructor[department] !== undefined && div !== undefined){
-                            constructor[department].push(div);
+                        location = record[i]['LOCATION'];
+                        // //init department
+                        // if (department !== null && constructor[department]=== undefined && div !== undefined) {
+                        //     constructor[department] = [];
+                        //     constructor[department].push(div);
+                        // }else if( constructor[department] !== undefined && div !== undefined){
+                        //     constructor[department].push(div);
+                        // }
+                        if (location == 'MFM' || location == 'NX') {
+                            addDivStructure(headquarter,div,department);
+                        } else if (location != null && (location in locationTranslator)) {
+                            
+                            addDivStructure(outStation,div,department);
                         }
                     }
-                }catch (e){
-                    console.log('error in create constructor: '+e);
+                } catch (e) {
+                    console.log('error in create constructor: ' + e);
                 }
                 if (typeof callback === 'function') {
                     callback(constructor);
@@ -65,43 +103,52 @@ function getConstruction(callback) {
         } catch (e) {
             console.log('error in get telephone constructor: ' + e);
         }
+        function addDivStructure(o,div,department) {
+             if(department != null && !(department in o)){
+                o[department] = [];
+            }
+            if(!(o[department].includes(div))){
+                o[department].push(div);
+            }
+
+        }
     })
 }
 
-router.get('/department',function(req,res,next){
-    try{
-        byDepartment(req.query['department'],function (data) {
+
+router.get('/department', function (req, res, next) {
+    try {
+        byDepartment(req.query['department'], function (data) {
             console.log(data);
             res.send(data);
         })
-    }catch (e){
-        console.log('error search by department: '+ e);
+    } catch (e) {
+        console.log('error search by department: ' + e);
     }
 });
 
 
-function byDepartment(department,callback) {
+function byDepartment(department, callback) {
     var result = {};
-    console.log('SELECT * FROM [INTRANET].[dbo].[TEL_VW] where DEPT = \''+department+'\' and LOCATION = \'MFM\' order by DIV ');
-    sql.connect(config, function (err){
-        if(err){
-            console.log('error in search by department'+err);
+    sql.connect(config, function (err) {
+        if (err) {
+            console.log('error in search by department' + err);
             return null;
         }
-        try{
-            new sql.Request().query('SELECT * FROM [INTRANET].[dbo].[TEL_VW] where DEPT = \''+department+'\' and LOCATION = \'MFM\' order by DIV ',function (error,data) {
-                if(error){
-                    console.log('error search by department: '+error);
+        try {
+            new sql.Request().query('SELECT * FROM [INTRANET].[dbo].[TEL_VW] where DEPT = \'' + department + '\' and LOCATION = \'MFM\' order by DIV ', function (error, data) {
+                if (error) {
+                    console.log('error search by department: ' + error);
                     return null;
                 }
 
-                for(var i = 0 ; i < data.length; i++ ){
+                for (var i = 0; i < data.length; i++) {
                     (function (peron) {
                         var div = peron['DIV'];
-                        if(result[div] === undefined){
+                        if (result[div] === undefined) {
                             result[div] = [];
                         }
-                        if(div !== null && div !== undefined){
+                        if (div !== null && div !== undefined) {
                             result[div].push(peron);
                         }
                     })(data[i])
@@ -113,8 +160,8 @@ function byDepartment(department,callback) {
                     return result;
                 }
             });
-        }catch (e){
-            console.log('error in sql search by department'+e);
+        } catch (e) {
+            console.log('error in sql search by department' + e);
         }
     });
 }
