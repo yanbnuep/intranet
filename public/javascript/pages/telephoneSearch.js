@@ -30,52 +30,38 @@ function getConstructor(callback) {
 
 
 function addDepartment(constructor) {
-    var departmenthtml = $(),
-        menuSub = $();
-    divhtml = $();
+    var headquarter = constructor['headquarter'],
+        outstation = constructor['outStation'];
     console.log(constructor);
-    for (var department in constructor) {
-        departmenthtml = $('<li><a href="/" class="sidebar-link">' + department + '</a></li>');
-        if (constructor.hasOwnProperty(department)) {
-            (function (department) {
-                departmenthtml.children('a').click(function (event) {
-                    event.preventDefault() ? event.preventDefault() : (event.returnValue = false);
-                    //add cur remove others class cur
-                    activeLinkReset();
-                    am.oneClass($(this), 'cur');
-                    var firstlink = $($(this).next('.menu-sub').find(".section-link")[0]);
-                    am.oneClass(firstlink, 'cur');
-                    menuSub = $($(this).next('ul.menu-sub'));
-                    if (!menuSub.hasClass('cur')) {
-                        $('ul.menu-sub.cur').removeClass('cur');
-                        menuSub.addClass('cur');
-                    }
-                    //get html by department
-                    $('#contacts-content').html('');
-                    searchByDepartment(department);
-                });
-            })(department)
-        }
-        if (constructor.hasOwnProperty(department) && constructor[department].length > 0) {
-            var subMenu = $('<ul class="menu-sub"></ul>');
-            for (var i = 0; i < constructor[department].length; i++) {
-                var div = constructor[department][i];
-                divhtml = $('<li><a class="section-link" data-scroll href="#' + am.rgxGet("enChar", div).replace(" ", "-") + '"> ' + div + '</a></li>');
-                subMenu.append(divhtml);
-            }
-            departmenthtml.append(subMenu);
-        }
 
-        $('#headQuarter').append(departmenthtml);
+    departmentHtml(headquarter,$('#headQuarter'));
+    departmentHtml(outstation,$('#outStation'));
+
+    function departmentHtml(department,locateNode) {
+        var html = $();
+        for(var departmentName in department){
+            html = $('<li><a class="sidebar-link">'+departmentName+'</a></li>');
+            locateNode.append(html);
+        }
     }
-    //Activate first link
-    var firstLink = $('#headQuarter .sidebar-link').first();
-    firstLink.addClass('cur');
-    searchByDepartment(firstLink.html());
-    var firstChildMenu = firstLink.next('.menu-sub');
-    firstChildMenu.addClass('cur');
-    var firstChildLink = $('#headQuarter .section-link').first();
-    firstChildLink.addClass('cur');
+
+    function sortLocationName(locationCode) {
+        var locationTranslator = {
+            BKK: 'Bangkok(曼谷)', CGO : 'ZhengZhou(郑州)', CKG: 'ChongQing(重庆)', CTU: 'ChengDu(成都)', FUK: 'Fukuoka(福冈)', HFE: 'HeFei(合肥)', HGH: 'HangZhou(杭州)', KHH: 'Kaohsiung(高雄)', KWE: 'GuiYang(贵阳)', MFM: 'Macau(澳门)', NGB: 'NingBo(宁波)', NKG: 'NanJing(南京)', NNG: 'NanNing(南宁)', NX : 'Macau(澳门)', OSA: 'KAYAK(大阪)', PEK: 'BeiJing(北京)', SEL: 'Seoul,South Korea(南韩)', SHA: 'ShangHai(上海)', SHE: 'Shengyang(沈阳)', SZX: 'ShenZhen(深圳)', TPE: 'TaiWan Taoyuan(台北)', TSN: 'TianJin(天津)', TXG: 'TaiWan TaiChung(台春)', TYN: 'TaiYuan(太原)', TYO: 'Tokyo Haneda(东京)', XMN: 'XiaMen(厦门)', ZHU: 'ZhuHai(珠海)'
+        };
+        if(locationCode in locationTranslator) return (locationCode +":"+locationTranslator[locationCode]);
+    }
+
+    function addDiv(departmentObj,departmentNode) {
+        for(var i = 0 ; i < departmentObj.length; i++){
+            var department = departmentObj[i];
+            if(Object.prototype.toString.call( department ) === '[object Array]'){
+                $.each(department,function (index,val) {
+                        
+                });
+            }
+        }
+    }
 }
 
 

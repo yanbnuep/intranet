@@ -2369,7 +2369,7 @@ body {
 
 .menu-root {
   margin: 0;
-  padding: 20px 20px 0 0;
+  padding: 25px 20px 0 0;
   display: block;
   height: 100%;
   list-style: none; }
@@ -2380,6 +2380,11 @@ body {
     color: #292059;
     font-size: 18px;
     font-weight: bolder; }
+  .menu-root ul {
+    margin: 10px 0 0 0;
+    padding-left: 0 15px 0 0; }
+    .menu-root ul li a {
+      white-space: nowrap; }
 
 .menu-sub {
   display: none;
@@ -2758,11 +2763,6 @@ table.contact-table {
   display: block;
   float: left;
   margin-left: 300px; }
-
-#headQuarter {
-  margin: 10px 0 0 0;
-  padding: 0;
-  list-style: none; }
 
 #Admin, #Information-Technology {
   margin-top: 500px; }

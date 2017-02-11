@@ -34,35 +34,6 @@ function getConstruction(callback) {
         department = '',
         location = '',
         div = '';
-    var locationTranslator = {
-        BKK: 'Bangkok(曼谷)',
-        CGO : 'ZhengZhou(郑州)',
-        CKG: 'ChongQing(重庆)',
-        CTU: 'ChengDu(成都)',
-        FUK: 'Fukuoka(福冈)',
-        HFE: 'HeFei(合肥)',
-        HGH: 'HangZhou(杭州)',
-        KHH: 'Kaohsiung(高雄)',
-        KWE: 'GuiYang(贵阳)',
-        MFM: 'Macau(澳门)',
-        NGB: 'NingBo(宁波)',
-        NKG: 'NanJing(南京)',
-        NNG: 'NanNing(南宁)',
-        NX : 'Macau(澳门)',
-        OSA: 'KAYAK(大阪)',
-        PEK: 'BeiJing(北京)',
-        SEL: 'Seoul,South Korea(南韩)',
-        SHA: 'ShangHai(上海)',
-        SHE: 'Shengyang(沈阳)',
-        SZX: 'ShenZhen(深圳)',
-        TPE: 'TaiWan Taoyuan(台北)',
-        TSN: 'TianJin(天津)',
-        TXG: 'TaiWan TaiChung(台春)',
-        TYN: 'TaiYuan(太原)',
-        TYO: 'Tokyo Haneda(东京)',
-        XMN: 'XiaMen(厦门)',
-        ZHU: 'ZhuHai(珠海)'
-    };
     var headquarter = {},
         outStation = {};
     sql.connect(config, function (err) {
@@ -77,28 +48,20 @@ function getConstruction(callback) {
                         department = record[i]['DEPT'];
                         div = record[i]['DIV'];
                         location = record[i]['LOCATION'];
-                        // //init department
-                        // if (department !== null && constructor[department]=== undefined && div !== undefined) {
-                        //     constructor[department] = [];
-                        //     constructor[department].push(div);
-                        // }else if( constructor[department] !== undefined && div !== undefined){
-                        //     constructor[department].push(div);
-                        // }
                         if (location == 'MFM' || location == 'NX') {
                             addDivStructure(headquarter,div,department);
-                        } else if (location != null && (location in locationTranslator)) {
-                            
-                            addDivStructure(outStation,div,department);
+                        } else if (location != null) {
+                            addDivStructure(outStation,div,location);
                         }
                     }
+
                 } catch (e) {
                     console.log('error in create constructor: ' + e);
                 }
-                if (typeof callback === 'function') {
-                    callback(constructor);
-                } else {
-                    return constructor;
-                }
+
+                constructor['headquarter'] = headquarter;
+                constructor.outStation = outStation;
+                callback(constructor);
             });
         } catch (e) {
             console.log('error in get telephone constructor: ' + e);
@@ -110,7 +73,6 @@ function getConstruction(callback) {
             if(!(o[department].includes(div))){
                 o[department].push(div);
             }
-
         }
     })
 }
@@ -119,7 +81,6 @@ function getConstruction(callback) {
 router.get('/department', function (req, res, next) {
     try {
         byDepartment(req.query['department'], function (data) {
-            console.log(data);
             res.send(data);
         })
     } catch (e) {

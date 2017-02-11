@@ -13,6 +13,15 @@
     font-size: $menu-root-header-font-size;
     font-weight: bolder;
   }
+
+  ul {
+    margin: $menu-ul-margin;
+    padding-left: $menu-ul-padding;
+    li a{
+      white-space: nowrap;
+    }
+  }
+
 }
 
 
