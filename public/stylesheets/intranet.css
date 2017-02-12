@@ -2369,12 +2369,13 @@ body {
 
 .menu-root {
   margin: 0;
-  padding: 25px 20px 0 0;
+  padding: 25px 0 0 0;
   display: block;
   height: 100%;
   list-style: none; }
   .menu-root a {
-    text-decoration: none; }
+    text-decoration: none;
+    cursor: pointer; }
   .menu-root .header {
     padding: 7.5px 0;
     color: #292059;
@@ -2382,17 +2383,18 @@ body {
     font-weight: bolder; }
   .menu-root ul {
     margin: 10px 0 0 0;
-    padding-left: 0 15px 0 0; }
+    padding: 0 0 0 15px; }
     .menu-root ul li a {
       white-space: nowrap; }
-
-.menu-sub {
-  display: none;
-  list-style: none;
-  padding: 0 0 0 25px;
-  font-size: 15px; }
-  .menu-sub.cur {
-    display: block; }
+  .menu-root .menu-sub {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    line-height: 20px; }
+    .menu-root .menu-sub.cur {
+      display: block; }
 
 .tabs {
   position: relative;
@@ -2740,7 +2742,7 @@ table.contact-table {
     padding: 0;
     width: 100%; }
     .sidebar .sidebar-link, .sidebar .sidebar-link a {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       line-height: 35px;
       color: #424242;

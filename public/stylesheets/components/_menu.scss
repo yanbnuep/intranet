@@ -6,6 +6,7 @@
   list-style: none;
   a {
     text-decoration: none;
+    cursor: pointer;
   }
   .header {
     padding: $menu-root-header-padding;
@@ -16,22 +17,23 @@
 
   ul {
     margin: $menu-ul-margin;
-    padding-left: $menu-ul-padding;
+    padding: $menu-ul-padding;
     li a{
       white-space: nowrap;
     }
   }
-
-}
-
-
-
-.menu-sub {
-  display: none;
-  list-style: none;
-  padding: 0 0 0 25px;
-  font-size: 15px;
-  &.cur {
+  .menu-sub {
     display: block;
+    list-style: none;
+    margin: $menu-sub-margin;
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    line-height: 20px;
+    &.cur {
+      display: block;
+    }
   }
 }
+
+
+

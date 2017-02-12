@@ -4,7 +4,7 @@
 $(document).ready(function () {
     getConstructor(addDepartment);
     smoothScrollInit();
-    windowScrollListener();
+    // windowScrollListener();
 });
 
 
@@ -28,39 +28,76 @@ function getConstructor(callback) {
 }
 
 
-
 function addDepartment(constructor) {
     var headquarter = constructor['headquarter'],
         outstation = constructor['outStation'];
-    console.log(constructor);
+    departmentHtml(headquarter, $('#headQuarter'));
+    departmentHtml(outstation, $('#outStation'));
 
-    departmentHtml(headquarter,$('#headQuarter'));
-    departmentHtml(outstation,$('#outStation'));
-
-    function departmentHtml(department,locateNode) {
+    function departmentHtml(department, locateNode) {
         var html = $();
-        for(var departmentName in department){
-            html = $('<li><a class="sidebar-link">'+departmentName+'</a></li>');
-            locateNode.append(html);
+        for (var departmentName in department) {
+            if (department.hasOwnProperty(departmentName)) {
+                var curDept = department[departmentName];
+                html = $('<li><a id="'+departmentName+'" class="sidebar-link">' + sortLocationName(departmentName) + '</a></li>');
+                if (curDept.length > 0) {
+                    addDiv(curDept, html);
+                }
+                locateNode.append(html);
+            }
         }
+        $('.sidebar-link').on('click',function (event) {
+            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+            console.log(this.id);
+            searchByDepartment('CEO');
+        });
     }
 
     function sortLocationName(locationCode) {
         var locationTranslator = {
-            BKK: 'Bangkok(曼谷)', CGO : 'ZhengZhou(郑州)', CKG: 'ChongQing(重庆)', CTU: 'ChengDu(成都)', FUK: 'Fukuoka(福冈)', HFE: 'HeFei(合肥)', HGH: 'HangZhou(杭州)', KHH: 'Kaohsiung(高雄)', KWE: 'GuiYang(贵阳)', MFM: 'Macau(澳门)', NGB: 'NingBo(宁波)', NKG: 'NanJing(南京)', NNG: 'NanNing(南宁)', NX : 'Macau(澳门)', OSA: 'KAYAK(大阪)', PEK: 'BeiJing(北京)', SEL: 'Seoul,South Korea(南韩)', SHA: 'ShangHai(上海)', SHE: 'Shengyang(沈阳)', SZX: 'ShenZhen(深圳)', TPE: 'TaiWan Taoyuan(台北)', TSN: 'TianJin(天津)', TXG: 'TaiWan TaiChung(台春)', TYN: 'TaiYuan(太原)', TYO: 'Tokyo Haneda(东京)', XMN: 'XiaMen(厦门)', ZHU: 'ZhuHai(珠海)'
+            BKK: 'Bangkok(曼谷)',
+            CGO: 'ZhengZhou(郑州)',
+            CKG: 'ChongQing(重庆)',
+            CTU: 'ChengDu(成都)',
+            FUK: 'Fukuoka(福冈)',
+            HFE: 'HeFei(合肥)',
+            HGH: 'HangZhou(杭州)',
+            KHH: 'Kaohsiung(高雄)',
+            KWE: 'GuiYang(贵阳)',
+            MFM: 'Macau(澳门)',
+            NGB: 'NingBo(宁波)',
+            NKG: 'NanJing(南京)',
+            NNG: 'NanNing(南宁)',
+            NX: 'Macau(澳门)',
+            OSA: 'KAYAK(大阪)',
+            PEK: 'BeiJing(北京)',
+            SEL: 'Seoul,South Korea(南韩)',
+            SHA: 'ShangHai(上海)',
+            SHE: 'Shengyang(沈阳)',
+            SZX: 'ShenZhen(深圳)',
+            TPE: 'TaiWan Taoyuan(台北)',
+            TSN: 'TianJin(天津)',
+            TXG: 'TaiWan TaiChung(台春)',
+            TYN: 'TaiYuan(太原)',
+            TYO: 'Tokyo Haneda(东京)',
+            XMN: 'XiaMen(厦门)',
+            ZHU: 'ZhuHai(珠海)'
         };
-        if(locationCode in locationTranslator) return (locationCode +":"+locationTranslator[locationCode]);
+        if (locationCode in locationTranslator) {
+            return (locationCode + "-" + locationTranslator[locationCode])
+        } else return locationCode;
     }
 
-    function addDiv(departmentObj,departmentNode) {
-        for(var i = 0 ; i < departmentObj.length; i++){
-            var department = departmentObj[i];
-            if(Object.prototype.toString.call( department ) === '[object Array]'){
-                $.each(department,function (index,val) {
-                        
-                });
-            }
+    function addDiv(departmentObj, node) {
+        var container = $('<ul class="menu-sub"></ul>');
+        if (Object.prototype.toString.call(departmentObj) === '[object Array]') {
+            $.each(departmentObj, function (index, val) {
+                var divName = val.split(' ').join('');
+                var link = $('<a class="section-link" data-scroll href="#' + divName + '">' + val + '</a>');
+                container.append(link);
+            });
         }
+        node.append(container);
     }
 }
 
@@ -71,6 +108,7 @@ function searchByDepartment(department) {
         data: {department: department},
         method: 'get',
         success: function (data) {
+            console.log(data);
             renderPhoneResult(data);
         }
     });
@@ -89,7 +127,7 @@ function renderPhoneResult(data) {
             var tb = $('<tbody></tbody>');
             for (var i = 0; i < data[div].length; i++) {
                 (function (contact) {
-                    person.name = contact['NAME']+" . "+contact['PREFER'];
+                    person.name = contact['NAME'] + " . " + contact['PREFER'];
                     person.companyPhone = contact['BUSNPHONE'];
                     person.email = contact['EMAIL'];
                     person.jobtitle = contact['JOBTITLE'];
@@ -108,9 +146,9 @@ function renderPhoneResult(data) {
 
 function makeContactCard(contactList) {
     var person = $('<tr class="person"></tr>'),
-        name = $('<td class="td-name"><span class="name">'+contactList.name+'</span>'+'<span class="jobTitle">'+contactList.jobtitle+'</span>'+'</td>'),
-        tele = $('<td class="td-tele"><span class="tele">'+contactList.companyPhone+'</span></td>'),
-        email = $('<td class="td-email"><span class="email">'+'<a href="'+'mailto:'+contactList.email+'\">'+contactList.email+'</span></td>');
+        name = $('<td class="td-name"><span class="name">' + contactList.name + '</span>' + '<span class="jobTitle">' + contactList.jobtitle + '</span>' + '</td>'),
+        tele = $('<td class="td-tele"><span class="tele">' + contactList.companyPhone + '</span></td>'),
+        email = $('<td class="td-email"><span class="email">' + '<a href="' + 'mailto:' + contactList.email + '\">' + contactList.email + '</span></td>');
     person.append(name);
     person.append(tele);
     person.append(email);

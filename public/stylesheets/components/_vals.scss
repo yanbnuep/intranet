@@ -137,9 +137,14 @@ $slide-btn-bck-color: color('grey','lighten-5');
 $menu-root-header-font-size: 18px;
 $menu-root-header-padding: 7.5px 0;
 $menu-root-header-color: $company-theme-color;
-$menu-root-padding: 25px 20px 0 0;
+$menu-root-padding: 25px 0 0 0;
 $menu-ul-margin: 10px 0 0 0 ;
-$menu-ul-padding: 0 15px 0 0 ;
+$menu-ul-padding: 0 0 0 15px;
+
+//menu sub
+$menu-sub-margin: 0;
+
+
 $contact-group-margin: 65px 0 0 10px;
 $contact-group-padding: 0 15px;
 $contact-group-title-color: $company-theme-color;
