@@ -2460,7 +2460,8 @@ table.contact-table {
   table.contact-table thead th {
     text-align: left; }
   table.contact-table tbody tr.person {
-    width: 100%; }
+    width: 100%;
+    padding: 15px 0; }
     table.contact-table tbody tr.person:nth-child(odd) {
       background-color: #f2f2f2; }
     table.contact-table tbody tr.person td {
@@ -2474,10 +2475,14 @@ table.contact-table {
         font-weight: normal; }
       table.contact-table tbody tr.person td span.tele, table.contact-table tbody tr.person td span.name, table.contact-table tbody tr.person td span.email {
         font-size: 13px; }
-      table.contact-table tbody tr.person td .email a {
+      table.contact-table tbody tr.person td span.email a {
         font-size: 14px;
         text-decoration: none;
         color: #212121; }
+      table.contact-table tbody tr.person td span.td-office {
+        font-size: 14px;
+        text-decoration: none;
+        display: block; }
     table.contact-table tbody tr.person td.td-name {
       width: 30%; }
     table.contact-table tbody tr.person td.td-tele {

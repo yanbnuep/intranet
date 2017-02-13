@@ -54,11 +54,9 @@ function getConstruction(callback) {
                             addDivStructure(outStation,div,location);
                         }
                     }
-
                 } catch (e) {
                     console.log('error in create constructor: ' + e);
                 }
-
                 constructor['headquarter'] = headquarter;
                 constructor.outStation = outStation;
                 callback(constructor);
@@ -78,31 +76,40 @@ function getConstruction(callback) {
 }
 
 
-router.get('/department', function (req, res, next) {
+router.get('/search', function (req, res, next) {
     try {
-        byDepartment(req.query['department'], function (data) {
+        var department = req.query['department'],
+            station = req.query['station'];
+        searchByLocation({department: department,station: station},function (data) {
             res.send(data);
-        })
+        });
     } catch (e) {
-        console.log('error search by department: ' + e);
+        console.log('error search by department/station: ' + e);
     }
 });
 
 
-function byDepartment(department, callback) {
-    var result = {};
+function searchByLocation(location, callback) {
+    var result = {},
+        selectInfo = '[EMPLID],[DEPT],[DIV],[NAME],[PREFER],[JOBTITLE],[BUSNPHONE],[EMAIL],[OFFICE],[JOB_LEVEL]',
+        mssql = '';
+    if(location.department && !location.station){
+        var department = location.department;
+        mssql = 'SELECT '+selectInfo+' FROM [INTRANET].[dbo].[TEL_ORDER_VW] where DEPT = \'' + department + '\' and (LOCATION = \'MFM\' or LOCATION = \'NX\') and Div != \'null\' order by DIVCODE,JOB_LEVEL DESC';
+    }else if (!location.department && location.station){
+        mssql = 'SELECT * FROM [INTRANET].[dbo].[TEL_ORDER_VW] where LOCATION = \'' + location.station +'\' and Div != \'null\' order by DIVCODE,JOB_LEVEL DESC';
+    }
     sql.connect(config, function (err) {
         if (err) {
             console.log('error in search by department' + err);
             return null;
         }
         try {
-            new sql.Request().query('SELECT * FROM [INTRANET].[dbo].[TEL_VW] where DEPT = \'' + department + '\' and LOCATION = \'MFM\' order by DIV ', function (error, data) {
+            new sql.Request().query(mssql, function (error, data) {
                 if (error) {
                     console.log('error search by department: ' + error);
                     return null;
                 }
-
                 for (var i = 0; i < data.length; i++) {
                     (function (peron) {
                         var div = peron['DIV'];
@@ -114,7 +121,6 @@ function byDepartment(department, callback) {
                         }
                     })(data[i])
                 }
-
                 if (typeof callback === 'function') {
                     callback(result);
                 } else {

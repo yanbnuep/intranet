@@ -24,6 +24,7 @@ table.contact-table {
   tbody {
     tr.person {
       width: 100%;
+      padding: $contact-person-padding;
       &:nth-child(odd){
         background-color: #f2f2f2;
       }
@@ -41,12 +42,17 @@ table.contact-table {
         span.tele,span.name,span.email {
           font-size: 13px;
         }
-        .email {
+        span.email {
           a{
             font-size: 14px;
             text-decoration: none;
             color: color('grey','darken-4');
           }
+        }
+        span.td-office{
+          font-size: 14px;
+          text-decoration: none;
+          display: block;
         }
       }
       td.td-name {

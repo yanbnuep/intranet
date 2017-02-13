@@ -39,55 +39,15 @@ function addDepartment(constructor) {
         for (var departmentName in department) {
             if (department.hasOwnProperty(departmentName)) {
                 var curDept = department[departmentName];
-                html = $('<li><a id="'+departmentName+'" class="sidebar-link">' + sortLocationName(departmentName) + '</a></li>');
+                var displayName = (sortLocationName(departmentName)? sortLocationName(departmentName): departmentName);
+                html = $('<li><a id="'+departmentName+'" class="sidebar-link" onclick="loadDepartment(this)">' + displayName + '</a></li>');
                 if (curDept.length > 0) {
                     addDiv(curDept, html);
                 }
                 locateNode.append(html);
             }
         }
-        $('.sidebar-link').on('click',function (event) {
-            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-            console.log(this.id);
-            searchByDepartment('CEO');
-        });
     }
-
-    function sortLocationName(locationCode) {
-        var locationTranslator = {
-            BKK: 'Bangkok(曼谷)',
-            CGO: 'ZhengZhou(郑州)',
-            CKG: 'ChongQing(重庆)',
-            CTU: 'ChengDu(成都)',
-            FUK: 'Fukuoka(福冈)',
-            HFE: 'HeFei(合肥)',
-            HGH: 'HangZhou(杭州)',
-            KHH: 'Kaohsiung(高雄)',
-            KWE: 'GuiYang(贵阳)',
-            MFM: 'Macau(澳门)',
-            NGB: 'NingBo(宁波)',
-            NKG: 'NanJing(南京)',
-            NNG: 'NanNing(南宁)',
-            NX: 'Macau(澳门)',
-            OSA: 'KAYAK(大阪)',
-            PEK: 'BeiJing(北京)',
-            SEL: 'Seoul,South Korea(南韩)',
-            SHA: 'ShangHai(上海)',
-            SHE: 'Shengyang(沈阳)',
-            SZX: 'ShenZhen(深圳)',
-            TPE: 'TaiWan Taoyuan(台北)',
-            TSN: 'TianJin(天津)',
-            TXG: 'TaiWan TaiChung(台春)',
-            TYN: 'TaiYuan(太原)',
-            TYO: 'Tokyo Haneda(东京)',
-            XMN: 'XiaMen(厦门)',
-            ZHU: 'ZhuHai(珠海)'
-        };
-        if (locationCode in locationTranslator) {
-            return (locationCode + "-" + locationTranslator[locationCode])
-        } else return locationCode;
-    }
-
     function addDiv(departmentObj, node) {
         var container = $('<ul class="menu-sub"></ul>');
         if (Object.prototype.toString.call(departmentObj) === '[object Array]') {
@@ -101,14 +61,56 @@ function addDepartment(constructor) {
     }
 }
 
+function sortLocationName(locationCode) {
+    var locationTranslator = {
+        BKK: 'Bangkok(曼谷)',
+        CGO: 'ZhengZhou(郑州)',
+        CKG: 'ChongQing(重庆)',
+        CTU: 'ChengDu(成都)',
+        FUK: 'Fukuoka(福冈)',
+        HFE: 'HeFei(合肥)',
+        HGH: 'HangZhou(杭州)',
+        KHH: 'Kaohsiung(高雄)',
+        KWE: 'GuiYang(贵阳)',
+        MFM: 'Macau(澳门)',
+        NGB: 'NingBo(宁波)',
+        NKG: 'NanJing(南京)',
+        NNG: 'NanNing(南宁)',
+        NX: 'Macau(澳门)',
+        OSA: 'KAYAK(大阪)',
+        PEK: 'BeiJing(北京)',
+        SEL: 'Seoul,South Korea(南韩)',
+        SHA: 'ShangHai(上海)',
+        SHE: 'Shengyang(沈阳)',
+        SZX: 'ShenZhen(深圳)',
+        TPE: 'TaiWan Taoyuan(台北)',
+        TSN: 'TianJin(天津)',
+        TXG: 'TaiWan TaiChung(台春)',
+        TYN: 'TaiYuan(太原)',
+        TYO: 'Tokyo Haneda(东京)',
+        XMN: 'XiaMen(厦门)',
+        ZHU: 'ZhuHai(珠海)'
+    };
+    if (locationCode in locationTranslator) {
+        return (locationCode + "-" + locationTranslator[locationCode])
+    } else return false;
+}
 
-function searchByDepartment(department) {
+
+function loadDepartment(link) {
+    $('#contacts-content').empty();
+    searchByDeptOrSta(link.id,sortLocationName(link.id));
+}
+
+function searchByDeptOrSta(name,outstation) {
+    //department or outstation
+    var url = 'tele/search',data;
+    data = (outstation ? {station: name,department: ''} : {department: name,station: ''});
     $.ajax({
-        url: '/tele/department',
-        data: {department: department},
+        url: url,
+        data: data,
         method: 'get',
         success: function (data) {
-            console.log(data);
             renderPhoneResult(data);
         }
     });
@@ -119,6 +121,7 @@ function renderPhoneResult(data) {
         card = $(),
         tablehead,
         contactCards = [];
+    console.log(data);
     for (var div in data) {
         if (data.hasOwnProperty(div) && div !== null) {
             card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
@@ -130,6 +133,7 @@ function renderPhoneResult(data) {
                     person.name = contact['NAME'] + " . " + contact['PREFER'];
                     person.companyPhone = contact['BUSNPHONE'];
                     person.email = contact['EMAIL'];
+                    person.office = contact['OFFICE'];
                     person.jobtitle = contact['JOBTITLE'];
                     (function (person) {
                         contactCards = makeContactCard(person);
@@ -148,7 +152,7 @@ function makeContactCard(contactList) {
     var person = $('<tr class="person"></tr>'),
         name = $('<td class="td-name"><span class="name">' + contactList.name + '</span>' + '<span class="jobTitle">' + contactList.jobtitle + '</span>' + '</td>'),
         tele = $('<td class="td-tele"><span class="tele">' + contactList.companyPhone + '</span></td>'),
-        email = $('<td class="td-email"><span class="email">' + '<a href="' + 'mailto:' + contactList.email + '\">' + contactList.email + '</span></td>');
+        email = $('<td class="td-email"><span class="email">' + '<a href="' + 'mailto:' + contactList.email + '\">' + contactList.email + '</a></span>'+'<span class="td-office">'+contactList.office+'</span>'+'</td>');
     person.append(name);
     person.append(tele);
     person.append(email);
