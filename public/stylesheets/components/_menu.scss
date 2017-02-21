@@ -1,3 +1,9 @@
+.menu-header {
+  padding: $menu-root-header-padding;
+  color: $menu-root-header-color;
+  font-size: $menu-root-header-font-size;
+  font-weight: bolder;
+}
 .menu-root {
   margin: 0;
   padding: $menu-root-padding;
@@ -8,12 +14,7 @@
     text-decoration: none;
     cursor: pointer;
   }
-  .header {
-    padding: $menu-root-header-padding;
-    color: $menu-root-header-color;
-    font-size: $menu-root-header-font-size;
-    font-weight: bolder;
-  }
+
 
   ul {
     margin: $menu-ul-margin;
@@ -23,16 +24,28 @@
     }
   }
   .menu-sub {
-    display: block;
+    display: none;
     list-style: none;
     margin: $menu-sub-margin;
     padding: 0 0 0 15px;
     font-size: 14px;
     line-height: 20px;
-    &.cur {
+    &.active {
       display: block;
+      .section-link.active{
+        color: $sectionr-link-active-color;
+        border-left: $section-link-active-border-left;
+      }
+    }
+
+    .section-link {
+      display: block;
+      color: $section-link-color;
+      border: 2px solid transparent;
+      padding: $section-link-padding;
     }
   }
+
 }
 
 

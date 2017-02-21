@@ -86,7 +86,6 @@ function getMainStory(json) {
         htmlStr = '',
         newsHtml = [];
     mainStory = json[jsonStr.attrName];
-
     for (var i = 0; i < mainStory.length; i++) {
         var story = mainStory[i],
             image = '<div class="img" style="background-image: url(' +

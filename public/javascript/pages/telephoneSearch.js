@@ -11,7 +11,6 @@ $(document).ready(function () {
 function smoothScrollInit() {
     var options = {
         offset: 100, easing: 'easeOutCubic', speed: 350, callback: function (anchor, toggle) {
-            am.oneClass($(toggle), 'cur');
         }
     };
     smoothScroll.init(options);
@@ -40,7 +39,7 @@ function addDepartment(constructor) {
             if (department.hasOwnProperty(departmentName)) {
                 var curDept = department[departmentName];
                 var displayName = (sortLocationName(departmentName)? sortLocationName(departmentName): departmentName);
-                html = $('<li><a id="'+departmentName+'" class="sidebar-link" onclick="loadDepartment(this)">' + displayName + '</a></li>');
+                html = $('<li><a id="'+departmentName+'" class="sidebar-link">' + displayName + '</a></li>');
                 if (curDept.length > 0) {
                     addDiv(curDept, html);
                 }
@@ -51,13 +50,36 @@ function addDepartment(constructor) {
     function addDiv(departmentObj, node) {
         var container = $('<ul class="menu-sub"></ul>');
         if (Object.prototype.toString.call(departmentObj) === '[object Array]') {
+
             $.each(departmentObj, function (index, val) {
                 var divName = val.split(' ').join('');
-                var link = $('<a class="section-link" data-scroll href="#' + divName + '">' + val + '</a>');
+                var link = $('<a class="section-link" data-scroll href="#' + am.rgxGet('enChar',divName) + '">' + val + '</a>');
                 container.append(link);
             });
         }
-        node.append(container);
+        node.append(container)
+    }
+    (function appendClick() {
+        $('a.sidebar-link').click(function (event) {
+            var link = $(event.target);
+            var submenu = $(link.next('ul.menu-sub'));
+            loadDepartment(link);
+            if(!link.hasClass('active')){
+                link.addClass('active');
+            }
+            if(submenu && !submenu.hasClass('active')){
+                submenu.addClass('active');
+            }
+        });
+    })();
+}
+
+function activeOne(ele,classname) {
+    var classList = ele.attr('class').split('');
+    console.log(classList);
+    if(!ele.hasClass(classname)){
+        var classList = ele.attr('class').split('');
+        console.log();
     }
 }
 
@@ -96,10 +118,10 @@ function sortLocationName(locationCode) {
     } else return false;
 }
 
-
 function loadDepartment(link) {
     $('#contacts-content').empty();
-    searchByDeptOrSta(link.id,sortLocationName(link.id));
+    var name = link.attr('id');
+    searchByDeptOrSta(name,sortLocationName(name));
 }
 
 function searchByDeptOrSta(name,outstation) {
@@ -121,12 +143,10 @@ function renderPhoneResult(data) {
         card = $(),
         tablehead,
         contactCards = [];
-    console.log(data);
     for (var div in data) {
         if (data.hasOwnProperty(div) && div !== null) {
             card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
             tablehead = $('<table class="contact-table"><thead><tr><th>Name</th><th>Telephone</th><th>Email</th><tr></thead></table>');
-
             var tb = $('<tbody></tbody>');
             for (var i = 0; i < data[div].length; i++) {
                 (function (contact) {

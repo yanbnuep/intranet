@@ -137,7 +137,7 @@ $slide-btn-bck-color: color('grey','lighten-5');
 $menu-root-header-font-size: 18px;
 $menu-root-header-padding: 7.5px 0;
 $menu-root-header-color: $company-theme-color;
-$menu-root-padding: 25px 0 0 0;
+$menu-root-padding: 5px 0 0 0;
 $menu-ul-margin: 10px 0 0 0 ;
 $menu-ul-padding: 0 0 0 15px;
 
@@ -155,7 +155,10 @@ $person-margin: 10px 0;
 $sidebar-link-bk-color: color('blue','lighten-5');
 $sidebar-link-border: 2px solid transparent;
 $sidebar-link-border-hover: 2px solid $company-theme-color;
-$sidebar-link-cur-color: lighten($company-theme-color,10%);
+$section-link-color: #424242;
+$section-link-padding: 0 7.5px;
+$sectionr-link-active-color: lighten($company-theme-color,20%);
+$section-link-active-border-left: 2px solid $sectionr-link-active-color;
 //footer
 $default-footer-color: $nav-second-color;
 $default-footer-bk-color: $company-theme-color;

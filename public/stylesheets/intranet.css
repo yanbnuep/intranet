@@ -2367,34 +2367,43 @@ body {
   display: block;
   margin: 65px 0 0 10px; }
 
+.menu-header {
+  padding: 7.5px 0;
+  color: #292059;
+  font-size: 18px;
+  font-weight: bolder; }
+
 .menu-root {
   margin: 0;
-  padding: 25px 0 0 0;
+  padding: 5px 0 0 0;
   display: block;
   height: 100%;
   list-style: none; }
   .menu-root a {
     text-decoration: none;
     cursor: pointer; }
-  .menu-root .header {
-    padding: 7.5px 0;
-    color: #292059;
-    font-size: 18px;
-    font-weight: bolder; }
   .menu-root ul {
     margin: 10px 0 0 0;
     padding: 0 0 0 15px; }
     .menu-root ul li a {
       white-space: nowrap; }
   .menu-root .menu-sub {
-    display: block;
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0 0 0 15px;
     font-size: 14px;
     line-height: 20px; }
-    .menu-root .menu-sub.cur {
+    .menu-root .menu-sub.active {
       display: block; }
+      .menu-root .menu-sub.active .section-link.active {
+        color: #4c3ba4;
+        border-left: 2px solid #4c3ba4; }
+    .menu-root .menu-sub .section-link {
+      display: block;
+      color: #424242;
+      border: 2px solid transparent;
+      padding: 0 7.5px; }
 
 .tabs {
   position: relative;
@@ -2754,16 +2763,6 @@ table.contact-table {
       border-bottom: 2px solid transparent; }
     .sidebar .sidebar-link:hover {
       border-bottom: 2px solid #292059; }
-    .sidebar .sidebar-link.cur {
-      color: #3a2d7f; }
-  .sidebar .section-link {
-    display: block;
-    padding: 5px 3px;
-    color: #424242;
-    white-space: nowrap; }
-    .sidebar .section-link.cur {
-      color: #3a2d7f;
-      font-weight: bold; }
 
 .main-content {
   position: fixed;

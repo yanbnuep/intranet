@@ -105,11 +105,13 @@ function searchByLocation(location, callback) {
             return null;
         }
         try {
+
             new sql.Request().query(mssql, function (error, data) {
                 if (error) {
                     console.log('error search by department: ' + error);
                     return null;
                 }
+                console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     (function (peron) {
                         var div = peron['DIV'];

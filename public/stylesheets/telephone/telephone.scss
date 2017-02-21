@@ -28,19 +28,6 @@ $sidebar-link-color: color('grey','darken-3');
     &:hover {
       border-bottom: $sidebar-link-border-hover;
     }
-    &.cur {
-      color: $sidebar-link-cur-color;
-    }
-  }
-  .section-link {
-    display: block;
-    padding: 5px 3px;
-    color: $sidebar-link-color;
-    white-space: nowrap;
-    &.cur {
-      color: $sidebar-link-cur-color;
-      font-weight: bold;
-    }
   }
 }
 .main-content {
