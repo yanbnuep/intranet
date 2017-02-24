@@ -1,0 +1,29 @@
+.popbox {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  margin-left:-($popbox-width/2);
+  display: none;
+  width: $popbox-width;
+  height: auto;
+  z-index: 10001;
+  .title {
+    position: relative;
+    top: 0;
+    font-size: $popbox-title-font-size;
+    color: $popbox-font-color;
+    clear: both;
+  }
+
+}
+
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: $cover-bk-color;
+  @include opacity(.6);
+  z-index: 10000;
+}

@@ -15,14 +15,19 @@
   .resultItem {
     position: relative;
     display: block;
+    font-size: $resultItem-font-size;
     padding: $autocompletItem-padding;
     text-decoration: none;
     text-align: left;
     vertical-align: top;
     border-bottom: $resultItem-border-bottom;
     @include clearfix;
+
     .string {
       white-space: nowrap;
+      &.name{
+        white-space: normal;
+      }
     }
     .string,.num {
       position: relative;

@@ -11,15 +11,15 @@ var config = {
         database: 'INTRANET'
     },
     teleAutoSearchConfig = {
-        teleReqInfo: ' [PREFER],[BUSNPHONE],[DIV],[NAME]',
-        tableName: ' [INTRANET].[dbo].[TEL_VW]'
+        teleReqInfo: ' [EMPLID],[DEPT],[DIV],[NAME],[PREFER],[JOBTITLE],[BUSNPHONE],[EMAIL],[OFFICE],[JOB_LEVEL] ',
+        tableName: ' [INTRANET].[dbo].[TEL_ORDER_VW] '
     };
 router.get('/', function (req, res, next) {
 
 });
 
 router.get('/autoSearch', function (req, res, next) {
-    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 20),
+    var dataSQL = telephoneSearch(req.query['name'], req.query['number'], 10),
         dataSend =  function (result) {
             res.send(result);
         };
@@ -41,7 +41,7 @@ function telephoneSearch(searchName, number, topNum) {
             '\n OR CHARINDEX(\''+name+'\',REPLACE( UPPER(NAME),\' \',\'\'))>=1'+
             '\n ORDER BY CHARINDEX(\''+name+'\',REPLACE( UPPER(PREFER),\' \',\'\')) + CHARINDEX(\''+name+'\',REPLACE( UPPER(NAME),\' \',\'\')) ASC',
         sqlByNum = 'SELECT TOP '+ top + teleReqInfo+' FROM '+tableName +' WHERE CHARINDEX(\'' + tele + '\',REPLACE(BUSNPHONE,\' \',\'\'))>=1';
-        console.log(sqlByName);
+
         if(name != '*' && tele === '*'){
             return sqlByName;
         }else if(name === '*' && tele != '*'){

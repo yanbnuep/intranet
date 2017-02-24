@@ -10,7 +10,8 @@ $(document).ready(function () {
 
 function smoothScrollInit() {
     var options = {
-        offset: 100, easing: 'easeOutCubic', speed: 350, callback: function (anchor, toggle) {
+        offset: 120, easing: 'easeOutCubic', speed: 450, callback: function (anchor, toggle) {
+            activeOne($(toggle), 'active');
         }
     };
     smoothScroll.init(options);
@@ -38,8 +39,8 @@ function addDepartment(constructor) {
         for (var departmentName in department) {
             if (department.hasOwnProperty(departmentName)) {
                 var curDept = department[departmentName];
-                var displayName = (sortLocationName(departmentName)? sortLocationName(departmentName): departmentName);
-                html = $('<li><a id="'+departmentName+'" class="sidebar-link">' + displayName + '</a></li>');
+                var displayName = (sortLocationName(departmentName) ? sortLocationName(departmentName) : departmentName);
+                html = $('<li><a id="' + departmentName + '" class="sidebar-link">' + displayName + '</a></li>');
                 if (curDept.length > 0) {
                     addDiv(curDept, html);
                 }
@@ -47,39 +48,48 @@ function addDepartment(constructor) {
             }
         }
     }
+
     function addDiv(departmentObj, node) {
         var container = $('<ul class="menu-sub"></ul>');
         if (Object.prototype.toString.call(departmentObj) === '[object Array]') {
-
             $.each(departmentObj, function (index, val) {
                 var divName = val.split(' ').join('');
-                var link = $('<a class="section-link" data-scroll href="#' + am.rgxGet('enChar',divName) + '">' + val + '</a>');
+                var link = $('<a class="section-link" data-scroll href="#' + am.rgxGet('enChar', divName) + '">' + val + '</a>');
                 container.append(link);
             });
         }
         node.append(container)
     }
+
     (function appendClick() {
         $('a.sidebar-link').click(function (event) {
-            var link = $(event.target);
-            var submenu = $(link.next('ul.menu-sub'));
+            var link = $(event.target),
+                menusub = link.siblings('.menu-sub');
+            activeOne([link, menusub], 'active');
+            $(menusub.children('.section-link:first-child')).addClass('active');
             loadDepartment(link);
-            if(!link.hasClass('active')){
-                link.addClass('active');
-            }
-            if(submenu && !submenu.hasClass('active')){
-                submenu.addClass('active');
-            }
         });
     })();
 }
 
-function activeOne(ele,classname) {
-    var classList = ele.attr('class').split('');
-    console.log(classList);
-    if(!ele.hasClass(classname)){
-        var classList = ele.attr('class').split('');
-        console.log();
+function activeOne(ele, classname) {
+
+    if ($.isArray(ele)) {
+        $.each(ele, function (index, val) {
+            switchActiveElement($(val));
+        })
+    }
+    else {
+        switchActiveElement(ele);
+    }
+
+    function switchActiveElement(element) {
+        var eleClass = element.attr('class');
+        var seleElementGroup = $('.' + eleClass);
+        if (!element.hasClass(classname)) {
+            seleElementGroup.removeClass(classname);
+            element.addClass(classname);
+        }
     }
 }
 
@@ -121,13 +131,13 @@ function sortLocationName(locationCode) {
 function loadDepartment(link) {
     $('#contacts-content').empty();
     var name = link.attr('id');
-    searchByDeptOrSta(name,sortLocationName(name));
+    searchByDeptOrSta(name, sortLocationName(name));
 }
 
-function searchByDeptOrSta(name,outstation) {
+function searchByDeptOrSta(name, outstation) {
     //department or outstation
-    var url = 'tele/search',data;
-    data = (outstation ? {station: name,department: ''} : {department: name,station: ''});
+    var url = 'tele/search', data;
+    data = (outstation ? {station: name, department: ''} : {department: name, station: ''});
     $.ajax({
         url: url,
         data: data,
@@ -172,7 +182,7 @@ function makeContactCard(contactList) {
     var person = $('<tr class="person"></tr>'),
         name = $('<td class="td-name"><span class="name">' + contactList.name + '</span>' + '<span class="jobTitle">' + contactList.jobtitle + '</span>' + '</td>'),
         tele = $('<td class="td-tele"><span class="tele">' + contactList.companyPhone + '</span></td>'),
-        email = $('<td class="td-email"><span class="email">' + '<a href="' + 'mailto:' + contactList.email + '\">' + contactList.email + '</a></span>'+'<span class="td-office">'+contactList.office+'</span>'+'</td>');
+        email = $('<td class="td-email"><span class="email">' + '<a href="' + 'mailto:' + contactList.email + '\">' + contactList.email + '</a></span>' + '<span class="td-office">' + contactList.office + '</span>' + '</td>');
     person.append(name);
     person.append(tele);
     person.append(email);
@@ -202,45 +212,39 @@ function windowScrollListener() {
 }
 
 function scrollSetActive(scrollDown) {
-    var curIndex, curGroup, nextLink, nextElment, distance, change;
-    curGroup = $('.menu-sub.cur .section-link');
-    curIndex = curGroup.index($('.section-link.cur'));
+    var curIndex, curGroup, nextLink, distance, change;
+    curGroup = $('.menu-sub.active .section-link');
+    curIndex = curGroup.index($('.section-link.active'));
     //init change to false
     change = false;
-    if (scrollDown && curGroup.length > curIndex + 1) {
-        nextLink = $(curGroup[curIndex + 1]);
-        nextElment = $(nextLink.attr('href'));
-        distance = $(window).scrollTop() - nextElment.offset().top + 220;
+    if (!curGroup) {
+        return null
+    } else {
+        // if (scrollDown) {
+        //     if (curIndex < curGroup.length - 1) {
+        //         nextLink = $(curGroup[curIndex + 1]);
+        //         change = isScrollInView(nextLink);
+        //     }
+        // } else {
+        //     if (curIndex > 0) {
+        //         nextLink = $(curGroup[curIndex - 1]);
+        //         change = isScrollInView(nextLink);
+        //     }
+        //     if (change && nextLink) {
+        //         activeOne(nextLink, 'active');
+        //     }
+        // }
+        isScrollInView($(curGroup[1]),'ele1');
+        isScrollInView($(curGroup[2]),'ele2');
     }
-    else if (!scrollDown && curIndex != 0) {
-        nextLink = $(curGroup[curIndex - 1]);
-        nextElment = $(nextLink.attr('href'));
-        distance = $(window).scrollTop() - nextElment.offset().top - 220;
-    } else if ($(window).scrollTop() + $(window).height() == $(document).height() && $(window).scrollTop() > 112) {
-        // already scroll to the bottom
-        nextLink = $(curGroup).last();
-        nextElment = $(nextLink.attr('href'));
-        change = true;
-    } else if ($(window).scrollTop() === 0) {
-        //112 is the top of navbar
-        //and window already top
-        nextLink = $(curGroup).first();
-        nextElment = $(nextLink.attr('href'));
-        change = true;
-    }
-    if ((distance > 0 && scrollDown) || (distance < 0 && !scrollDown)) {
-        change = true;
-    }
+    function isScrollInView(ele,str) {
+        var windowTop = $(window).scrollTop();
+        var windowBottom = $(window).height() + windowTop;
 
-    if (change) {
-        am.oneClass(nextElment, 'cur');
-        am.oneClass(nextLink, 'cur');
-    }
-}
+        var eleTop = $(ele).offset().top,
+            eleBottom = eleTop + $(ele).height();
 
-function activeLinkReset() {
-    var activeLinks = $('.section-link.cur');
-    $.each(activeLinks, function (s, o) {
-        $(o).removeClass('cur');
-    });
+        console.log('windowtop: ' + windowTop + ' windowBottom : ' + windowBottom + ' eletop: ' + eleTop + ' elebottom: ' + eleBottom + str);
+        return ((eleBottom <= windowBottom ) && (eleTop >= windowTop));
+    }
 }

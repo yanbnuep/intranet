@@ -238,7 +238,7 @@
                 };
                 options = $.extend(defaults, options);
                 return this.each(function () {
-                    
+
                 });
             }
         }
@@ -254,3 +254,101 @@
     //Expose AM
     window.am = new am();
 }));
+
+//telephoneSearch
+(function ($,window,document) {
+    var setting = {
+        inWidth: 500,
+        outWidth: 200,
+        moveSpeed: 150,
+        fadeSpeed: 300,
+        debounce: 500
+    };
+    var clickHandler = function (e) {
+        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+        autoSearch(this.value)
+    };
+
+    function autoSearch(msg) {
+        //start with 3 chars
+        var str = '',
+            num = '';
+        if (msg.length > 1) {
+            str = am.rgxGet('enChar', msg).toUpperCase();
+            num = am.rgxGet('number', msg);
+            $.ajax({
+                url: '/db/autoSearch',
+                method: 'get',
+                data: {
+                    name: str,
+                    number: num
+                },
+                success: function (jsonResult) {
+                    document.getElementById('telResult').innerHTML = parseTeleJson(jsonResult);
+                }
+            });
+        } else if (msg.length === 0) {
+            $('#telResult').html('');
+        }
+    }
+
+    function parseTeleJson(jsonData) {
+        var resultArray = JSON.parse(jsonData),
+            usrName = '',
+            htmlString = '';
+        $.each(resultArray, function (index, ele) {
+                usrName = (ele['PREFER'].length > 1 ? ele['PREFER'] : ele['NAME']);
+                var string = '<div class="resultItem">' +
+                    '<span class="string bold name">' + usrName + '</span>' +
+                    '<span class="num">' + ele['BUSNPHONE'] + '</span>' +
+                    '<span class="string sm">' + ele['DIV'] + '</span>' +
+                    '</div>';
+                var popup = '<div class="popbox">' +
+                    '<div class="title">' + ele['NAME'] + '.' + ele['PREFER'] + '</div>' +
+                    '<table class="popContent">' +
+                    '<tr class="infoRow">' +
+                    '<th class="infoTitle">' + 'Div:' + '</th>' + '<td class="info">' + ele['DIV'] + '</td>' +
+                    '</tr><tr>' +
+                    '<th class="infoTitle">' + 'Department:' + '</th>' + '<td class="info">' + ele['DEPT'] + '</td>' +
+                    '</tr><tr>' +
+                    '<th class="infoTitle">' + 'Telephone:' + '</th>' + '<td class="info">' + ele['BUSNPHONE'] + '</td>' +
+                    '</tr><tr>' +
+                    '<th class="infoTitle">' + 'Email:' + '</th>' + '<td class="info">' + ele['EMAIL'] + '</td>' +
+                    '</tr><tr>' +
+                    '<th class="infoTitle">' + 'Office:' + '</th>' + '<td class="info">' + ele['OFFICE'] + '</td>' +
+                    '</tr>' +
+                    '</table>' +
+                    '</div>';
+                string += popup.replace('null', ' ');
+                htmlString += string.replace('null', ' ');
+            }
+        );
+        return htmlString;
+    }
+
+    $('#telSearch').on('keyup', am.debounce(clickHandler, 500)).focusin(function () {
+        $(this).parent('form.nav-form').stop().animate({width: setting.inWidth}, 150);
+        $('#telResult').fadeIn(setting.fadeSpeed);
+    }).focusout(function () {
+        var input = this;
+        setTimeout(function () {
+            $(input).parent('form.nav-form').stop().animate({width: setting.outWidth}, 150);
+            $('#telResult').fadeOut(setting.fadeSpeed);
+        },100);
+    });
+
+
+    function popup(ele) {
+        var cover = $('<div class="cover"></div>');
+
+        $(document).append($('<div class=".cover"></div>'));
+        $(document).append(ele);
+    }
+
+    $(document).on('click','.resultItem',function (event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        event.stopPropagation();
+        var popbox = $(this).next('.popbox');
+        popup(popbox);
+    });
+})(jQuery,window,document);

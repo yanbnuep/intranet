@@ -2,9 +2,7 @@
 //values
 
 //sidebar
-$sidebar-width: 300px;
-$sidebar-link-padding: 0;
-$sidebar-link-color: color('grey','darken-3');
+
 .sidebar {
   position: fixed;
   display: block;
@@ -14,21 +12,7 @@ $sidebar-link-color: color('grey','darken-3');
   width: $sidebar-width;
   @include clearfix;
   overflow-y: scroll;
-  .sidebar-link {
-    position: relative;
-    padding: $sidebar-link-padding;
-    width: 100%;
-    &,& a {
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 35px;
-      color: $sidebar-link-color;
-      border-bottom: $sidebar-link-border;
-    }
-    &:hover {
-      border-bottom: $sidebar-link-border-hover;
-    }
-  }
+
 }
 .main-content {
   position: fixed;

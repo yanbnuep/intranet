@@ -48,6 +48,7 @@ $search-ipt-background-color: color('grey','lighten-3');
 $search-ipt-background-hover: color('grey','lighten-2');
 $search-ipt-border-radius: floor($nav-form-ipt-height/2);
 $resultItem-border-bottom: 1px solid color('grey','lighten-2');
+$resultItem-font-size: 13px;
 
 //Tabs
 $tabs-height: 36px;
@@ -152,13 +153,26 @@ $contact-group-title-color: $company-theme-color;
 $contact-group-title-bk-color: none;
 $contact-group-title-font-size: 18px;
 $person-margin: 10px 0;
+$sidebar-width: 300px;
+$sidebar-link-padding: 0;
+$sidebar-link-color: color('grey','darken-3');
 $sidebar-link-bk-color: color('blue','lighten-5');
 $sidebar-link-border: 2px solid transparent;
 $sidebar-link-border-hover: 2px solid $company-theme-color;
+$sidebar-active-color: $company-theme-color;
+$sidebar-hover-color: lighten($company-theme-color,10%);
 $section-link-color: #424242;
 $section-link-padding: 0 7.5px;
-$sectionr-link-active-color: lighten($company-theme-color,20%);
+$sectionr-link-active-color: $company-theme-color;
+$sectionr-link-hover-color: lighten($company-theme-color,10%);
 $section-link-active-border-left: 2px solid $sectionr-link-active-color;
+
 //footer
 $default-footer-color: $nav-second-color;
 $default-footer-bk-color: $company-theme-color;
+
+//popbox
+$popbox-width: 400px;
+$popbox-title-font-size: 18px;
+$popbox-font-color: $company-theme-color;
+$cover-bk-color: color('grey','darken-1');
