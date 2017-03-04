@@ -146,7 +146,7 @@ $menu-ul-padding: 0 0 0 15px;
 $menu-sub-margin: 0;
 
 
-$contact-group-margin: 65px 0 0 10px;
+$contact-group-margin: 45px 0 0 10px;
 $contact-group-padding: 0 15px;
 $contact-person-padding: 15px 0;
 $contact-group-title-color: $company-theme-color;
@@ -154,6 +154,7 @@ $contact-group-title-bk-color: none;
 $contact-group-title-font-size: 18px;
 $person-margin: 10px 0;
 $sidebar-width: 300px;
+$sidebar-padding: 5px 0 100px 5px;
 $sidebar-link-padding: 0;
 $sidebar-link-color: color('grey','darken-3');
 $sidebar-link-bk-color: color('blue','lighten-5');
@@ -172,7 +173,11 @@ $default-footer-color: $nav-second-color;
 $default-footer-bk-color: $company-theme-color;
 
 //popbox
-$popbox-width: 400px;
+$popbox-width: 500px;
 $popbox-title-font-size: 18px;
+$popbox-title-background-color: color('grey','lighten-2');
 $popbox-font-color: $company-theme-color;
-$cover-bk-color: color('grey','darken-1');
+$popbox-title-padding: 15px 5px 5px 25px;
+$popbox-content-padding: 15px 25px 10px 25px;
+$cover-bk-color: color('grey','darken-4');
+$popbox-bk-color: color('grey','lighten-5');

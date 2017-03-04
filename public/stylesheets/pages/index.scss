@@ -43,7 +43,6 @@
         font-weight: bold;
         line-height: $slide-tab-bar-height;
       }
-
     }
   }
 
@@ -63,14 +62,10 @@
         font-size: $slick-sub-font-size;
       }
     }
-    .img {
+    .img,.img img {
       width: $new-image-width;
       height: $new-image-height;
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+      overflow: hidden;
     }
   }
 }

@@ -2,26 +2,41 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addMainStory($('#mainNews'));
+    addImages($('#mainNews'),'javascript/dbJSON/ajax.json',getMainStory,function () {
+        var imgs = $('#mainNews').find('.slide-images');
+        am.addSlick($(imgs));
+    });
+    addImages($('#lastnews-list'),'javascript/dbJSON/lastnews.json',parseLastnews,null);
 });
 
 
 
-function addMainStory(selector) {
-    $.getJSON('javascript/dbJSON/ajax.json', function (data) {
-        var html = getMainStory(data),
-            eleLength = 0;
+function addImages(selector,location,addHtmlFunction,callback) {
+    try{$.getJSON(location, function (data) {
+        if($.isFunction(addHtmlFunction))
+            var html = addHtmlFunction(data);
         try {
-            selector.append(html);
-            if (selector.is('#mainNews')) {
-                am.addSlick($("#mainNews .slide-images"));
+            if(typeof html === 'string'){
+                selector.append(html);
+            }else if ($.isArray(html)){
+                $.each(html,function (index,val) {
+                    selector.append(val);
+                })
+            }
+
+            if($.isFunction(callback)){
+                callback();
             }
         }
         catch (e) {
             console.log('error append element to mainstory:' + e);
         }
-    })
+    })}catch (e){
+        console.log('error getjson:' + e);
+    }
 }
+
+
 
 function getMainStory(json) {
     var jsonStr = {
@@ -48,3 +63,23 @@ function getMainStory(json) {
     return newsHtml.join('\n');
 }
 
+function parseLastnews(json) {
+    var lastNews = json['lastNews'];
+    var newsHtml = [];
+    $.each(lastNews,function (index,val) {
+        var card = $('<a class="card-h"></a>');
+        var title = val['title'],
+            sub = val['subTitle'],
+            href = val['href'],
+            imgSrc = val['imgURL'];
+        var txt = $('<div class="txt">'+
+                        '<div class="title">"'+title+'</div>'+
+                        '<div class="sub">"'+sub+'</div>'+
+                    '</div>');
+        var img = $('<div class="img">'+ '<img src="'+imgSrc+'"></div>');
+        card.append(txt);
+        card.append(img);
+        newsHtml.push(card);
+    });
+   return newsHtml;
+}

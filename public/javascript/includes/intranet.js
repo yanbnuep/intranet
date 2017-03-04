@@ -265,7 +265,7 @@
         debounce: 500
     };
     var clickHandler = function (e) {
-        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+        // e.preventDefault ? e.preventDefault() : (e.returnValue = false);
         autoSearch(this.value)
     };
 
@@ -304,8 +304,13 @@
                     '<span class="string sm">' + ele['DIV'] + '</span>' +
                     '</div>';
                 var popup = '<div class="popbox">' +
-                    '<div class="title">' + ele['NAME'] + '.' + ele['PREFER'] + '</div>' +
+                    '<div class="title">' + ele['NAME'] + '.' + ele['PREFER'] +
+                        '<i class="material-icons closebtn">&#xE5CD;</i>'+
+                    '</div>'+
                     '<table class="popContent">' +
+                    '<tr class="infoRow">' +
+                    '<th class="infoTitle">' + 'JobTitle:' + '</th>' + '<td class="info">' + ele['JOBTITLE'] + '</td>' +
+                    '</tr><tr>' +
                     '<tr class="infoRow">' +
                     '<th class="infoTitle">' + 'Div:' + '</th>' + '<td class="info">' + ele['DIV'] + '</td>' +
                     '</tr><tr>' +
@@ -313,7 +318,7 @@
                     '</tr><tr>' +
                     '<th class="infoTitle">' + 'Telephone:' + '</th>' + '<td class="info">' + ele['BUSNPHONE'] + '</td>' +
                     '</tr><tr>' +
-                    '<th class="infoTitle">' + 'Email:' + '</th>' + '<td class="info">' + ele['EMAIL'] + '</td>' +
+                    '<th class="infoTitle">' + 'Email:' + '</th>' + '<td class="info"><a href="mailto:">' + ele['EMAIL'] + '</a></td>' +
                     '</tr><tr>' +
                     '<th class="infoTitle">' + 'Office:' + '</th>' + '<td class="info">' + ele['OFFICE'] + '</td>' +
                     '</tr>' +
@@ -339,16 +344,22 @@
 
 
     function popup(ele) {
-        var cover = $('<div class="cover"></div>');
-
-        $(document).append($('<div class=".cover"></div>'));
-        $(document).append(ele);
+        $('#telecover').addClass('active');
+        var clone = $(ele).clone();
+        $(document.body).prepend($(clone).addClass('active'));
     }
-
     $(document).on('click','.resultItem',function (event) {
-        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        // event.preventDefault ? event.preventDefault() : (event.returnValue = false);
         event.stopPropagation();
         var popbox = $(this).next('.popbox');
         popup(popbox);
+    });
+
+    $(document).on('click','.material-icons.closebtn',function (event) {
+        var btn = event.target;
+        var cover = $('#telecover');
+        var contactform = $(btn).parents('.popbox');
+        contactform.remove();
+        cover.removeClass('active');
     });
 })(jQuery,window,document);

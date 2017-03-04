@@ -1,6 +1,10 @@
 @import "../components/mixins";
 //values
 
+.tele-content.wrapper-960 {
+  margin-top: 97px;
+}
+
 //sidebar
 
 .sidebar {
@@ -8,8 +12,9 @@
   display: block;
   float: left;
   height: 100%;
-  top: $nav-height +$nav-second-height;
+  //top: $nav-height +$nav-second-height;
   width: $sidebar-width;
+  padding: $sidebar-padding;
   @include clearfix;
   overflow-y: scroll;
 
@@ -36,6 +41,6 @@
 }
 
 #contacts-content {
-  top: $nav-height + $nav-second-height;
+  //top: $nav-height + $nav-second-height;
   margin-bottom: 150px;
 }
