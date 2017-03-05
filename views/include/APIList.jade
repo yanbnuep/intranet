@@ -1,5 +1,25 @@
 //
    Created by itdwyy on 1/17/2017.
 .wrapper-960
-    ul.list-container
-        li
+    -
+        var APIs = ['Centralized Operational Manuals','Corporate Quality Center','Conference Training Room Booking','Flight Information Board',
+        'Flight Schedule','Safety Zone','ILearning','Training Information','SAMS','OA','EHR','DMS','E-Log','Flight Ops Manual'];
+        var initAPI = ['Centralized Operational Manuals','Corporate Quality Center','Conference Training Room Booking','Flight Information Board',
+        'Flight Schedule','Safety Zone','ILearning','Training Information','SAMS','OA','EHR','DMS','E-Log','Flight Ops Manual'];
+    ul.tabs
+        li.tab
+            a(href='#defaultAPIs') Most Used
+        li.tab
+            a(href='#aeAPIs') A - E
+        li.tab
+            a(href='#fqAPIs') F - Q
+        li.tab
+            a(href='#otherAPIs') F - Q
+    #defaultAPIs.tab-control
+        ul.apiList
+            each item in initAPI
+                li.list-item
+                    a(href=)
+    #aeAPIs.tab-control
+    #fqAPIs.tab-control
+    #otherAPIs.tab-control

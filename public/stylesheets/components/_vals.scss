@@ -33,6 +33,8 @@ $nav-second-height: floor($nav-height/1.618);
 $nav-second-item-line-height: $nav-second-height;
 $nav-second-bg-color: $company-theme-color;
 $nav-second-color: color('grey','lighten-5');
+$drp-list-item-border: 2px solid transparent;
+$drp-list-item-border-hover: 2px solid $company-theme-color;
 //nav-form
 $nav-form-height: $nav-height;
 $nav-form-width: 200px;
