@@ -1,25 +1,36 @@
 //
    Created by itdwyy on 1/17/2017.
-.wrapper-960
-    -
-        var APIs = ['Centralized Operational Manuals','Corporate Quality Center','Conference Training Room Booking','Flight Information Board',
-        'Flight Schedule','Safety Zone','ILearning','Training Information','SAMS','OA','EHR','DMS','E-Log','Flight Ops Manual'];
-        var initAPI = ['Centralized Operational Manuals','Corporate Quality Center','Conference Training Room Booking','Flight Information Board',
-        'Flight Schedule','Safety Zone','ILearning','Training Information','SAMS','OA','EHR','DMS','E-Log','Flight Ops Manual'];
-    ul.tabs
-        li.tab
-            a(href='#defaultAPIs') Most Used
-        li.tab
-            a(href='#aeAPIs') A - E
-        li.tab
-            a(href='#fqAPIs') F - Q
-        li.tab
-            a(href='#otherAPIs') F - Q
-    #defaultAPIs.tab-control
-        ul.apiList
-            each item in initAPI
-                li.list-item
-                    a(href=)
-    #aeAPIs.tab-control
-    #fqAPIs.tab-control
-    #otherAPIs.tab-control
+#apiContainer.second-backgrond-color
+    .wrapper-960
+        -
+            var initAPI = ['Centralized Operational Manuals','Corporate Quality Center','Conference Training Room Booking','Flight Information Board',
+            'Flight Schedule','Safety Zone','ILearning','Training Information','SAMS','OA','EHR','DMS','E-Log','Flight Ops Manual'];
+        ul#apislist.tabs.z-depth-1.company-theme-bk
+            li.tab
+                a(href='#defaultAPIs') Most Used
+            li.tab
+                a(href='#aeAPIs') A - E
+            li.tab
+                a(href='#fqAPIs') F - Q
+            li.tab
+                a(href='#otherAPIs') Others
+        #defaultAPIs.tab-control.z-depth-1
+            ul.apiList
+                each url, item in {'Centralized Operational Manuals':'http://dcc.airmacau.com.mo/opendocman','Corporate Quality Center':'http://app/qcenter/main.aspx','Conference Training Room Booking':'http://192.168.101.22/mrbs/web/index.php','Flight Information Board':'http://fib.airmacau.com.mo/','Flight Schedule':'/Info/flt%20schedule/flight_schedule.htm','Safety Zone':'http://app/safetyzone/main.aspx','ILearning':'http://ilearning.airmacau.com.mo/airmacau/servlet/ekp/login?getnews=Y','Training Information':'http://intranet/department/pna/training/k_training.html','SAMS':'https://sams.airmacau.com.mo:8743/sams/pages/index.jsf','OA':'https://nxoa.airmacau.com.mo/login/Login.jsp?logintype=1','EHR':'http://ehr.airmacau.com.mo/psp/HCMPRD/?cmd=login&languageCd=ENG&','DMS':'https://dms.airmacau.com.mo/login.htm','E-Log':'https://app.airmacau.com.mo:8080/elog','Flight Ops Manual':'http://intranet/department/flt/fltm/fltmanual.html'}
+                    li.list-item
+                        a(href= url,target= "_blank")= item
+        #aeAPIs.tab-control
+            ul.apiList
+                each url, item in {'Centralized Operational Manuals':'http://dcc.airmacau.com.mo/opendocman','Corporate Quality Center':'http://app/qcenter/main.aspx','Conference Training Room Booking':'http://192.168.101.22/mrbs/web/index.php'}
+                    li.list-item
+                        a(href=url,target='_blank')=item
+        #fqAPIs.tab-control
+            ul.apiList
+                each url, item in {'Flight Information Board':'http://fib.airmacau.com.mo/','Flight Schedule':'/Info/flt%20schedule/flight_schedule.htm','Flight Ops Manual':'http://intranet/department/flt/fltm/fltmanual.html'}
+                    li.list-item
+                        a(href=url,target='_blank')=item
+        #otherAPIs.tab-control
+            ul.apiList
+                each url, item in {'Safety Zone':'http://app/safetyzone/main.aspx','ILearning':'http://ilearning.airmacau.com.mo/airmacau/servlet/ekp/login?getnews=Y','Training Information':'http://intranet/department/pna/training/k_training.html','SAMS':'https://sams.airmacau.com.mo:8743/sams/pages/index.jsf','OA':'https://nxoa.airmacau.com.mo/login/Login.jsp?logintype=1'}
+                    li.list-item
+                        a(href=url,target='_blank')=item

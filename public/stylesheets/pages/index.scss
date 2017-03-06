@@ -98,3 +98,10 @@
 #slick-right {
   background-image:url(../img/btn/ic_keyboard_arrow_right_black_24dp_2x.png);
 }
+
+#apiContainer {
+  display: block;
+  position: relative;
+  padding: 30px 0;
+  @include clearfix;
+}

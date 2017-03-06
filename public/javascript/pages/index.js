@@ -7,6 +7,8 @@ $(document).ready(function () {
         am.addSlick($(imgs));
     });
     addImages($('#lastnews-list'),'javascript/dbJSON/lastnews.json',parseLastnews,null);
+
+    $('ul.tabs').tabs('select_tab','defaultAPIs');
 });
 
 

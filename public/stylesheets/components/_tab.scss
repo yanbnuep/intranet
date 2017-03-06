@@ -2,14 +2,14 @@
   position: relative;
   height: $tabs-height;
   width: 100%;
-  background-color: $tabs-bk-color;
   padding: 0;
   margin: 0;
   white-space: nowrap;
   list-style: none;
   @include clearfix;
   .tab {
-    @include float-block;
+    //@include float-block;
+    display: inline-block;
     text-align: center;
     line-height: $tabs-height;
     padding: 0;
@@ -19,6 +19,7 @@
       display: block;
       width: 100%;
       height: 100%;
+      margin: $tab-margin;
       padding: $tab-a-padding;
       font-size: 14px;
       font-weight: bold;
@@ -28,6 +29,57 @@
       transition: color .28s ease;
       background-color: transparent;
       color: $company-theme-color;
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+  &.company-theme-bk {
+    a {color: $bk-white;}
+  }
+
+  .indicator {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    height: 2px;
+    background-color: $company-theme-color;
+    will-change: left, right;
+  }
+  &.company-theme-bk .indicator{
+    background-color: $bk-white;
+  }
+}
+
+.tab-control {
+  //position: relative;
+  display: none;
+  margin-left: auto;
+  left:auto;
+  right:auto;
+  padding: 15px 5px;
+  background-color: $bk-white;
+  &.active {
+    display: block;
+  }
+  ul.apiList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    @include clearfix;
+    li.list-item {
+      @include float-block;
+      width: 33%;
+    }
+  }
+  .list-item {
+    & a {
+      line-height: 20px;
+      font-size: 15px;
+      font-weight: bold;
+      color: $company-theme-color;
+      text-decoration: none;
     }
   }
 }
+

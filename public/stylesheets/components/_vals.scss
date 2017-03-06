@@ -7,6 +7,8 @@ $company-theme-lighter-black: #091423;
 $second-bck-color: color('grey','lighten-4');
 
 $company-theme-color-darken-20: darken($company-theme-color,20%);
+$bk-white: #fff;
+
 
 //z-index
 $z-index-the-top: 1000;
@@ -55,6 +57,7 @@ $resultItem-font-size: 13px;
 //Tabs
 $tabs-height: 36px;
 $tabs-bk-color: white;
+$tab-margin: 0 0 0 12px;
 $tab-a-padding: 0 24px;
 
 //icon
@@ -73,7 +76,7 @@ $autocomplet-bck-color: color('grey','lighten-5');
 
 
 //pages
-$news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618) + $nav-height +$nav-second-height;
+$news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618) + $nav-height +$nav-second-height + 20;
 $slide-image-width: 550px;
 $slide-image-height: 385px;
 //custom  number of slide images
@@ -95,7 +98,7 @@ $right-news-panel-height: $slide-image-height;
 
 //news-area
 $news-area-padding-left: 30px;
-$news-area-padding-bottom: 30px;
+$news-area-padding-bottom: 40px;
 //news txt width
 $news-txt-width: 260px;
 //new images width
