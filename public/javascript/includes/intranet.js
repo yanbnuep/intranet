@@ -215,7 +215,6 @@
         }
 
     }
-
     // only one class in group
     function oneClass(selector, addClassName) {
         var targetString = "." + selector.context.className + "." + addClassName;
@@ -258,6 +257,7 @@
 //telephoneSearch
 (function ($,window,document) {
     var setting = {
+        mixIpt: 2,
         inWidth: 500,
         outWidth: 200,
         moveSpeed: 150,
@@ -265,8 +265,8 @@
         debounce: 500
     };
     var clickHandler = function (e) {
-        // e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-        autoSearch(this.value)
+        // e.preventDefault ? e.preventDefault():(e.returnValue = false);
+            autoSearch(this.value)
     };
 
     function autoSearch(msg) {
@@ -362,10 +362,11 @@
         contactform.remove();
         cover.removeClass('active');
     });
+
 }(jQuery,window,document));
 
 
-
+//for tabs
 (function ($) {
     var methods = {
         init: function (options) {
@@ -382,6 +383,8 @@
                     $tabs_width = $this.width(),
                     $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length,
                     $index = 0;
+                //animate div height change
+                var curHeight,nextHeight;
 
                 // Finds right attribute for indicator based on active tab.
                 // el: jQuery Object
@@ -391,7 +394,6 @@
                 // Finds left attribute for indicator based on active tab.
                 // el: jQuery Object
                 var calcLeftPos = function(el) {
-                    console.log(el);
                     return el.position().left + $this.scrollLeft();
                 };
                 // If the location.hash matches one of the links, use that as the active tab.
@@ -445,11 +447,14 @@
                     $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length;
 
                     //Make the old tab inactive.
+                    //remember the height of cur content
                     $active.removeClass('active');
                     if ($content !== undefined) {
+                        curHeight = $content.outerHeight();
                         $content.hide();
                     }
                     // Update the variables with the new link and content
+                    //animate the height change
                     $active = $(this);
                     $content = $(escapeHash(this.hash));
                     $links = $this.find('li.tab a');
@@ -465,7 +470,16 @@
                     // window.location.hash = $active.attr('href');
 
                     if ($content !== undefined) {
-                        $content.show();
+                        var contentHeight = $content.outerHeight();
+                        if(curHeight && curHeight != contentHeight){
+                            nextHeight = contentHeight;
+                            // $content.height(curHeight).velocity({"height":nextHeight},{ duration: 600, queue: false, easing: 'easeOutQuad'});
+                            $content.height(curHeight).animate({"height":nextHeight},{ duration: 300, queue: false});
+                            $content.show();
+                        }else{
+                            $content.show();
+                        }
+
                         if (typeof(options.onShow) === "function") {
                             options.onShow.call(this, $content);
                         }

@@ -6,8 +6,8 @@
         a.nav-logo.cp-logo
         a(href='#').icon-group-h.right
             i.material-icons.blue-icon &#xE0BE;
-        form.nav-form.right.zindexthetop.zindexMost
-            input#telSearch.search
+        form#searchForm.nav-form.right.zindexthetop.zindexMost(action='/search',method='get')
+            input#telSearch.search(name='val')
             i.material-icons.search-icon &#xE8B6;
             #telResult.autoSearchList.nav-searchList.z-depth-2.zindexMost
 .nav-list-h.second-nav.clear.clearfix.zindexsecond.z-depth-1

@@ -2482,6 +2482,8 @@ body {
     background-color: #fff; }
 
 .tab-control {
+  position: relative;
+  box-sizing: border-box;
   display: none;
   margin-left: auto;
   left: auto;
