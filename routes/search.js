@@ -51,7 +51,13 @@ function getSearchResult(searchVal,callback) {
                         console.log('error search department: ' + err);
                         return err;
                     }
-                    callback(record);
+                    if(record){
+                        var result = [];
+                        for(var i = 0; i < record.length; i++){
+                            result.push(record[i]);
+                        }
+                        callback(result);
+                    }
                 })
             }
 
