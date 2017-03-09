@@ -2147,6 +2147,9 @@ body {
 .company-theme-bk {
   background-color: #292059 !important; }
 
+.bodyfixheader {
+  margin-top: 97px; }
+
 .nav {
   position: fixed;
   display: block;

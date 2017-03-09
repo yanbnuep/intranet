@@ -143,16 +143,19 @@ function searchByDeptOrSta(name, outstation) {
         data: data,
         method: 'get',
         success: function (data) {
+            $('#contacts-content').empty();
             renderPhoneResult(data);
         }
     });
 }
 
 function renderPhoneResult(data) {
+    var content = $('#contacts-content');
     var person = {},
         card = $(),
         tablehead,
         contactCards = [];
+
     for (var div in data) {
         if (data.hasOwnProperty(div) && div !== null) {
             card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
@@ -174,7 +177,7 @@ function renderPhoneResult(data) {
             tablehead.append(tb);
             card.append(tablehead);
         }
-        $('#contacts-content').append(card);
+        content.append(card);
     }
 }
 
@@ -189,27 +192,6 @@ function makeContactCard(contactList) {
     return person;
 }
 
-function windowScrollListener() {
-    (function () {
-        var didScroll,
-            lastScrollTop = 0,
-            curScrollTop = 0,
-            scrollDown;
-        $(window).scroll(function (event) {
-            didScroll = true;
-        });
-        setInterval(function () {
-            if (didScroll) {
-                //detect if window is scroll up or down
-                curScrollTop = $(this).scrollTop();
-                scrollDown = curScrollTop > lastScrollTop;
-                lastScrollTop = curScrollTop;
-                scrollSetActive(scrollDown);
-                didScroll = false;
-            }
-        }, 100);
-    })()
-}
 
 function scrollSetActive(scrollDown) {
     var curIndex, curGroup, nextLink, distance, change;

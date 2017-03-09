@@ -215,6 +215,7 @@
         }
 
     }
+
     // only one class in group
     function oneClass(selector, addClassName) {
         var targetString = "." + selector.context.className + "." + addClassName;
@@ -255,7 +256,7 @@
 }));
 
 //telephoneSearch
-(function ($,window,document) {
+(function ($, window, document) {
     var setting = {
         mixIpt: 2,
         inWidth: 500,
@@ -266,7 +267,7 @@
     };
     var clickHandler = function (e) {
         // e.preventDefault ? e.preventDefault():(e.returnValue = false);
-            autoSearch(this.value)
+        autoSearch(this.value)
     };
 
     function autoSearch(msg) {
@@ -305,8 +306,8 @@
                     '</div>';
                 var popup = '<div class="popbox">' +
                     '<div class="title">' + ele['NAME'] + '.' + ele['PREFER'] +
-                        '<i class="material-icons closebtn">&#xE5CD;</i>'+
-                    '</div>'+
+                    '<i class="material-icons closebtn">&#xE5CD;</i>' +
+                    '</div>' +
                     '<table class="popContent">' +
                     '<tr class="infoRow">' +
                     '<th class="infoTitle">' + 'JobTitle:' + '</th>' + '<td class="info">' + ele['JOBTITLE'] + '</td>' +
@@ -339,7 +340,7 @@
         setTimeout(function () {
             $(input).parent('form.nav-form').stop().animate({width: setting.outWidth}, 150);
             $('#telResult').fadeOut(setting.fadeSpeed);
-        },100);
+        }, 100);
     });
 
 
@@ -348,14 +349,15 @@
         var clone = $(ele).clone();
         $(document.body).prepend($(clone).addClass('active'));
     }
-    $(document).on('click','.resultItem',function (event) {
+
+    $(document).on('click', '.resultItem', function (event) {
         // event.preventDefault ? event.preventDefault() : (event.returnValue = false);
         event.stopPropagation();
         var popbox = $(this).next('.popbox');
         popup(popbox);
     });
 
-    $(document).on('click','.material-icons.closebtn',function (event) {
+    $(document).on('click', '.material-icons.closebtn', function (event) {
         var btn = event.target;
         var cover = $('#telecover');
         var contactform = $(btn).parents('.popbox');
@@ -363,8 +365,67 @@
         cover.removeClass('active');
     });
 
-}(jQuery,window,document));
+}(jQuery, window, document));
 
+
+//for window scroll
+(function ($) {
+    $.fn.extend({
+        debounce: function (func, wait, immediate) {
+            var timeout;
+            return function () {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+
+
+        },
+        scrollDistance: function (handler, wait) {
+            var previous = 0;
+            $(this).on('scroll', $(this).debounce(function () {
+                var cur = $(this).scrollTop();
+                var distance = cur - previous;
+                if ($.isFunction(handler)) {
+                    handler(distance);
+                }
+                previous = cur;
+            }, wait))
+        }
+    })
+}(jQuery));
+
+//navbar
+
+(function ($) {
+
+    var dispearNavbar = $('#secondNav');
+    var firstNav = $('#firstNav');
+
+    function navStateChange(distance) {
+        if(distance > 200) {
+            dispearNavbar.slideUp(400,function () {
+                firstNav.addClass('z-depth-2 IEborder');
+            });
+        }else if(distance < 0) {
+            if(firstNav.hasClass('z-depth-2')){
+                firstNav.removeClass('z-depth-2');
+            }
+            if(dispearNavbar.css('display')== 'none'){
+               dispearNavbar.slideDown(400);
+            }
+        }
+    }
+    $(document).ready(function () {
+        $(window).scrollDistance(navStateChange, 100);
+    });
+}(jQuery));
 
 //for tabs
 (function ($) {
@@ -379,25 +440,25 @@
                 var $this = $(this),
                     window_width = $(window).width();
 
-                var $active,$content,$links = $this.find('li.tab a'),
+                var $active, $content, $links = $this.find('li.tab a'),
                     $tabs_width = $this.width(),
                     $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length,
                     $index = 0;
                 //animate div height change
-                var curHeight,nextHeight;
+                var curHeight, nextHeight;
 
                 // Finds right attribute for indicator based on active tab.
                 // el: jQuery Object
-                var calcRightPos = function(el) {
+                var calcRightPos = function (el) {
                     return $tabs_width - el.position().left - el.outerWidth() - $this.scrollLeft();
                 };
                 // Finds left attribute for indicator based on active tab.
                 // el: jQuery Object
-                var calcLeftPos = function(el) {
+                var calcLeftPos = function (el) {
                     return el.position().left + $this.scrollLeft();
                 };
                 // If the location.hash matches one of the links, use that as the active tab.
-                $active = $($links.filter('[href="'+location.hash+'"]'));
+                $active = $($links.filter('[href="' + location.hash + '"]'));
                 // If no match is found, use the first link or any with class 'active' as the initial active tab.
                 if ($active.length === 0) {
                     $active = $(this).find('li.tab a.active').first();
@@ -420,9 +481,9 @@
                 if ($this.is(":visible")) {
                     // $indicator.css({"right": $tabs_width - (($index + 1) * $tab_width)});
                     // $indicator.css({"left": $index * $tab_width});
-                    setTimeout(function() {
-                        $indicator.css({"right": calcRightPos($active) });
-                        $indicator.css({"left": calcLeftPos($active) });
+                    setTimeout(function () {
+                        $indicator.css({"right": calcRightPos($active)});
+                        $indicator.css({"left": calcLeftPos($active)});
                     }, 0);
                 }
                 $(window).resize(function () {
@@ -432,14 +493,14 @@
                         $index = 0;
                     }
                     if ($tab_width !== 0 && $tabs_width !== 0) {
-                        $indicator.css({"right": calcRightPos($active) });
-                        $indicator.css({"left": calcLeftPos($active) });
+                        $indicator.css({"right": calcRightPos($active)});
+                        $indicator.css({"left": calcLeftPos($active)});
                     }
                 });
 
                 // Bind the click event handler
-                $this.on('click','a',function (e) {
-                    if($(this).parent().hasClass('disabled')){
+                $this.on('click', 'a', function (e) {
+                    if ($(this).parent().hasClass('disabled')) {
                         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
                         return null;
                     }
@@ -471,12 +532,12 @@
 
                     if ($content !== undefined) {
                         var contentHeight = $content.outerHeight();
-                        if(curHeight && curHeight != contentHeight){
+                        if (curHeight && curHeight != contentHeight) {
                             nextHeight = contentHeight;
                             // $content.height(curHeight).velocity({"height":nextHeight},{ duration: 600, queue: false, easing: 'easeOutQuad'});
-                            $content.height(curHeight).animate({"height":nextHeight},{ duration: 300, queue: false});
+                            $content.height(curHeight).animate({"height": nextHeight}, {duration: 300, queue: false});
                             $content.show();
-                        }else{
+                        } else {
                             $content.show();
                         }
 
@@ -488,12 +549,30 @@
                     // Update indicator
 
                     if (($index - $prev_index) >= 0) {
-                        $indicator.velocity({"right": calcRightPos($active) }, { duration: 300, queue: false, easing: 'easeOutQuad'});
-                        $indicator.velocity({"left": calcLeftPos($active) }, {duration: 300, queue: false, easing: 'easeOutQuad', delay: 90});
+                        $indicator.velocity({"right": calcRightPos($active)}, {
+                            duration: 300,
+                            queue: false,
+                            easing: 'easeOutQuad'
+                        });
+                        $indicator.velocity({"left": calcLeftPos($active)}, {
+                            duration: 300,
+                            queue: false,
+                            easing: 'easeOutQuad',
+                            delay: 90
+                        });
 
                     } else {
-                        $indicator.velocity({"left": calcLeftPos($active) }, { duration: 300, queue: false, easing: 'easeOutQuad'});
-                        $indicator.velocity({"right": calcRightPos($active) }, {duration: 300, queue: false, easing: 'easeOutQuad', delay: 90});
+                        $indicator.velocity({"left": calcLeftPos($active)}, {
+                            duration: 300,
+                            queue: false,
+                            easing: 'easeOutQuad'
+                        });
+                        $indicator.velocity({"right": calcRightPos($active)}, {
+                            duration: 300,
+                            queue: false,
+                            easing: 'easeOutQuad',
+                            delay: 90
+                        });
 
                     }
                     // console.log('right: '+calcRightPos($active) + ' left: '+calcLeftPos($active));
@@ -501,25 +580,25 @@
                 });
             });
         },
-        select_tab : function( id ) {
+        select_tab: function (id) {
             this.find('a[href="#' + id + '"]').trigger('click');
         }
 
     };
-    $.fn.tabs = function(methodOrOptions) {
-        if ( methods[methodOrOptions] ) {
-            return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-        } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+    $.fn.tabs = function (methodOrOptions) {
+        if (methods[methodOrOptions]) {
+            return methods[methodOrOptions].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof methodOrOptions === 'object' || !methodOrOptions) {
             // Default to "init"
-            return methods.init.apply( this, arguments );
+            return methods.init.apply(this, arguments);
         } else {
-            $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.tabs' );
+            $.error('Method ' + methodOrOptions + ' does not exist on jQuery.tabs');
         }
     };
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('ul.tabs').tabs();
     });
     function escapeHash(hash) {
-        return hash.replace( /(:|\.|\[|\]|,|=)/g, "\\$1" );
+        return hash.replace(/(:|\.|\[|\]|,|=)/g, "\\$1");
     }
 }(jQuery));

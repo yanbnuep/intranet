@@ -93,3 +93,7 @@ body {
 .company-theme-bk {
   background-color: $company-theme-color !important;
 }
+
+.bodyfixheader {
+  margin-top: $nav-height + $nav-second-height;
+}

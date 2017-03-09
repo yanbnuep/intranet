@@ -1,40 +1,41 @@
 //
    Created by itdwyy on 12/2/2016.
 #telecover.cover
-.nav.zindexthetop
-    .wrapper-960.zindexMost
-        a.nav-logo.cp-logo
-        a(href='#').icon-group-h.right
-            i.material-icons.blue-icon &#xE0BE;
-        form#searchForm.nav-form.right.zindexthetop.zindexMost(action='/search',method='get')
-            input#telSearch.search(name='val')
-            i.material-icons.search-icon &#xE8B6;
-            #telResult.autoSearchList.nav-searchList.z-depth-2.zindexMost
-.nav-list-h.second-nav.clear.clearfix.zindexsecond.z-depth-1
-    ul.wrapper-960.none-padding
-        -
-            var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];
-            var services = ['IT Request Form','E-Service','Crew Zone'];
-        li.nav-item
-            a(href='/') Home
-        li.nav-item
-            a(href='/tele') Telephone
-        li.nav-item.has-dropdown
-            a(href='#') Department
+#amHeader.amNav-grp
+    #firstNav.nav.zindexthetop
+        .wrapper-960.zindexMost
+            a.nav-logo.cp-logo
+            a(href='#').icon-group-h.right
+                i.material-icons.blue-icon &#xE0BE;
+            form#searchForm.nav-form.right.zindexthetop.zindexMost(action='/search',method='get')
+                input#telSearch.search(name='val')
+                i.material-icons.search-icon &#xE8B6;
+                #telResult.autoSearchList.nav-searchList.z-depth-2.zindexMost
+    #secondNav.nav-list-h.second-nav.clear.clearfix.zindexsecond.z-depth-1
+        ul.wrapper-960.none-padding
+            -
+                var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];
+                var services = ['IT Request Form','E-Service','Crew Zone'];
+            li.nav-item
+                a(href='/') Home
+            li.nav-item
+                a(href='/tele') Telephone
+            li.nav-item.has-dropdown
+                a(href='#') Department
                 ul.drp-list-v
                     each item in departments
                         li.drp-list-item
                             a(href='#')= item
-        li.nav-item.has-dropdown
-            a(href='#') Services
-            ul.drp-list-v
-                each item in services
-                    li.drp-list-item
-                        a(href='#')= item
-        li.nav-item
-            a(href='#') Download
-        li.nav-item
-            a(href='#') Help
+            li.nav-item.has-dropdown
+                a(href='#') Services
+                ul.drp-list-v
+                    each item in services
+                        li.drp-list-item
+                            a(href='#')= item
+            li.nav-item
+                a(href='#') Download
+            li.nav-item
+                a(href='#') Help
 
 
 
