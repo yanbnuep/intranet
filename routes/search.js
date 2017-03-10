@@ -52,11 +52,7 @@ function getSearchResult(searchVal,callback) {
                         return err;
                     }
                     if(record){
-                        var result = [];
-                        for(var i = 0; i < record.length; i++){
-                            result.push(record[i]);
-                        }
-                        callback(result);
+                        callback(record)
                     }
                 })
             }

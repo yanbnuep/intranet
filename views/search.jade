@@ -4,8 +4,14 @@ html(lang="en")
     include include/header
 body
     include include/nav
-    .bodyfixheader
-        p= message
+    .bodyfixheader.wrapper-960
+        ul#searchHelper.chipGrp
+            li.chipLi
+                a.chip.selected(href='#all') All
+        #searchResult
+script.
+    searchResult = !{JSON.stringify(message)};
 script(src='/javascript/includes/jquery-1.12.4.min.js')
 script(src='/javascript/includes/intranet.js')
+script(src='/javascript/includes/smooth-scroll.min.js')
 script(src='/javascript/pages/search.js')

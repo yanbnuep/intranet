@@ -1,0 +1,30 @@
+.chipGrp {
+  margin: $chipGrp-margin;
+  padding: 0;
+  list-style: none;
+  .chipLi {
+    display:inline-block;
+  }
+  .chip{
+    display: inline-block;
+  }
+}
+
+.chip {
+  margin: $chip-margin;
+  height: $chip-height;
+  min-width: $chip-min-width;
+  padding: $chip-padding;
+  text-decoration: none;
+  color: $chip-color;
+  *color: color('grey','darken-2');
+  font-size: $chip-font-size;
+  font-weight: $chip-font-weight;
+  line-height: $chip-line-height;
+  background-color: $chip-bk-color;
+  border-radius: $chip-border-radius;
+  &.selected {
+    color: color('grey',lighten-3);
+    background-color: $company-theme-color;
+  }
+}
