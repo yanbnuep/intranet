@@ -9,8 +9,16 @@ $second-bck-color: color('grey','lighten-4');
 $company-theme-color-darken-20: darken($company-theme-color,20%);
 $bk-white: #fff;
 
+//Media
+$iphone-width: 480px;
+
+$iphone-6-width: 375px;
+$desktop-width: 960px;
+$iphone-6plus-width: 415px;
+$phone-width: $iphone-6plus-width;
 
 //z-index
+$z-index-most: 9000;
 $z-index-the-top: 1000;
 $z-index-second: 500;
 $z-index-normal: 100;
@@ -79,6 +87,8 @@ $autocomplet-bck-color: color('grey','lighten-5');
 $news-area-margin-top: floor(($nav-height+$nav-second-height)/1.618/1.618/1.618) + $nav-height +$nav-second-height + 20;
 $slide-image-width: 550px;
 $slide-image-height: 385px;
+$slide-image-width-iphone: 100%;
+$slide-image-height-iphone: 250px;
 //custom  number of slide images
 $slide-num : 8;
 $slide-container-width: $slide-image-width * $slide-num;

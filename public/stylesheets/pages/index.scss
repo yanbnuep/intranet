@@ -1,27 +1,15 @@
 //pages
 .news-area {
   margin-top: $news-area-margin-top ;
-
   padding-bottom: $news-area-padding-bottom;
 }
-.slide-container {
-  @include float-block;
-  width: $slide-image-width;
-  height: $slide-image-height;
-}
+
 .right-new-panel {
   @include float-block;
   width: $right-news-panel-width;
   height: $right-news-panel-height;
 }
 
-#mainNews.img-list {
-  width: $slide-container-width;
-  .slide-images {
-    width: $slide-image-width;
-    height: $slide-image-height;
-  }
-}
 #newsSlide-btns {
   width: $slide-image-width;
   height: 48px;

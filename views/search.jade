@@ -9,8 +9,8 @@ body
             li.chipLi
                 a.chip.selected(href='#all') All
         #searchResult
-script.
-    searchResult = !{JSON.stringify(message)};
+            #hidden.hidden=message
+
 script(src='/javascript/includes/jquery-1.12.4.min.js')
 script(src='/javascript/includes/intranet.js')
 script(src='/javascript/includes/smooth-scroll.min.js')

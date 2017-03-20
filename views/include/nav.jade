@@ -2,16 +2,16 @@
    Created by itdwyy on 12/2/2016.
 #telecover.cover
 #amHeader.amNav-grp
-    #firstNav.nav.zindexthetop
-        .wrapper-960.zindexMost
+    #firstNav.nav.zindexMost
+        .wrapper-960
             a.nav-logo.cp-logo
             a(href='#').icon-group-h.right
                 i.material-icons.blue-icon &#xE0BE;
-            form#searchForm.nav-form.right.zindexthetop.zindexMost(action='/search',method='get')
+            form#searchForm.nav-form.right.phoneHidden(action='/search',method='get')
                 input#telSearch.search(name='val')
                 i.material-icons.search-icon &#xE8B6;
-                #telResult.autoSearchList.nav-searchList.z-depth-2.zindexMost
-    #secondNav.nav-list-h.second-nav.clear.clearfix.zindexsecond.z-depth-1
+                #telResult.autoSearchList.nav-searchList.z-depth-2
+    #secondNav.nav-list-h.second-nav.clear.clearfix.z-depth-1.zindexnormal
         ul.wrapper-960.none-padding
             -
                 var departments = ['General Affairs(GAD)','Commercial(COM)','Finance(FIN)','Flight Operations(FLT)'];

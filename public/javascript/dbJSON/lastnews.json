@@ -18,5 +18,38 @@
       "subTitle": " Delivered the Rare Animal ",
       "href": "#"
     }
+  ],
+
+  "orientation":[
+    {
+      "imgURL": "/news/img/bottom/13Dec2016.jpg",
+      "title": "Air Macau Delegation Visited Shenzhen Airlines",
+      "subTitle": "22/2/2017 Source: Public Relations Division, Air Macau",
+      "href": "#"
+    },
+    {
+      "imgURL": "/news/img/bottom/18OCT2016.jpg",
+      "title": "Four Team Runner From Air Macau",
+      "subTitle": "Participate 7th Macau Eco Trailhiker ",
+      "href": "#"
+    },
+    {
+      "imgURL": "/news/img/bottom/21Feb2017.jpg",
+      "title": "Air Macau Delivered Two Red Panda",
+      "subTitle": " Delivered the Rare Animal ",
+      "href": "#"
+    },
+    {
+      "imgURL": "/news/img/bottom/25OCT2016.jpg",
+      "title": "Four Team Runner From Air Macau",
+      "subTitle": "Participate 7th Macau Eco Trailhiker ",
+      "href": "#"
+    },
+    {
+      "imgURL": "/news/img/bottom/CultureBridge.jpg",
+      "title": "Air Macau Delivered Two Red Panda",
+      "subTitle": " Delivered the Rare Animal ",
+      "href": "#"
+    }
   ]
 }

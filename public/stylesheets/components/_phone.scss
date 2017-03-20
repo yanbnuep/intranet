@@ -1,0 +1,10 @@
+.phoneCenter {
+  @media screen and (max-width: $iphone-width) {
+    margin: 0 auto !important;
+  }
+}
+.phoneHidden {
+  @media screen and (max-width: $iphone-width) {
+    display: none !important;
+  }
+}

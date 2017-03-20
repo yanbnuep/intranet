@@ -2,9 +2,10 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addImages($('#mainNews'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
-        var imgs = $('#mainNews').find('.slide-images');
-        am.addSlick($(imgs));
+    addImages($('#slick-container'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
+        // var imgs = $('#mainNews').find('.slide-images');
+        // // am.addSlick($(imgs));
+
     });
     addImages($('#lastnews-list'), 'javascript/dbJSON/lastnews.json', parseLastnews, null);
 
@@ -52,13 +53,14 @@ function getMainStory(json) {
     mainStory = json[jsonStr.attrName];
     for (var i = 0; i < mainStory.length; i++) {
         var story = mainStory[i],
-            image = '<div class="img" style="background-image: url(' +
-                story[jsonStr.image] + ')">\</div>',
+            // image = '<div class="img" style="background-image: url(' +
+            //     story[jsonStr.image] + ')">\</div>',
             title = '<p class="title"> ' +
                 story[jsonStr.title] + '<span class="sub">' + story[jsonStr.subTitle] + '</span>' + '</p>';
-        htmlStr = '<a href="' + story[jsonStr.href] + '" class="slide-images">' + image + title + '</a>';
+        htmlStr = '<a class="slide-images" href="'+story['href']+'">';
+        $(htmlStr).css('background-image','url('+story[jsonStr.image]+')');
+        console.log($(htmlStr));
         newsHtml.push(htmlStr);
-
     }
 
     return newsHtml.join('\n');

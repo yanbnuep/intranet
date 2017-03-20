@@ -18,6 +18,10 @@ body {
   margin: 0 auto;
   width: 960px;
   @include clearfix;
+  @media screen and (max-width:$phone-width ){
+    width: 100%;
+    min-width: $iphone-6-width;
+  }
 }
 .left {
   float: left;
@@ -73,7 +77,9 @@ body {
   transition: box-shadow .25s;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.zindexMost {
+  z-index: $z-index-most;
+}
 .zindexthetop {
   z-index: $z-index-the-top;
 }
@@ -96,4 +102,8 @@ body {
 
 .bodyfixheader {
   margin-top: $nav-height + $nav-second-height;
+}
+.hidden {
+  @include opacity(0);
+  display: none;
 }

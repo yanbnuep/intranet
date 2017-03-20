@@ -2,8 +2,9 @@
  * Created by itdwyy on 3/9/2017.
  */
 $(document).ready(function () {
-    console.log();
+    var searchResult = JSON.parse($('#hidden').html());
     parseResult(searchResult);
+    tableRePaint();
 });
 
 function parseResult(json) {
@@ -67,30 +68,35 @@ function parseContactInfo(person) {
 function selectDiv(selector) {
     var inSpeed = 100,
         outSpeed = 100;
-    var oddBkColor = '#f2f2f2',
-        evenBKColor= 'transparent';
 
     if(!selector.hasClass('selected') && selector.attr('href')){
         var selectedClassName ='.'+am.rgxGet('enChar',selector.attr('href'));
         var selectRow = $(selectedClassName);
+
+        if(selectedClassName == '.all'){
+            var hiddenElement =  $('.person').not('.visible');
+            hiddenElement.addClass('visible');
+            tableRePaint();
+            hiddenElement.fadeIn(inSpeed);
+        }
+
         if(selectRow.length>0){
-            $('.person').not(selectRow).fadeOut(outSpeed,function () {
-                $(this).removeClass('visible');
-                selectRow.show(inSpeed,function () {
-                    if(!$(this).hasClass('visible')){
-                        $(this).addClass('visible');
-                    }
-                    tableRePaint(oddBkColor,evenBKColor);
-                });
-            });
+            var fadeElement =  $('.person').not(selectRow);
+            fadeElement.removeClass('visible').hide();
+            selectRow.addClass('visible');
+            tableRePaint();
+            selectRow.fadeIn(inSpeed);
         }
     }
 }
 
-function tableRePaint(oddColor,evenColor) {
+function tableRePaint() {
+    var oddBkColor = '#f2f2f2',
+        evenBKColor= 'transparent';
+
     var visible = $('.visible');
     for(var i = 0;i< visible.length;i++){
-        var color = ((i+1)%2? oddColor:evenColor);
+        var color = ((i+1)%2? oddBkColor:evenBKColor);
         $(visible[i]).css('background-color',color);
     }
 }

@@ -93,7 +93,12 @@
         slideElements = slideEle instanceof $ ? slideEle : $(slideEle);
         container = $(slideElements.parent());
         eleWidth = slideEle.width();
+
         eleLenght = slideElements.length;
+
+        // slickContainer.width(function () {
+        //     return eleWidth;
+        // });
 
         if (eleLenght < 2) return null;
         /*1.add first and last element's copy to dom
@@ -149,18 +154,20 @@
 
         function slick(direction, num) {
             var left = 0;
+            var elementWidth = slideEle.width();
+            console.log(elementWidth);
             //stop all animate;
             container.finish();
             slideEle.finish();
             if (direction === 'rtl') {
                 container.animate({
                     opacity: 1,
-                    left: "-=" + eleWidth * num
+                    left: "-=" + elementWidth * num
                 }, setting.duration, function () {
                     left = getLeft();
                     if (left <= -container.width() + eleWidth * setting.slickNum) {
                         container.css('left', function () {
-                            return -(eleWidth * num);
+                            return -(elementWidth * num);
                         })
                     }
                     chageCur();
@@ -169,12 +176,12 @@
             } else if (direction === 'ltr') {
                 container.animate({
                     opacity: 1,
-                    left: "+=" + eleWidth * num
+                    left: "+=" + elementWidth * num
                 }, setting.duration, function () {
                     left = getLeft();
                     if (left >= 0) {
                         container.css('left', function () {
-                            return -(container.width() - eleWidth * setting.slickNum * 2);
+                            return -(container.width() - elementWidth * setting.slickNum * 2);
                         })
                     }
                     chageCur();
@@ -184,8 +191,9 @@
 
         function slickTo(idx) {
             var curLeft = getLeft(),
+                elementWidth = slideEle.width(),
                 //default slick add id
-                shouldLeft = -(eleWidth * (idx + setting.slickNum));
+                shouldLeft = -(elementWidth * (idx + setting.slickNum));
             container.finish();
             container.animate({left: "+=" + (shouldLeft - curLeft)}, setting.duration, function () {
                 chageCur(idx);
@@ -207,12 +215,24 @@
             }
         }
 
-        //add internal timer to slick
-        if (setting.internal) {
-            setInterval(function () {
-                slick('rtl', 1);
-            }, 8000);
-        }
+        // //add internal timer to slick
+        // if (setting.internal) {
+        //     setInterval(function () {
+        //         slick('rtl', 1);
+        //     }, 8000);
+        // }
+
+
+        //window resize
+        $(window).on('resize',function (event) {
+            var windowWidth = $(this).width();
+            var eles = $('.slide-images');
+            if(windowWidth < 415 ){
+                $('#slick-container').width(windowWidth);
+                $('#mainNews').width(windowWidth*eles.length);
+                eles.width(windowWidth);
+            }
+        });
 
     }
 
@@ -227,6 +247,8 @@
 
         selector.addClass(addClassName);
     }
+
+
 
     //Tabs
     (function ($) {
@@ -409,7 +431,7 @@
     var firstNav = $('#firstNav');
 
     function navStateChange(distance) {
-        if(distance > 200) {
+        if(distance > 100) {
             dispearNavbar.slideUp(400,function () {
                 firstNav.addClass('z-depth-2 IEborder');
             });

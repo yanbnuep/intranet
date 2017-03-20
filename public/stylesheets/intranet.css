@@ -2072,6 +2072,10 @@ body {
     display: table; }
   .wrapper-960:after {
     clear: both; }
+  @media screen and (max-width: 415px) {
+    .wrapper-960 {
+      width: 100%;
+      min-width: 375px; } }
 
 .left {
   float: left; }
@@ -2129,6 +2133,9 @@ body {
   transition: box-shadow .25s;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
+.zindexMost {
+  z-index: 9000; }
+
 .zindexthetop {
   z-index: 1000; }
 
@@ -2149,6 +2156,18 @@ body {
 
 .bodyfixheader {
   margin-top: 97px; }
+
+.hidden {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  /* IE 5-7 */
+  filter: alpha(opacity=0);
+  /* Netscape */
+  -moz-opacity: 0;
+  /* Safari 1.x */
+  -khtml-opacity: 0;
+  /* Good browsers */
+  opacity: 0;
+  display: none; }
 
 .nav {
   position: fixed;
@@ -2437,6 +2456,7 @@ body {
 
 .tabs {
   position: relative;
+  display: block;
   height: 36px;
   width: 100%;
   padding: 0;
@@ -2613,42 +2633,43 @@ table.contact-table {
   float: left;
   min-height: 1px;
   *zoom: 1;
+  width: 550px;
+  height: 385px;
   overflow: hidden; }
   .slide-container:before, .slide-container:after {
     content: "";
     display: table; }
   .slide-container:after {
     clear: both; }
-  .slide-container .img-list {
+  @media screen and (max-width: 415px) {
+    .slide-container {
+      width: 100%;
+      min-width: 375px; } }
+  .slide-container .slide-images {
     position: absolute;
     display: block;
-    width: 100%;
-    height: 100%;
-    *zoom: 1; }
-    .slide-container .img-list:before, .slide-container .img-list:after {
-      content: "";
-      display: table; }
-    .slide-container .img-list:after {
-      clear: both; }
-  .slide-container .slide-images {
-    position: relative;
-    display: block;
-    float: left;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     list-style: none;
-    *zoom: 1; }
+    font-size: 0;
+    *zoom: 1;
+    z-index: 1000; }
     .slide-container .slide-images:before, .slide-container .slide-images:after {
       content: "";
       display: table; }
     .slide-container .slide-images:after {
       clear: both; }
-    .slide-container .slide-images .img {
-      display: block;
-      height: 100%;
-      background-repeat: no-repeat; }
+    @media screen and (max-width: 415px) {
+      .slide-container .slide-images {
+        width: 100%;
+        padding-top: 70%;
+        background-size: cover;
+        -moz-background-size: cover;
+        /* Firefox 3.6 */
+        background-position: center;
+        /* Internet Explorer 7/8 */ } }
     .slide-container .slide-images .title {
       position: absolute;
       display: block;
@@ -2689,6 +2710,7 @@ table.contact-table {
   .slide-show-container-h .slide-item {
     position: relative;
     text-decoration: none;
+    box-sizing: border-box;
     position: relative;
     display: block;
     float: left;
@@ -2702,6 +2724,13 @@ table.contact-table {
     .slide-show-container-h .slide-item .img, .slide-show-container-h .slide-item img {
       width: 100%;
       height: 100%; }
+    @media screen and (max-width: 415px) {
+      .slide-show-container-h .slide-item {
+        width: 49.9%;
+        margin: 0;
+        padding: 0; }
+        .slide-show-container-h .slide-item .img {
+          padding-top: 55.5%; } }
 
 .popbox {
   position: fixed;
@@ -2759,23 +2788,17 @@ table.contact-table {
   .cover.active {
     display: block; }
 
+@media screen and (max-width: 480px) {
+  .phoneCenter {
+    margin: 0 auto !important; } }
+
+@media screen and (max-width: 480px) {
+  .phoneHidden {
+    display: none !important; } }
+
 .news-area {
   margin-top: 139px;
   padding-bottom: 40px; }
-
-.slide-container {
-  position: relative;
-  display: block;
-  float: left;
-  min-height: 1px;
-  *zoom: 1;
-  width: 550px;
-  height: 385px; }
-  .slide-container:before, .slide-container:after {
-    content: "";
-    display: table; }
-  .slide-container:after {
-    clear: both; }
 
 .right-new-panel {
   position: relative;
@@ -2790,12 +2813,6 @@ table.contact-table {
     display: table; }
   .right-new-panel:after {
     clear: both; }
-
-#mainNews.img-list {
-  width: 4400px; }
-  #mainNews.img-list .slide-images {
-    width: 550px;
-    height: 385px; }
 
 #newsSlide-btns {
   width: 550px;

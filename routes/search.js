@@ -15,8 +15,8 @@ var config = {
 
 router.get('/', function (req, res, next) {
     getSearchResult(req.query.val,function (json) {
-        console.log(json);
-        res.render('search', {title: 'search',message:json});
+        var result = JSON.stringify(json);
+        res.render('search', {title: 'search',message:result});
     });
 
 });
