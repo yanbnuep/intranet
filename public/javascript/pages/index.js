@@ -49,7 +49,7 @@ function getMainStory(json) {
             order: "index"
         },
         htmlStr = '',
-        newsHtml = [];
+        newsHtml = '';
     mainStory = json[jsonStr.attrName];
     for (var i = 0; i < mainStory.length; i++) {
         var story = mainStory[i],
@@ -57,13 +57,13 @@ function getMainStory(json) {
             //     story[jsonStr.image] + ')">\</div>',
             title = '<p class="title"> ' +
                 story[jsonStr.title] + '<span class="sub">' + story[jsonStr.subTitle] + '</span>' + '</p>';
-        htmlStr = '<a class="slide-images" href="'+story['href']+'">';
-        $(htmlStr).css('background-image','url('+story[jsonStr.image]+')');
-        console.log($(htmlStr));
-        newsHtml.push(htmlStr);
+        htmlStr = '<a class="slide-images"  href="'+story['href']+'" style="background-image: url('+ story[jsonStr.image]+')">'+title+'</a>';
+        // newsHtml.push(htmlStr);
+        newsHtml += htmlStr;
     }
 
-    return newsHtml.join('\n');
+    // return newsHtml.join('\n');
+    return newsHtml;
 }
 
 function parseLastnews(json) {
