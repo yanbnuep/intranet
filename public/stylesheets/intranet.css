@@ -2001,6 +2001,14 @@ template {
     margin-top: -24px;
     width: 48px;
     height: 48px; }
+  .slide-btn.left, .slide-btn.right {
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out; }
+  .slide-btn.big.left {
+    background-image: url(../img/btn/ic_keyboard_arrow_left_black_24dp_2x.png); }
+  .slide-btn.big.right {
+    background-image: url(../img/btn/ic_keyboard_arrow_right_black_24dp_2x.png); }
   .slide-btn.sm {
     margin-top: -12px;
     width: 24px;

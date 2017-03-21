@@ -19,6 +19,18 @@
     height: $slide-btn-height-big;
 
   }
+  &.left,&.right {
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+  }
+  &.big.left {
+    background-image:url(../img/btn/ic_keyboard_arrow_left_black_24dp_2x.png);
+  }
+
+  &.big.right{
+    background-image:url(../img/btn/ic_keyboard_arrow_right_black_24dp_2x.png);
+  }
   &.sm {
     margin-top: -(floor($slide-btn-height-sm/2));
     width: $slide-btn-width-sm;

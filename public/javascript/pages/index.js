@@ -2,10 +2,9 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addImages($('#slick-container'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
+    addImages($('#slick-controler'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
         // var imgs = $('#mainNews').find('.slide-images');
-        // // am.addSlick($(imgs));
-
+        $('#slick-controler').slideImages();
     });
     addImages($('#lastnews-list'), 'javascript/dbJSON/lastnews.json', parseLastnews, null);
 
