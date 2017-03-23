@@ -1,0 +1,61 @@
+{
+  "mainStory": [
+
+    {
+      "imgUrl":"/images/a002107915-001.jpg",
+      "title": "GAD christmas",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 0
+    },
+    {
+      "imgUrl":"/images/Dances.jpg",
+      "title": "Inspiration African Art With African Art",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 1
+    },
+    {
+      "imgUrl": "/images/Fuller.jpg",
+      "title": "Fuller",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 2
+    },
+    {
+      "imgUrl": "/images/Kandinsky_Rapallo_Boote_1905_10.jpg",
+      "title": "Richard McKinley | Horizon Fine Art",
+      "subTitle":"2016/DEC/10",
+      "href":"#",
+      "index": 3
+    },
+    {
+      "imgUrl": "/images/KT_MMB_21_024.jpg",
+      "title": "Fine art gallery, Landscape paintings",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 4
+    },
+    {
+      "imgUrl": "/images/Trees.jpeg",
+      "title":"Portrait Painting of Dog in Oils",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 5
+    },
+    {
+      "imgUrl": "/images/Village.jpeg",
+      "title":"Portrait Painting of Dog in Oils",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 6
+    },
+    {
+      "imgUrl": "/images/WorkZoom.jpg",
+      "title":"Artist: Clifton Bieundurry",
+      "subTitle": "2016/DEC/10",
+      "href":"#",
+      "index": 7
+    }
+  ]
+}

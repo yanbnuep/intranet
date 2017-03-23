@@ -2663,7 +2663,12 @@ table.contact-table {
     list-style: none;
     font-size: 0;
     *zoom: 1;
-    z-index: 1000; }
+    z-index: 1000;
+    background-size: cover;
+    -moz-background-size: cover;
+    /* Firefox 3.6 */
+    background-position: center;
+    /* Internet Explorer 7/8 */ }
     .slide-container .slide-images:before, .slide-container .slide-images:after {
       content: "";
       display: table; }
@@ -2672,12 +2677,7 @@ table.contact-table {
     @media screen and (max-width: 415px) {
       .slide-container .slide-images {
         width: 100%;
-        padding-top: 70%;
-        background-size: cover;
-        -moz-background-size: cover;
-        /* Firefox 3.6 */
-        background-position: center;
-        /* Internet Explorer 7/8 */ } }
+        padding-top: 70%; } }
     .slide-container .slide-images .title {
       position: absolute;
       display: block;
@@ -2807,6 +2807,9 @@ table.contact-table {
 .news-area {
   margin-top: 139px;
   padding-bottom: 40px; }
+  @media screen and (max-width: 415px) {
+    .news-area {
+      margin-top: 139px -60px; } }
 
 .right-new-panel {
   position: relative;
@@ -2832,6 +2835,10 @@ table.contact-table {
   position: relative;
   display: block;
   padding-left: 30px; }
+  @media screen and (max-width: 415px) {
+    .right-new-panel {
+      width: 100%;
+      padding-left: 0; } }
   .right-new-panel .slide-tab-bar {
     position: relative;
     display: block;

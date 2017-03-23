@@ -2,7 +2,7 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addImages($('#slick-controler'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
+    addImages($('#slick-controler'), 'javascript/dbJSON/test.json', getMainStory, function () {
         // var imgs = $('#mainNews').find('.slide-images');
         $('#slick-controler').slideImages();
     });

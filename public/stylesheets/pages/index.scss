@@ -2,6 +2,9 @@
 .news-area {
   margin-top: $news-area-margin-top ;
   padding-bottom: $news-area-padding-bottom;
+  @media screen and(max-width: $phone-width){
+    margin-top: $news-area-margin-top -60px;
+  }
 }
 
 .right-new-panel {
@@ -20,6 +23,10 @@
   position: relative;
   display: block;
   padding-left: $news-area-padding-left;
+  @media screen and(max-width: $phone-width) {
+    width: 100%;
+    padding-left: 0;
+  }
   .slide-tab-bar {
     @include float-block;
     height: $slide-tab-bar-height;
