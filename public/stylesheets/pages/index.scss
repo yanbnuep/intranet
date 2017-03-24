@@ -45,9 +45,7 @@
   .card-h {
     padding: $card-padding;
     .txt {
-      width: $txt-area-width;
-      height: $txt-area-height;
-      padding: $new-title-padding;
+
       .title {
         font-size: $title-font-size;
         font-weight: bold;
@@ -58,9 +56,7 @@
       }
     }
     .img,.img img {
-      width: $new-image-width;
-      height: $new-image-height;
-      overflow: hidden;
+
     }
   }
 }

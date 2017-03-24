@@ -2,10 +2,19 @@
   @include relativeblock;
   text-decoration: none;
   @include clear;
+
   .txt {
     @include float-block;
     float: right;
+    width: $txt-area-width;
+    height: $txt-area-height;
+    padding: $new-title-padding;
+    @media screen and (max-width: $phone-width){
+      width: 49.9%;
+      padding: 0;
+    }
     .title {
+
       @include clear;
     }
     .sub {
@@ -16,7 +25,14 @@
     @include float-block;
     width: $new-image-width;
     height: $new-image-height;
+    overflow: hidden;
     float: left;
+    background-size: cover;
+    background-position: center;
+    @media screen and (max-width: $phone-width){
+      width: 50%;
+      //padding-top: $new-image-height/$new-image-width*100%;
+    }
   }
 }
 

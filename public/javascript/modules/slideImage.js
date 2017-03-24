@@ -17,14 +17,17 @@
                 speed: 300,
                 crossfade: true
             }
-        }
+        },
+        imgsClassSelector: '.slide-images',
+        imgsClassName: 'slide-images',
+        activeClassSelector: '.cur',
+        activeClassName: 'cur'
     };
     Plugin = (function () {
         function Plugin(element, options) {
             this.element = element;
             this.options = $.extend(true, {}, defaults, options);
             this._default = defaults;
-
             this._name = pluginName;
             this.init();
         }
@@ -119,12 +122,35 @@
         }
     };
     Plugin.prototype._fade = function (number) {
-        var $element, curSlide, next, slideControl, value,
+        var $element, curSlide, next, slidesControl, value,curImage,
             _this = this;
         $element = $(this.element);
+        
         this.data = $.data(this);
         if(number !== this.data.current + 1){
-            
+            currentSlide = this.data.current;
+            if(number){
+                number = number - 1;
+                value = number > currentSlide ? 1: -1;
+                next = number;
+            }else {
+                value = this.data.direction === "next"?1:-1;
+                next = currentSlide+value;
+            }
+            if(next === -1){
+                next = this.data.total -1;
+            }
+            if(next === this.data.total){
+                next = 0;
+            }
+            // this._setActive(next);
+            curImage = $();
+            curImage = $(this.options.activeClassSelector);
+            curImage.css({display:"none",left:0});
+            console.log(curImage.length);
+            if (this.options.effect.fade.crossfade){
+                curImage.stop().fadeOut(this.options.effect.fade.speed);
+            }
         }
     };
     return $.fn.slideImages = function (options) {

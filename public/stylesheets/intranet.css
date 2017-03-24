@@ -2366,12 +2366,19 @@ body {
     float: left;
     min-height: 1px;
     *zoom: 1;
-    float: right; }
+    float: right;
+    width: 230px;
+    height: 98px;
+    padding: 0 0 0 15px; }
     .card-h .txt:before, .card-h .txt:after {
       content: "";
       display: table; }
     .card-h .txt:after {
       clear: both; }
+    @media screen and (max-width: 415px) {
+      .card-h .txt {
+        width: 49.9%;
+        padding: 0; } }
     .card-h .txt .title {
       clear: both;
       *zoom: 1; }
@@ -2396,12 +2403,18 @@ body {
     *zoom: 1;
     width: 149.99px;
     height: 98px;
-    float: left; }
+    overflow: hidden;
+    float: left;
+    background-size: cover;
+    background-position: center; }
     .card-h .img:before, .card-h .img:after {
       content: "";
       display: table; }
     .card-h .img:after {
       clear: both; }
+    @media screen and (max-width: 415px) {
+      .card-h .img {
+        width: 50%; } }
 
 .contact-group {
   position: relative;
@@ -2653,9 +2666,11 @@ table.contact-table {
     .slide-container {
       width: 100%;
       min-width: 375px; } }
+  .slide-container .slide-controler {
+    height: 100%; }
   .slide-container .slide-images {
     position: absolute;
-    display: block;
+    display: none;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -2678,6 +2693,8 @@ table.contact-table {
       .slide-container .slide-images {
         width: 100%;
         padding-top: 70%; } }
+    .slide-container .slide-images.cur {
+      display: block; }
     .slide-container .slide-images .title {
       position: absolute;
       display: block;
@@ -2874,20 +2891,12 @@ table.contact-table {
         line-height: 16px; }
   .right-new-panel .card-h {
     padding: 11px 0; }
-    .right-new-panel .card-h .txt {
-      width: 230px;
-      height: 98px;
-      padding: 0 0 0 15px; }
-      .right-new-panel .card-h .txt .title {
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 16px; }
-      .right-new-panel .card-h .txt .sub {
-        font-size: 14px; }
-    .right-new-panel .card-h .img, .right-new-panel .card-h .img img {
-      width: 149.99px;
-      height: 98px;
-      overflow: hidden; }
+    .right-new-panel .card-h .txt .title {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 16px; }
+    .right-new-panel .card-h .txt .sub {
+      font-size: 14px; }
 
 #orslideshow {
   padding: 30px 0 30px 0; }

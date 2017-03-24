@@ -2,9 +2,10 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addImages($('#slick-controler'), 'javascript/dbJSON/test.json', getMainStory, function () {
+    addImages($('#slick-controler'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
         // var imgs = $('#mainNews').find('.slide-images');
         $('#slick-controler').slideImages();
+        $('.slide-images:nth-child(1)').addClass('cur');
     });
     addImages($('#lastnews-list'), 'javascript/dbJSON/lastnews.json', parseLastnews, null);
 
@@ -78,7 +79,10 @@ function parseLastnews(json) {
             '<div class="title">' + title + '</div>' +
             '<div class="sub">' + sub + '</div>' +
             '</div>');
-        var img = $('<div class="img">' + '<img src="' + imgSrc + '"></div>');
+        var img = $('<div>',{
+            "class": "img",
+            style: 'background-image:url('+imgSrc+')'
+        });
         card.append(txt);
         card.append(img);
         newsHtml.push(card);
