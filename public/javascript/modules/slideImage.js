@@ -114,15 +114,18 @@
     Plugin.prototype.previous = function (effect) {
         var $element = $(this.element);
         this.data = $.data(this);
-        $.data(this, "direction", "next");
+        $.data(this, "direction", "previous");
         if (effect === "fade") {
             return this._fade();
         } else {
             return this._slide();
         }
     };
+    Plugin.prototype._slide = function () {
+
+    };
     Plugin.prototype._fade = function (number) {
-        var $element, curSlide, next, slidesControl, value,curImage,
+        var $element, currentSlide, next, value,curImage,nextImage,
             _this = this;
         $element = $(this.element);
         
@@ -144,13 +147,18 @@
                 next = 0;
             }
             // this._setActive(next);
-            curImage = $();
             curImage = $(this.options.activeClassSelector);
             curImage.css({display:"none",left:0});
-            console.log(curImage.length);
+            nextImage = $(this.options.imgsClassSelector)[next];
             if (this.options.effect.fade.crossfade){
                 curImage.stop().fadeOut(this.options.effect.fade.speed);
+                return $(nextImage).stop().fadeIn(this.options.effect.fade.speed,(function () {
+                    curImage.removeClass(_this.options.activeClassName);
+                    $(nextImage).addClass(_this.options.activeClassName);
+                    $.data(_this,"current",next);
+                }))
             }
+
         }
     };
     return $.fn.slideImages = function (options) {
