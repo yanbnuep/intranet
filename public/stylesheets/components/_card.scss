@@ -11,7 +11,7 @@
     padding: $new-title-padding;
     @media screen and (max-width: $phone-width){
       width: 49.9%;
-      padding: 0;
+      padding: 0 0 0 15px;
     }
     .title {
 
@@ -31,7 +31,7 @@
     background-position: center;
     @media screen and (max-width: $phone-width){
       width: 50%;
-      //padding-top: $new-image-height/$new-image-width*100%;
+
     }
   }
 }

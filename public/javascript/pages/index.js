@@ -2,10 +2,11 @@
  * Created by itdwyy on 12/6/2016.
  */
 $(document).ready(function () {
-    addImages($('#slick-controler'), 'javascript/dbJSON/test.json', getMainStory, function () {
+    addImages($('#slick-controler'), 'javascript/dbJSON/ajax.json', getMainStory, function () {
         // var imgs = $('#mainNews').find('.slide-images');
-        $('#slick-controler').slideImages();
-        $('.slide-images:nth-child(1)').addClass('cur');
+        // $('#slick-controler').slideImages();
+        // $('.slide-images:nth-child(1)').addClass('cur');
+        $('#slick-controler').slidesjs({width: 550,height:385});
     });
     addImages($('#lastnews-list'), 'javascript/dbJSON/lastnews.json', parseLastnews, null);
 

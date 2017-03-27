@@ -86,6 +86,10 @@
         });
     };
     Plugin.prototype._touchstart = function (e) {
+        var $element,touches;
+        $element = $(this.element);
+        this.data = $.data(this);
+        touches = e.originalEvent.touches[0];
 
     };
     Plugin.prototype._touchend = function (e) {
@@ -121,14 +125,19 @@
             return this._slide();
         }
     };
-    Plugin.prototype._slide = function () {
+    Plugin.prototype._slide = function (number) {
+        var $element,currentSlide,direction,next,_this=this;
+        $element = $(this.element);
+        this.data = $.data(this);
+        if(number !== this.data.current + 1){
 
+        }
     };
     Plugin.prototype._fade = function (number) {
         var $element, currentSlide, next, value,curImage,nextImage,
             _this = this;
         $element = $(this.element);
-        
+
         this.data = $.data(this);
         if(number !== this.data.current + 1){
             currentSlide = this.data.current;

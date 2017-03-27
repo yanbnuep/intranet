@@ -21,6 +21,8 @@ body {
   @media screen and (max-width:$phone-width ){
     width: 100%;
     min-width: $iphone-6-width;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
   }
 }
 .left {

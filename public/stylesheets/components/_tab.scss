@@ -72,6 +72,9 @@
     li.list-item {
       @include float-block;
       width: 33%;
+      @media screen and (max-width: $phone-width) {
+        width: 100%;
+      }
     }
   }
   .list-item {
