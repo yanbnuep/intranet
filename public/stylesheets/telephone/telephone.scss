@@ -38,6 +38,11 @@
   min-height: 1px;
   margin-left: $sidebar-width;
   width: 629px;
+  @media screen and (max-width: $phone-width) {
+    margin: 0 auto;
+    width: 100%;
+    min-width: $iphone-6-width;
+  }
 }
 
 #contacts-content {

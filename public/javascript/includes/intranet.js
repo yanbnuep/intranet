@@ -354,16 +354,16 @@
         return htmlString;
     }
 
-    $('#telSearch').on('keyup', am.debounce(clickHandler, 500)).focusin(function () {
-        $(this).parent('form.nav-form').stop().animate({width: setting.inWidth}, 150);
-        $('#telResult').fadeIn(setting.fadeSpeed);
-    }).focusout(function () {
-        var input = this;
-        setTimeout(function () {
-            $(input).parent('form.nav-form').stop().animate({width: setting.outWidth}, 150);
-            $('#telResult').fadeOut(setting.fadeSpeed);
-        }, 100);
-    });
+    // $('#telSearch').on('keyup', am.debounce(clickHandler, 500)).focusin(function () {
+    //     $(this).parent('form.nav-form').stop().animate({width: setting.inWidth}, 150);
+    //     $('#telResult').fadeIn(setting.fadeSpeed);
+    // }).focusout(function () {
+    //     var input = this;
+    //     setTimeout(function () {
+    //         $(input).parent('form.nav-form').stop().animate({width: setting.outWidth}, 150);
+    //         $('#telResult').fadeOut(setting.fadeSpeed);
+    //     }, 100);
+    // });
 
 
     function popup(ele) {

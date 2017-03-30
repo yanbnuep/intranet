@@ -70,6 +70,8 @@ function addDepartment(constructor) {
             loadDepartment(link);
         });
     })();
+
+    PhoneSelect();
 }
 
 function activeOne(ele, classname) {
@@ -85,7 +87,7 @@ function activeOne(ele, classname) {
 
     function switchActiveElement(element) {
         var eleClass = element.attr('class');
-        var seleElementGroup = $('.' + eleClass);
+        var seleElementGroup = $("." + eleClass);
         if (!element.hasClass(classname)) {
             seleElementGroup.removeClass(classname);
             element.addClass(classname);
@@ -129,7 +131,7 @@ function sortLocationName(locationCode) {
 }
 
 function loadDepartment(link) {
-    $('#contacts-content').empty();
+    $('#phone-result').empty();
     var name = link.attr('id');
     searchByDeptOrSta(name, sortLocationName(name));
 }
@@ -143,14 +145,14 @@ function searchByDeptOrSta(name, outstation) {
         data: data,
         method: 'get',
         success: function (data) {
-            $('#contacts-content').empty();
+            $('#phone-result').empty();
             renderPhoneResult(data);
         }
     });
 }
 
 function renderPhoneResult(data) {
-    var content = $('#contacts-content');
+    var content = $('#phone-result');
     var person = {},
         card = $(),
         tablehead,
@@ -193,6 +195,78 @@ function makeContactCard(contactList) {
 }
 
 
+function PhoneSelect() {
+    var headQuarter = $('#headQuarter'),
+        outStation = $('#outStation'),
+        locationSelector = $('#location-select'),deptSelector = $('#Dept-select'),divSelector = $('#Div-select'),
+        headQuarterDepts = [],outstationDepts = [],
+        classOption = 'phoneOption',
+        headQuarterName = 'Macau',outstationName = 'OutStation';
+
+    var headQuartersDeptsLinks = headQuarter.find('.sidebar-link'),
+        outStationDeptsLinks = outStation.find('.sidebar-link');
+
+    headQuarterDepts = addSelectArray(headQuartersDeptsLinks,'.section-link');
+    outstationDepts = addSelectArray(outStationDeptsLinks,'.section-link');
+
+    $.data(this,headQuarterName,headQuarterDepts);
+    $.data(this,outstationName,outstationDepts);
+
+    (function initSelector () {
+        locationSelector.append($("<option></option>").text("Select Location").attr("value","").toggleClass(classOption));
+        locationSelector.append($("<option></option>").text(headQuarterName).attr("value",headQuarterName).toggleClass(classOption));
+        locationSelector.append($("<option></option>").text(outstationName).attr("value",outstationName).toggleClass(classOption));
+
+        locationSelector.on("change",function (event) {
+            var val = $(this).val();
+            if(val && val !==  "undefined"){
+                var arr = $.data(window,$(this).val());
+                if(arr && arr !== "undefined"){
+                    selectorAddOptions(deptSelector,arr);
+                }
+            }else if(val === ""){
+                deptSelector.empty();
+            }
+        });
+
+        
+
+    })();
+
+    function addSelectArray(links,selector) {
+        var array = [],dept,div;
+        $.each(links,function (index,val) {
+            dept = $(val).attr('id');
+            if(dept !== 'undefined' && dept){
+                array.push(dept);
+                var subLinks = $(val).find(selector);
+                if(subLinks.length>0){
+                    $.data(window,dept,[]);
+                    $.each(subLinks,function (index,val) {
+                        div = $(val).attr('id');
+                        if(div.length>0 && div !== 'undefined'){
+                            $.data(window,dept).push(div);
+                        }
+                    })
+                }
+            }
+        });
+        if(array.length>0){
+            return array;
+        }
+    }
+
+    function selectorAddOptions(select,arr) {
+        select.empty();
+        for(var i = 0; i< arr.length;i++){
+            var text = arr[i];
+            if(text){
+                select.append($("<option></option>").text(text).attr("value",arr[i]).toggleClass(classOption));
+            }
+        }
+    }
+}
+
 function scrollSetActive(scrollDown) {
     var curIndex, curGroup, nextLink, distance, change;
     curGroup = $('.menu-sub.active .section-link');
@@ -226,7 +300,6 @@ function scrollSetActive(scrollDown) {
         var eleTop = $(ele).offset().top,
             eleBottom = eleTop + $(ele).height();
 
-        console.log('windowtop: ' + windowTop + ' windowBottom : ' + windowBottom + ' eletop: ' + eleTop + ' elebottom: ' + eleBottom + str);
         return ((eleBottom <= windowBottom ) && (eleTop >= windowTop));
     }
 }

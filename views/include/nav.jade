@@ -7,7 +7,9 @@
             a.nav-logo.cp-logo
             a(href='#').icon-group-h.right
                 i.material-icons.blue-icon &#xE0BE;
-            form#searchForm.nav-form.right.phoneHidden(action='/search',method='get')
+            //a(href='#').icon-group-h.right
+            //    i.material-icons.phoneShow-inline-block &#xE8B6
+            form#searchForm.nav-form.right(action='/search',method='get')
                 input#telSearch.search(name='val')
                 i.material-icons.search-icon &#xE8B6;
                 #telResult.autoSearchList.nav-searchList.z-depth-2
@@ -34,8 +36,7 @@
                             a(href='#')= item
             li.nav-item
                 a(href='#') Download
-            li.nav-item
-                a(href='#') Help
+
 
 
 

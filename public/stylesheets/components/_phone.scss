@@ -8,3 +8,9 @@
     display: none !important;
   }
 }
+
+.phoneShow-inline-block {
+  @media screen and (max-width: $iphone-width) {
+    display: block !important;
+  }
+}

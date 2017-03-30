@@ -7,7 +7,7 @@ html(lang="en")
 body
     include include/nav
     .tele-content.wrapper-960
-        .sidebar
+        .sidebar.phoneHidden
             .nav-list-v.teleList.left
                 .menu-header Headquarter
                     ul#headQuarter.menu-root
@@ -15,6 +15,11 @@ body
                     ul#outStation.menu-root
 
         #contacts-content
+            .amSelects#phone-select
+                select#location-select.amSelect
+                select#Dept-select.amSelect
+                select#Div-select.amSelect
+            #phone-result
     //include include/footer
 script(src='/javascript/includes/jquery-1.12.4.min.js')
 script(src='/javascript/includes/smooth-scroll.min.js')
