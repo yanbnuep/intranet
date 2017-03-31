@@ -203,57 +203,61 @@ function PhoneSelect() {
         classOption = 'phoneOption',
         headQuarterName = 'Macau',outstationName = 'OutStation';
 
-    var headQuartersDeptsLinks = headQuarter.find('.sidebar-link'),
-        outStationDeptsLinks = outStation.find('.sidebar-link');
-
-    headQuarterDepts = addSelectArray(headQuartersDeptsLinks,'.section-link');
-    outstationDepts = addSelectArray(outStationDeptsLinks,'.section-link');
+    headQuarterDepts = getSelectArray(headQuarter,'.sidebar-link');
+    outstationDepts = getSelectArray(outStation,'.sidebar-link');
 
     $.data(this,headQuarterName,headQuarterDepts);
     $.data(this,outstationName,outstationDepts);
 
     (function initSelector () {
-        locationSelector.append($("<option></option>").text("Select Location").attr("value","").toggleClass(classOption));
         locationSelector.append($("<option></option>").text(headQuarterName).attr("value",headQuarterName).toggleClass(classOption));
         locationSelector.append($("<option></option>").text(outstationName).attr("value",outstationName).toggleClass(classOption));
-
-        locationSelector.on("change",function (event) {
-            var val = $(this).val();
-            if(val && val !==  "undefined"){
-                var arr = $.data(window,$(this).val());
-                if(arr && arr !== "undefined"){
-                    selectorAddOptions(deptSelector,arr);
-                }
-            }else if(val === ""){
-                deptSelector.empty();
-            }
-        });
-
-        
-
     })();
 
-    function addSelectArray(links,selector) {
-        var array = [],dept,div;
-        $.each(links,function (index,val) {
-            dept = $(val).attr('id');
-            if(dept !== 'undefined' && dept){
-                array.push(dept);
-                var subLinks = $(val).find(selector);
-                if(subLinks.length>0){
-                    $.data(window,dept,[]);
-                    $.each(subLinks,function (index,val) {
-                        div = $(val).attr('id');
-                        if(div.length>0 && div !== 'undefined'){
-                            $.data(window,dept).push(div);
-                        }
-                    })
+
+    triggerAppendOptions(locationSelector,deptSelector,function () {
+        triggerAppendOptions(deptSelector,divSelector);
+    });
+
+    headQuarter.on("change",function (event) {
+        var arr = $.data(window,$(this).val());
+        console.log(arr);
+        selectorAddOptions(deptSelector,arr);
+    });
+
+    function triggerAppendOptions(depend,trigge,callback) {
+        var val = depend.val();
+        var arr = $.data(window,val);
+        var opt;
+        if($.isArray(arr)){
+            if(arr.length){
+                trigge.empty();
+                for(var i = 0; i< arr.length;i++){
+                     opt = arr[i];
+                     if(opt && opt !== "null" && opt !== "undefined")
+                         selectorAddOptions(trigge,arr);
                 }
             }
-        });
-        if(array.length>0){
-            return array;
         }
+        if($.isFunction(callback)){
+            callback();
+        }
+    }
+
+    function getSelectArray(arr,clsName) {
+        var newArr = [];
+        $.each(arr,function (index,val) {
+            var newLinks = $(val).find(clsName);
+            $.each(newLinks,function (subIndex,subVal) {
+                var id = $(subVal).attr("id");
+                if(id && id !== "undefined" && id !== "null"){
+                    newArr.push(id);
+                }
+            })
+        });
+        if(newArr.length){
+            return newArr;
+        }else return false;
     }
 
     function selectorAddOptions(select,arr) {
