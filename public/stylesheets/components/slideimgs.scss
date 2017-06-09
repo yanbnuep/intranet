@@ -64,6 +64,8 @@
   @include clearfix;
   .slide-item {
     position: relative;
+    white-space: nowrap;
+    display: inline-block;
     text-decoration: none;
     box-sizing: border-box;
     @include float-block;
@@ -72,11 +74,11 @@
       height: 100%;
     }
     @media screen and (max-width: $phone-width){
-      width: 49.9%;
+      width: 30%;
       margin: 0;
       padding: 0;
       .img{
-        padding-top: 55.5%;
+
       }
     }
   }

@@ -1,0 +1,15 @@
+.amSelects{
+  .select-group {
+    display: block;
+    clear: both;
+    .title {
+      display: block;
+      margin:$select-title-margin;
+    }
+    .amSelect{
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #9e9e9e;
+    }
+  }
+}

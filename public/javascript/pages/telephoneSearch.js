@@ -22,11 +22,16 @@ function getConstructor(callback) {
         url: '/tele/construct',
         method: 'get',
         success: function (json) {
+            phoneDataStore(json);
+            PhoneSelect();
             callback(json);
         }
     });
 }
 
+function phoneDataStore(json) {
+    $.data(window,'teleData',json);
+}
 
 function addDepartment(constructor) {
     var headquarter = constructor['headquarter'],
@@ -71,7 +76,6 @@ function addDepartment(constructor) {
         });
     })();
 
-    PhoneSelect();
 }
 
 function activeOne(ele, classname) {
@@ -155,31 +159,51 @@ function renderPhoneResult(data) {
     var content = $('#phone-result');
     var person = {},
         card = $(),
-        tablehead,
+        tablehead,tb,
         contactCards = [];
+    if($.isArray(data)){
+        tablehead = $('<table class="contact-table"><thead><tr><th>Name</th><th>Telephone</th><th>Email</th><tr></thead></table>');
+        tb = $('<tbody></tbody>');
+        $.each(data,function (index,val) {
+            (function (contact) {
+                person.name = contact['NAME'] + " . " + contact['PREFER'];
+                person.companyPhone = contact['BUSNPHONE'];
+                person.email = contact['EMAIL'];
+                person.office = contact['OFFICE'];
+                person.jobtitle = contact['JOBTITLE'];
+                (function (person) {
+                    contactCards = makeContactCard(person);
+                    tb.append(contactCards);
+                })(person)
+            })(val);
 
-    for (var div in data) {
-        if (data.hasOwnProperty(div) && div !== null) {
-            card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
-            tablehead = $('<table class="contact-table"><thead><tr><th>Name</th><th>Telephone</th><th>Email</th><tr></thead></table>');
-            var tb = $('<tbody></tbody>');
-            for (var i = 0; i < data[div].length; i++) {
-                (function (contact) {
-                    person.name = contact['NAME'] + " . " + contact['PREFER'];
-                    person.companyPhone = contact['BUSNPHONE'];
-                    person.email = contact['EMAIL'];
-                    person.office = contact['OFFICE'];
-                    person.jobtitle = contact['JOBTITLE'];
-                    (function (person) {
-                        contactCards = makeContactCard(person);
-                        tb.append(contactCards);
-                    })(person)
-                })(data[div][i]);
+        });
+        tablehead.append(tb);
+        content.append(tablehead);
+    }else {
+        for (var div in data) {
+            if (data.hasOwnProperty(div) && div !== null) {
+                card = $('<div id="' + am.rgxGet("enChar", div).replace(" ", "-") + '" class="contact-group">' + '<div class="title">' + div + '</div>' + '</div>');
+                tablehead = $('<table class="contact-table"><thead><tr><th>Name</th><th>Telephone</th><th>Email</th><tr></thead></table>');
+                tb = $('<tbody></tbody>');
+                for (var i = 0; i < data[div].length; i++) {
+                    (function (contact) {
+                        person.name = contact['NAME'] + " . " + contact['PREFER'];
+                        person.companyPhone = contact['BUSNPHONE'];
+                        person.email = contact['EMAIL'];
+                        person.office = contact['OFFICE'];
+                        person.jobtitle = contact['JOBTITLE'];
+                        (function (person) {
+                            contactCards = makeContactCard(person);
+                            tb.append(contactCards);
+                        })(person)
+                    })(data[div][i]);
+                }
+                tablehead.append(tb);
+                card.append(tablehead);
             }
-            tablehead.append(tb);
-            card.append(tablehead);
+            content.append(card);
         }
-        content.append(card);
     }
 }
 
@@ -196,79 +220,106 @@ function makeContactCard(contactList) {
 
 
 function PhoneSelect() {
-    var headQuarter = $('#headQuarter'),
-        outStation = $('#outStation'),
-        locationSelector = $('#location-select'),deptSelector = $('#Dept-select'),divSelector = $('#Div-select'),
+        var locationSelector = $('#location-select'),deptSelector = $('#Dept-select'),divSelector = $('#Div-select'),
+        searchBtn = $('#selectSearchBtn'),
         headQuarterDepts = [],outstationDepts = [],
-        classOption = 'phoneOption',
-        headQuarterName = 'Macau',outstationName = 'OutStation';
+        alertMsg = $('#selectAlert');
+        classOption = 'phoneOption';
 
-    headQuarterDepts = getSelectArray(headQuarter,'.sidebar-link');
-    outstationDepts = getSelectArray(outStation,'.sidebar-link');
+    var phoneData = $.data(window,'teleData');
 
-    $.data(this,headQuarterName,headQuarterDepts);
-    $.data(this,outstationName,outstationDepts);
-
-    (function initSelector () {
-        locationSelector.append($("<option></option>").text(headQuarterName).attr("value",headQuarterName).toggleClass(classOption));
-        locationSelector.append($("<option></option>").text(outstationName).attr("value",outstationName).toggleClass(classOption));
+    (function init() {
+        addOptions(phoneData,locationSelector);
     })();
 
-
-    triggerAppendOptions(locationSelector,deptSelector,function () {
-        triggerAppendOptions(deptSelector,divSelector);
+    locationSelector.on("change",function (event) {
+        var selected = $(this).val();
+        initASelector([deptSelector,divSelector]);
+        addOptions(phoneData[selected],deptSelector);
     });
 
-    headQuarter.on("change",function (event) {
-        var arr = $.data(window,$(this).val());
-        console.log(arr);
-        selectorAddOptions(deptSelector,arr);
+    deptSelector.on("change",function (event) {
+        var selected = $(this).val();
+        var deptArr = phoneData[locationSelector.val()];
+        addOptions(deptArr[selected],divSelector);
     });
 
-    function triggerAppendOptions(depend,trigge,callback) {
-        var val = depend.val();
-        var arr = $.data(window,val);
-        var opt;
+    searchBtn.on("click",function (event) {
+        var valid = validSelector(alertMsg);
+        if(valid){
+            searchPhones();
+        }
+    });
+
+
+    function addOptions(arr,target) {
+        initASelector(target);
         if($.isArray(arr)){
-            if(arr.length){
-                trigge.empty();
-                for(var i = 0; i< arr.length;i++){
-                     opt = arr[i];
-                     if(opt && opt !== "null" && opt !== "undefined")
-                         selectorAddOptions(trigge,arr);
-                }
-            }
-        }
-        if($.isFunction(callback)){
-            callback();
-        }
-    }
-
-    function getSelectArray(arr,clsName) {
-        var newArr = [];
-        $.each(arr,function (index,val) {
-            var newLinks = $(val).find(clsName);
-            $.each(newLinks,function (subIndex,subVal) {
-                var id = $(subVal).attr("id");
-                if(id && id !== "undefined" && id !== "null"){
-                    newArr.push(id);
-                }
+            $.each(arr,function (index,val) {
+                appendOptions(target,val);
             })
-        });
-        if(newArr.length){
-            return newArr;
-        }else return false;
+        }else {
+            for(var groupName in arr){
+                if(arr.hasOwnProperty(groupName)){
+                    appendOptions(target,groupName);
+                }
+            }
+        }
+
+    }
+    function appendOptions(target,optionName) {
+        target.append($("<option></option>").text(optionName).toggleClass(classOption).attr("value",optionName));
     }
 
-    function selectorAddOptions(select,arr) {
-        select.empty();
-        for(var i = 0; i< arr.length;i++){
-            var text = arr[i];
-            if(text){
-                select.append($("<option></option>").text(text).attr("value",arr[i]).toggleClass(classOption));
+    function initASelector(selectors,initTxt) {
+        if($.isArray(selectors)){
+            $.each(selectors,function (idx,val) {
+                initSelector($(val));
+            })
+        }else {
+            initSelector(selectors)
+        }
+        function initSelector(selector) {
+            selector.empty();
+            if(!initTxt){
+                selector.append($("<option></option>").toggleClass(classOption).text("---").attr("value", ""));
+            }else {
+                selector.append($("<option></option>").toggleClass(classOption).text(initTxt).attr("value", ""));
             }
         }
     }
+    
+    function validSelector(alertTarget) {
+        var location = locationSelector.val(),
+            dept = deptSelector.val(),
+            div = divSelector.val();
+        if(location === 'null' || dept ===  'null' || !location || !dept){
+            alertTarget.removeClass("hidden");
+            return false;
+        }else {
+            if(!alertTarget.hasClass("hidden")){
+                alertTarget.addClass("hidden")
+            }
+            return true;
+        }
+    }
+
+    function searchPhones() {
+        var location = locationSelector.val(),
+            dept = deptSelector.val(),
+            div = divSelector.val();
+        var url = "tele/phoneSearch",data= {"location":location,"dept":dept,"div":div};
+        $.ajax({
+            url: url,
+            data: data,
+            method: 'get',
+            success: function (data) {
+                $('#phone-result').empty();
+                renderPhoneResult(data);
+            }
+        });
+    }
+
 }
 
 function scrollSetActive(scrollDown) {

@@ -14,6 +14,8 @@
     "jade": "*",
     "morgan": "~1.7.0",
     "mssql": "^3.3.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "squel":"*",
+    "bcrypt-nodejs": "*"
   }
 }

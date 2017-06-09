@@ -23,11 +23,25 @@ router.get('/construct', function (req, res, nex) {
             res.send(data);
         })
     } catch (e) {
-        console.log('error in get constructor: ' + e);
+        
     }
 
 });
 
+router.get('/phoneSearch',function (req,res,next) {
+    try{
+        var location = req.query['location'],
+            dept = req.query['dept'],
+            div = req.query['div'];
+        phoneSearch(location,dept,div,function (data) {
+            if(data)
+                res.send(data);
+        })
+
+    }catch (e){
+        console.log('error in get constructor: ' + e);
+    }
+});
 
 function getConstruction(callback) {
     var constructor = {},
@@ -48,9 +62,9 @@ function getConstruction(callback) {
                         department = record[i]['DEPT'];
                         div = record[i]['DIV'];
                         location = record[i]['LOCATION'];
-                        if (location == 'MFM' || location == 'NX') {
+                        if (location === 'MFM' || location === 'NX') {
                             addDivStructure(headquarter,div,department);
-                        } else if (location != null) {
+                        } else if (location !== null) {
                             addDivStructure(outStation,div,location);
                         }
                     }
@@ -65,7 +79,7 @@ function getConstruction(callback) {
             console.log('error in get telephone constructor: ' + e);
         }
         function addDivStructure(o,div,department) {
-             if(department != null && !(department in o)){
+             if(department !== null && !(department in o)){
                 o[department] = [];
             }
             if(!(o[department].includes(div))){
@@ -75,6 +89,63 @@ function getConstruction(callback) {
     })
 }
 
+function phoneSearch(location,dept,div,callback) {
+    var result = {},
+        selectInfo = '[EMPLID],[DEPT],[DIV],[NAME],[PREFER],[JOBTITLE],[BUSNPHONE],[EMAIL],[OFFICE],[JOB_LEVEL]',
+        mssql = '';
+    if(location === 'headquarter'){
+        if(dept&&div){
+            mssql = 'SELECT '+selectInfo+' FROM [INTRANET].[dbo].[TEL_ORDER_VW] where DEPT = \'' + dept + '\'  and Div =  \''+div+' \' order by DIVCODE,JOB_LEVEL DESC';
+        }else if (dept && !div){
+            mssql = 'SELECT '+selectInfo+' FROM [INTRANET].[dbo].[TEL_ORDER_VW] where DEPT = \'' + dept + '\' order by DIVCODE,JOB_LEVEL DESC';
+        }else {
+            return false;
+        }
+    }else if(location === 'outStation'){
+        if(dept&&div){
+            mssql = 'SELECT '+selectInfo+' FROM [INTRANET].[dbo].[TEL_ORDER_VW] where LOCATION = \'' + dept + '\'  and Div =  \''+div+' \' order by DIVCODE,JOB_LEVEL DESC';
+        }else if (dept && !div){
+            mssql = 'SELECT '+selectInfo+' FROM [INTRANET].[dbo].[TEL_ORDER_VW] where LOCATION = \'' + dept + '\' order by DIVCODE,JOB_LEVEL DESC';
+        }else {
+            return false;
+        }
+    }else {
+
+        return false;
+    }
+    if(mssql){
+        sql.connect(config,function (err) {
+            if (err) {
+                console.log('error in search by phone' + err);
+                return null;
+            }
+            try {
+                new sql.Request().query(mssql, function (error, data) {
+                    if (error) {
+                        console.log('error search by department: ' + error);
+                        return null;
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        (function (peron) {
+                            var div = peron['DIV'];
+                            if (result[div] === undefined) {
+                                result[div] = [];
+                            }
+                            if (div !== null && div !== undefined) {
+                                result[div].push(peron);
+                            }
+                        })(data[i])
+                    }
+                    if (typeof callback === 'function') {
+                        callback(result);
+                    } else {
+                        return result;
+                    }
+                });
+            }catch (err){}
+        })
+    }
+}
 
 router.get('/search', function (req, res, next) {
     try {

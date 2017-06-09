@@ -439,7 +439,7 @@
             if(firstNav.hasClass('z-depth-2')){
                 firstNav.removeClass('z-depth-2');
             }
-            if(dispearNavbar.css('display')== 'none'){
+            if(dispearNavbar.css('display')=== 'none'){
                dispearNavbar.slideDown(400);
             }
         }

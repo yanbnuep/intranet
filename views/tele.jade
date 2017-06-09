@@ -15,10 +15,21 @@ body
                     ul#outStation.menu-root
 
         #contacts-content
-            .amSelects#phone-select
-                select#location-select.amSelect
-                select#Dept-select.amSelect
-                select#Div-select.amSelect
+            .amSelects#phone-select.desktop-hidden.phoneShow-inline-block
+                .select-group
+                    p.title Location
+                    select#location-select.amSelect
+                        option.phoneOption(value=null) ---
+                .select-group
+                    p.title Department
+                    select#Dept-select.amSelect
+                        option.phoneOption(value=null) ---
+                .select-group
+                    p.title Divsion
+                    select#Div-select.amSelect
+                        option.phoneOption(value=null) ---
+                button#selectSearchBtn.row-btn Search
+                p#selectAlert.alert.hidden At least one Department should be selected.
             #phone-result
     //include include/footer
 script(src='/javascript/includes/jquery-1.12.4.min.js')
